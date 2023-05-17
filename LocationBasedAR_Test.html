@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Location-based AR.js demo</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <!-- animation-mixtureを使うため -->
+    <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      #distance {
+        position: fixed;
+        z-index: 10000;
+        background-color: rgba(0,0,0,.8);
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        top: 10px;
+        left: 5%;
+        width: 90%;
+        display: block;
+      }
+      body {
+        margin: 0;
+      }
+      #message {
+        position: fixed;
+        z-index: 10;
+        left: 5%;
+        bottom: 30px;
+        width: 90%;
+        padding: 5%;
+        color: #fff;
+        font-weight: bold;
+        background-color: rgba(0,0,0,.8);
+        border-radius: 20px;
+        border: 3px solid #fff;
+        display: none;
+      }
+    </style>
+
+  </head>
+
+  <body style="margin: 0; overflow: hidden;">
+    <div id="distance">Loading...</div>
+    <div id="message">
+      AR掩体壕(えんたいごう): 20pt
+    </div>
+    <a-scene
+      vr-mode-ui="enabled: false"
+      embedded
+      arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix;"
+    >
+      <!-- 3Dモデルの読み込み -->
+      <a-assets>
+        <a-asset-item id="obj" src="./3133.obj"></a-asset-item>
+        <a-asset-item id="mtl" src="./3133.mtl"></a-asset-item>
+      </a-assets>
+      <!-- latitude: 33.5487992423596; longitude: 133.68019763083254 -->
+      <a-entity
+        gps-entity-place="latitude: 33.5487992423596; longitude: 133.68019763083254; elevation: 0;"
+        obj-model="obj: #obj; mtl: #mtl"
+        scale="0.0005 0.0005 0.0005"
+        rotation="0 0 0"
+        animation-mixer
+      ></a-entity>
+      <a-light
+        id="directionLight"
+        type="directional"
+        color="#FFF"
+        intensity="0"
+        position="-1 1 2">
+      </a-light>
+      <a-light
+        id="ambientLight"
+        type="ambient"
+        intensity="0"
+        color="#FFF">
+      </a-light>
+      <a-camera gps-camera rotation-reader> </a-camera>
+    </a-scene>
+    <script>
+      window.addEventListener('load', function () {
+        const el = document.querySelector('[gps-entity-place]');
+        const distanceMsg = document.getElementById('distance');
+        const message = document.getElementById('message');
+        const directionLight = document.getElementById('directionLight');
+        const ambientLight = document.getElementById('ambientLight');
+        el.addEventListener('gps-entity-place-update-position', (event) => {
+          distanceMsg.textContent = `あと${event.detail.distance}m`;
+          if(event.detail.distance <= 5) {
+            // 5m以下で明るくする、メッセージ表示、距離非表示
+            directionLight.setAttribute('intensity', 1);
+            ambientLight.setAttribute('intensity', 1);
+            distanceMsg.style.display = 'none';
+            message.style.display = 'block';
+          } else if(event.detail.distance <= 10) {
+            // 10m以下で近づくほど明るくする、メッセージ非表示、距離表示
+            directionLight.setAttribute('intensity', 1 - event.detail.distance / 10);
+            ambientLight.setAttribute('intensity', 1 - event.detail.distance / 10);
+            distanceMsg.style.display = 'block';
+            message.style.display = 'none';
+          } else {
+            // 10mより離れると、明るさ0、メッセージ非表示、距離表示
+            directionLight.setAttribute('intensity', 0);
+            ambientLight.setAttribute('intensity', 0);
+            distanceMsg.style.display = 'block';
+            message.style.display = 'none';
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
