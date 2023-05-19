@@ -2,13 +2,14 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Location-based AR.js demo</title>
+    <title>Location Based AR Test</title>
+    <!-- <script src="./lib/aframe.min.js"></script> -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
     <!-- animation-mixtureを使うため -->
     <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
+
     <style>
       body {
         font-family: sans-serif;
@@ -46,24 +47,18 @@
         display: none;
       }
     </style>
-
   </head>
-
-  <body style="margin: 0; overflow: hidden;">
-    <div id="distance">Loading...</div>
-    <div id="message">
-      AR掩体壕(えんたいごう): 20pt
-    </div>
+  <body>
+    <a-assets>
+      <!-- 3Dモデルの読み込み -->
+      <a-asset-item id="obj" src="./model/3133.obj"></a-asset-item>
+      <a-asset-item id="mtl" src="./model/3133.mtl"></a-asset-item>
+    </a-assets>
     <a-scene
       vr-mode-ui="enabled: false"
       embedded
       arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix;"
     >
-      <!-- 3Dモデルの読み込み -->
-      <a-assets>
-        <a-asset-item id="obj" src="./model/3133.obj"></a-asset-item>
-        <a-asset-item id="mtl" src="./model/3133.mtl"></a-asset-item>
-      </a-assets>
       <a-entity
         gps-entity-place="latitude: 33.5487992423596; longitude: 133.68019763083254; elevation: 0;"
         obj-model="obj: #obj; mtl: #mtl"
@@ -86,6 +81,7 @@
       </a-light>
       <a-camera gps-camera rotation-reader> </a-camera>
     </a-scene>
+
     <script>
       window.addEventListener('load', function () {
         const el = document.querySelector('[gps-entity-place]');
