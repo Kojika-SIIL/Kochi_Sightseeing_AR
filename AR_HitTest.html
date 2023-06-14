@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>AR_一式陸攻</title>
+    <meta name="description" content="AR_一式陸攻" />
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+      /* スナップショットボタンの表示 */
+      .ui {
+        position: absolute;
+        z-index: 100;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 10px 15px 30px;
+        text-align: center;
+        box-sizing: border-box;
+      }
+
+      .ui a {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        background-color: #ffffff;
+        line-height: 100%;
+        color: #303030;
+        margin: 10px 3px;
+        border-radius: 50%;
+        position: relative;
+      }
+        
+      .ui a i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+      }
+
+      .ui a:active {
+        color: #ff0000;
+      }
+
+      #snap {
+        max-width: 100%;
+        height: auto;
+        display: block;;
+        visibility: hidden;
+      }
+
+      .ui a.disabled {
+        pointer-events: none;
+        color: #cccccc;
+      }
+
+      #snap.visible {
+        visibility: visible;
+      }
+    </style>
+
+
+    <script>
+      AFRAME.registerComponent("ar-hit-test", {
+        init: function () {
+          // session start
+          this.el.sceneEl.renderer.xr.addEventListener(
+            "sessionstart",
+            async () => {
+              if (this.el.sceneEl.is("ar-mode")) {
+                this.renderer = this.el.sceneEl.renderer;
+                let session = this.renderer.xr.getSession();
+                let viewerSpace = await session.requestReferenceSpace("viewer");
+                this.xrHitTestSource = await session.requestHitTestSource({
+                  space: viewerSpace,
+                });
+              }
+            }
+          );
+
+          // session end
+          this.el.sceneEl.renderer.xr.addEventListener(
+            "sessionend",
+            async () => {
+              this.xrHitTestSource = null;
+            }
+          );
+        },
+        tick: function () {
+          const frame = this.el.sceneEl.frame;
+          if (!frame) return;
+
+          // hit-test in real world
+          const xrHitTestSource = this.xrHitTestSource;
+          if (xrHitTestSource) {
+            const refSpace = this.renderer.xr.getReferenceSpace();
+            const hitTestResults = frame.getHitTestResults(xrHitTestSource);
+            if (hitTestResults.length > 0) {
+              const pose = hitTestResults[0].getPose(refSpace);
+              this.el.setAttribute("position", pose.transform.position);
+              this.el.object3D.quaternion.copy(pose.transform.orientation);
+            }
+          }
+        },
+      });
+    </script>
+  </head>
+  <body>
+    <a-assets>
+      <!-- OBJ形式のCGモデルの読み込み -->
+      <a-asset-item id="obj" src="./3133.obj"></a-asset-item>
+      <a-asset-item id="mtl" src="./3133.mtl"></a-asset-item>
+    </a-assets>
+    <a-scene
+      webxr="optionalFeatures: hit-test, dom-overlay; overlayElement: #overlay;"
+      embedded arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;"
+      vr-mode-ui="enabled: false;"
+    >
+      <a-entity
+        id="light1"
+        light="type: point; color: #fff;"
+        position="0 7 0"
+      ></a-entity>
+      <a-entity
+        id="light2"
+        light="type: point; color: #fff; intensity 0.5;"
+        position="0 0.3 0"
+        scale="0.5 0.5 0.5"
+      ></a-entity>
+      <a-entity id="hitTestMarker" ar-hit-test>
+        <!-- <a-circle scale="0.1 0.1 0.1" rotation="-90 0 0"></a-circle> -->
+        <a-ring
+          material="opacity: 0.5"
+          color="red"
+          radius-inner="1.5"
+          radius-outer="2"
+          scale="0.1 0.1 0.1"
+          rotation="-90 0 0"
+        ></a-ring>
+      </a-entity>
+      <a-entity
+        id="objmodel"
+        obj-model="obj: #obj; mtl: #mtl"
+        rotation="0 -90 0"
+        scale="0 0 0"
+      ></a-entity>
+      <!-- scale="0.0005 0.0005 0.0005" -->
+    </a-scene>
+
+    <div class="ui">
+        <img id="snap">
+        <a href="#" id="delete-photo" title="Delete Photo" class="disabled"><i class="material-icons">delete</i></a>
+        <a href="" id="take-photo" title="Take Photo"><i class="material-icons">photo_camera</i></a>
+        <a href="#" id="download-photo" download="selfie.png" title="Save Photo" class="disabled" target="_blank"><i class="material-icons">file_download</i></a>
+    </div>
+
+    <div id="overlay">
+      <input
+        id="button"
+        type="button"
+        style="
+          position: absolute;
+          bottom: 150px;
+          left: 20px;
+          width: 40px;
+          height: 40px;
+          z-index: 100;
+        "
+        value="○"
+      />
+      <input
+        id="button_scale_up"
+        type="button"
+        style="
+          position: absolute;
+          bottom: 250px;
+          left: 20px;
+          width: 40px;
+          height: 40px;
+          z-index: 100;
+        "
+        value="+"
+      />
+      <input
+        id="button_scale_down"
+        type="button"
+        style="
+          position: absolute;
+          bottom: 200px;
+          left: 20px;
+          width: 40px;
+          height: 40px;
+          z-index: 100;
+        "
+        value="-"
+      />
+    </div>
+
+    <script>
+      var scene = document.querySelector("a-scene");
+      var hitTest = document.querySelector("#hitTestMarker");
+      var button = document.querySelector("#button");
+      var model = document.querySelector("#objmodel");
+      const defaultSize = new THREE.Vector3(0.0005, 0.0005, 0.0005);
+      const changeSize = new THREE.Vector3(0.00003, 0.00003, 0.00003);
+
+      button.addEventListener("click", function () {
+        //モデルの位置変更
+        model.setAttribute(
+          "position",
+          new THREE.Vector3(0, 0.05, 0.05).add(hitTest.object3D.position)
+        );
+        model.setAttribute("rotation", hitTest.getAttribute("rotation"));
+        //大きさリセット
+        model.setAttribute("scale", defaultSize);
+        //model.setAttribute("rotation",
+        //  new THREE.Vector3(0, -90, 0).add(hitTest.object3D.rotation)
+        //);
+      });
+      button_scale_up.addEventListener("click", function () {
+        //モデルの大きさ変更
+        var scaleSize = model.getAttribute("scale");
+        scaleSize.x = scaleSize.x + changeSize.x;
+        scaleSize.y = scaleSize.y + changeSize.y;
+        scaleSize.z = scaleSize.z + changeSize.z;
+        model.setAttribute(
+          "scale",
+          new THREE.Vector3(scaleSize.x, scaleSize.y, scaleSize.z)
+        );
+        //alert(scaleSize.x);
+      });
+
+      button_scale_down.addEventListener("click", function () {
+        //モデルの大きさ変更
+        var scaleSize = model.getAttribute("scale");
+        scaleSize.x = scaleSize.x - changeSize.x;
+        scaleSize.y = scaleSize.y - changeSize.y;
+        scaleSize.z = scaleSize.z - changeSize.z;
+        model.setAttribute(
+          "scale",
+          new THREE.Vector3(scaleSize.x, scaleSize.y, scaleSize.z)
+        );
+        //alert(scaleSize.x);
+      });
+    </script>
+  </body>
+
+  <script>
+    var image = document.querySelector('#snap');
+    var take_photo_btn = document.querySelector('#take-photo');
+    var delete_photo_btn = document.querySelector('#delete-photo');
+    var download_photo_btn = document.querySelector('#download-photo');
+    
+    // スナップショットボタン
+    take_photo_btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      var video = document.querySelector('video');
+      var snap = takeSnapshot(video);
+    
+      // スナップショット表示.
+      image.setAttribute('src', snap);
+      image.classList.add('visible');
+    
+      // 削除ボタンと保存ボタン有効
+      delete_photo_btn.classList.remove("disabled");
+      download_photo_btn.classList.remove("disabled");
+    
+      // 保存ボタンにスナップショットを渡す
+      download_photo_btn.href = snap;
+    });
+    
+    // 削除ボタン
+    delete_photo_btn.addEventListener("click", function(e){
+    
+      e.preventDefault();
+    
+      // スナップショットを隠す
+      image.setAttribute('src', "");
+      image.classList.remove("visible");
+    
+      // 削除ボタンと保存ボタン無効
+      delete_photo_btn.classList.add("disabled");
+      download_photo_btn.classList.add("disabled");
+    
+    });
+    
+    // スナップショットを撮る
+    function takeSnapshot(video) {
+      var resizedCanvas = document.createElement("canvas");
+      var resizedContext = resizedCanvas.getContext("2d");
+      var width = video.videoWidth;
+      var height = video.videoHeight;
+      var aScene = document.querySelector("a-scene").components.screenshot.getCanvas("perspective");
+    
+      if (width && height) {
+        // videoのサイズをキャンバスにセット
+        resizedCanvas.width = width;
+        resizedCanvas.height = height;
+
+        // キャンバスにvideoをコピー
+        resizedContext.drawImage(video, 0, 0, width, height);
+    
+        // カメラの画角でAR側の縮小処理を変える
+        if (width > height) {
+          // 横長 (PC)
+          resizedContext.drawImage(aScene, 0, 0, width, height);
+        } else {
+          // 縦長 (スマホ)
+          var scale = height / width;
+          var scaledWidth = height * scale;
+          var marginLeft = (width - scaledWidth) / 2;
+          resizedContext.drawImage(aScene, marginLeft, 0, scaledWidth, height);
+        }
+        return resizedCanvas.toDataURL('image/png');
+      }
+    }
+  </script>
+
+</html>
