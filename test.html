@@ -148,8 +148,7 @@
         intensity="0"
         color="#FFF">
       </a-light>
-      <a-camera gps-camera="minDistance:5; maxDistance:20" rotation-reader></a-camera>
-      <a-entity camera look-controls>
+      <a-camera gps-camera="minDistance:5; maxDistance:20" rotation-reader look-controls>
         <a-entity cursor="fuse: true;"
           position="0 0 -3"
           geometry="primitive: ring; radiusInner: 0.1; radiusOuter: 0.15;"
@@ -159,7 +158,7 @@
           <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500"
                fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
         </a-entity>
-      </a-entity>
+      </a-camera>
     </a-scene>
 
     <div class="ui">
