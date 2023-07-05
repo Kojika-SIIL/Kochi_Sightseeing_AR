@@ -12,7 +12,7 @@
           material="color: #acacac; shader: flat; opacity: 0.6">
         </a-entity>
       </a-entity>
-      <a-box cursor-listener id="box" position="0 0 -5" rotation="0 45 45" color="red" scale="1 1 1"></a-box>
+      <a-entity cursor-listener id="box" geometry="primitive: box" position="0 0 -5" rotation="0 45 45" material="color: red" scale="1 1 1"></a-entity>
     </a-scene>
 
     <script>
@@ -20,7 +20,7 @@
         init: function () {
           var el = this.el;
           el.addEventListener('click', function () {
-            console.log('カーソルがクリックされました！');
+            console.log('Cursor clicked.');
             // ここにクリックイベント発生時の処理を追加する
             var entity = document.querySelector('#box');
             entity.setAttribute('color', 'blue');
