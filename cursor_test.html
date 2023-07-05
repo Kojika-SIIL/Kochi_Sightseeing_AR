@@ -6,10 +6,10 @@
       AFRAME.registerComponent('cursor-listener', {
         init: function () {
           var el = this.el;
-          el.addEventListener('click', function () {
-            console.log('Cursor clicked.');
+          el.addEventListener('fusing', function () {
+            console.log('Cursor fused.');
             // ここにクリックイベント発生時の処理を追加する
-            var entity = el.sceneEl.querySelector('#box');
+            var entity = document.querySelector('#box');
             entity.setAttribute('color', 'blue');
           });
         }
