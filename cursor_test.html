@@ -9,7 +9,7 @@
           el.addEventListener('click', function () {
             console.log('Cursor clicked.');
             // ここにクリックイベント発生時の処理を追加する
-            var entity = document.querySelector('#box');
+            var entity = el.sceneEl.querySelector('#box');
             entity.setAttribute('color', 'blue');
           });
         }
