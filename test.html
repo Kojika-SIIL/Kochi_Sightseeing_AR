@@ -132,7 +132,7 @@
       arjs="debugUIEnabled: false;"
     >
       <!-- 3Dモデルの読み込み -->
-      <a-assets cursor-listener>
+      <a-assets>
         <a-asset-item id="obj" src="./model/3133.obj"></a-asset-item>
         <a-asset-item id="mtl" src="./model/3133.mtl"></a-asset-item>
       </a-assets>
@@ -150,6 +150,7 @@
         scale="0.0005 0.0005 0.0005"
         rotation="0 0 0"
         look-at="[gps-camera]"
+        cursor-listener
         animation-mixer
       ></a-entity>
       
