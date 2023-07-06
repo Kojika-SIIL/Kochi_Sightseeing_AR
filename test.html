@@ -9,8 +9,7 @@
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
     <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
-
-    <script>
+    <!--script>
       AFRAME.registerComponent('cursor-listener', {
         init: function () {
           var el = this.el;
@@ -24,8 +23,7 @@
           });
         }
       });
-    </script>
-    
+    </script-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
     <style>
@@ -183,22 +181,27 @@
         <a href="#" id="download-photo" download="selfie.png" title="Save Photo" class="disabled" target="_blank"><i class="material-icons">file_download</i></a>
     </div>
 
+    
     <script>
+      AFRAME.registerComponent('cursor-listener', {
       window.addEventListener('load', function () {
         const el = document.querySelector('[gps-entity-place]');
         const distanceMsg = document.getElementById('distance');
         const message = document.getElementById('message');
         const directionLight = document.getElementById('directionLight');
         const ambientLight = document.getElementById('ambientLight');
+        let isCursorOver = false; // カーソルがオブジェクト上にあるかどうかを追跡するフラグ
+
         el.addEventListener('gps-entity-place-update-position', (event) => {
           distanceMsg.textContent = `あと${event.detail.distance}m`;
-          if(event.detail.distance <= 10) {
+
+          if (event.detail.distance <= 10) {
             // 10m以下で明るくする、メッセージ表示、距離非表示
             directionLight.setAttribute('intensity', 1);
             ambientLight.setAttribute('intensity', 1);
             distanceMsg.style.display = 'none';
             message.style.display = 'block';
-          } else if(event.detail.distance <= 20) {
+          } else if (event.detail.distance <= 20) {
             // 20m以下で近づくほど明るくする、メッセージ非表示、距離表示
             directionLight.setAttribute('intensity', 1 - event.detail.distance / 20);
             ambientLight.setAttribute('intensity', 1 - event.detail.distance / 20);
@@ -212,6 +215,21 @@
             message.style.display = 'none';
           }
         });
+
+        el.addEventListener('mouseenter', () => {
+          if (event.detail.distance <= 10) {
+            el.setAttribute('material', 'color', 'red'); // オブジェクトの色を赤に変更
+          }
+          isCursorOver = true;
+        });
+
+        el.addEventListener('mouseleave', () => {
+          if (event.detail.distance <= 10) {
+            el.setAttribute('material', 'color', 'white'); // オブジェクトの色を元に戻す
+          }
+          isCursorOver = false;
+        });
+      });
       });
 
       var image = document.querySelector('#snap');
