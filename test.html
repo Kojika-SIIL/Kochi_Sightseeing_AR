@@ -9,6 +9,23 @@
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
     <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
+
+    <script>
+      AFRAME.registerComponent('cursor-listener', {
+        init: function () {
+          var el = this.el;
+          var defaultColor = el.getAttribute('material').color; 
+          el.addEventListener('mouseenter', function () {
+            // ここにイベント発生時の処理を追加する
+            el.setAttribute('material', 'color', 'blue');
+          });
+          el.addEventListener('mouseleave', function () {
+            el.setAttribute('material', 'color', defaultColor);
+          });
+        }
+      });
+    </script>
+    
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
     <style>
@@ -115,7 +132,7 @@
       arjs="debugUIEnabled: false;"
     >
       <!-- 3Dモデルの読み込み -->
-      <a-assets>
+      <a-assets cursor-listener>
         <a-asset-item id="obj" src="./model/3133.obj"></a-asset-item>
         <a-asset-item id="mtl" src="./model/3133.mtl"></a-asset-item>
       </a-assets>
@@ -135,6 +152,7 @@
         look-at="[gps-camera]"
         animation-mixer
       ></a-entity-->
+      
       <a-light
         id="directionLight"
         type="directional"
@@ -149,14 +167,10 @@
         color="#FFF">
       </a-light>
       <a-camera gps-camera="minDistance:5; maxDistance:20" rotation-reader look-controls>
-        <a-entity cursor="fuse: true;"
+        <a-entity cursor="fuse: true"
           position="0 0 -3"
-          geometry="primitive: ring; radiusInner: 0.1; radiusOuter: 0.15;"
+          geometry="primitive: ring; radiusInner: 0.1; radiusOuter: 0.15"
           material="color: #acacac; shader: flat; opacity: 0.6">
-          <a-animation begin="click" easing="ease-in" attribute="scale" dur="150"
-               fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
-          <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500"
-               fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
         </a-entity>
       </a-camera>
     </a-scene>
