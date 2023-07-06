@@ -8,7 +8,7 @@
       AFRAME.registerComponent('cursor-listener', {
         init: function () {
           var el = this.el;
-          var defaultColor = el.getAttribute('material').color; 
+          var defaultColor = el.getAttribute('material').color.clone(); 
           el.addEventListener('mouseenter', function () {
             // ここにイベント発生時の処理を追加する
             el.setAttribute('material', 'color', 'blue');
@@ -33,7 +33,6 @@
       <a-entity
         obj-model="obj: #obj; mtl: #mtl"
         position="0 -1 -10"
-        color="white"
         scale="0.0005 0.0005 0.0005"
         rotation="0 0 0"
         cursor-listener
