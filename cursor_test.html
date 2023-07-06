@@ -30,11 +30,13 @@
         <a-asset-item id="obj" src="./model/3133.obj"></a-asset-item>
         <a-asset-item id="mtl" src="./model/3133.mtl"></a-asset-item>
       </a-assets>
-      <a-entity>
+      <a-entity
         obj-model="obj: #obj; mtl: #mtl"
+        position="0 0 -5"
         scale="0.0005 0.0005 0.0005"
         rotation="0 0 0"
-      </a-entity>
+        cursor-listener
+      ></a-entity>
       <a-entity camera look-controls>
         <a-entity cursor="fuse: true"
           position="0 0 -3"
