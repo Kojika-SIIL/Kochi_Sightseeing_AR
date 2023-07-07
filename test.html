@@ -14,29 +14,32 @@
         init: function () {
           var el = this.el;
           var distanceMsg = document.getElementById('distance');
+          var mouseenterListener = function () {
+            // ここにイベント発生時の処理を追加する
+            el.setAttribute('animation', {
+              property: 'rotation',
+              to: '0 360 0',
+              dur: 1000,
+              easing: 'linear',
+              loop: true
+            });
+          };
 
           el.addEventListener('gps-entity-place-update-position', function (event) {
             if (event.detail.distance <= 10) {
-              el.addEventListener('mouseenter', function () {
-                // ここにイベント発生時の処理を追加する
-                el.setAttribute('animation', {
-                  property: 'rotation',
-                  to: '0 360 0',
-                  dur: 1000,
-                  easing: 'linear',
-                  loop: true
-                });
-              });
+              el.addEventListener('mouseenter', mouseenterListener);
               el.addEventListener('mouseleave', function () {
                 el.removeAttribute('animation');
               });
               distanceMsg.style.display = 'none';
             } else {
+              el.removeEventListener('mouseenter', mouseenterListener); // イベントリスナーを削除する
               distanceMsg.style.display = 'block';
             }
           });
         }
       });
+
     </script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
