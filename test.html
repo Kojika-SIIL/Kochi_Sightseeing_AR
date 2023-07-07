@@ -12,19 +12,28 @@
     <script>
       AFRAME.registerComponent('cursor-listener', {
         init: function () {
-          var el = this.el; 
-          el.addEventListener('mouseenter', function () {
-            // ここにイベント発生時の処理を追加する
-            el.setAttribute('animation', {
-              property: 'rotation',
-              to: '0 360 0',
-              dur: 1000,
-              easing: 'linear',
-              loop: true
-            });
-          });
-          el.addEventListener('mouseleave', function () {
-            el.removeAttribute('animation');
+          var el = this.el;
+          var distanceMsg = document.getElementById('distance');
+
+          el.addEventListener('gps-entity-place-update-position', function (event) {
+            if (event.detail.distance <= 10) {
+              el.addEventListener('mouseenter', function () {
+                // ここにイベント発生時の処理を追加する
+                el.setAttribute('animation', {
+                  property: 'rotation',
+                  to: '0 360 0',
+                  dur: 1000,
+                  easing: 'linear',
+                  loop: true
+                });
+              });
+              el.addEventListener('mouseleave', function () {
+                el.removeAttribute('animation');
+              });
+              distanceMsg.style.display = 'none';
+            } else {
+              distanceMsg.style.display = 'block';
+            }
           });
         }
       });
