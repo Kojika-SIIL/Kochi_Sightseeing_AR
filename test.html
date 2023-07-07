@@ -166,7 +166,6 @@
         cursor-listener
         animation-mixer
       ></a-entity-->
-      
       <a-light
         id="directionLight"
         type="directional"
@@ -198,39 +197,6 @@
 
     
     <script>
-    /*  window.addEventListener('load', function () {
-        const el = document.querySelector('[gps-entity-place]');
-        const distanceMsg = document.getElementById('distance');
-        const message = document.getElementById('message');
-        const directionLight = document.getElementById('directionLight');
-        const ambientLight = document.getElementById('ambientLight');
-        let isCursorOver = false; // カーソルがオブジェクト上にあるかどうかを追跡するフラグ
-
-        el.addEventListener('gps-entity-place-update-position', (event) => {
-          distanceMsg.textContent = `あと${event.detail.distance}m`;
-
-          if (event.detail.distance <= 10) {
-            // 10m以下で明るくする、メッセージ表示、距離非表示
-            directionLight.setAttribute('intensity', 1);
-            ambientLight.setAttribute('intensity', 1);
-            distanceMsg.style.display = 'none';
-            message.style.display = 'block';
-          } else if (event.detail.distance <= 20) {
-            // 20m以下で近づくほど明るくする、メッセージ非表示、距離表示
-            directionLight.setAttribute('intensity', 1 - event.detail.distance / 20);
-            ambientLight.setAttribute('intensity', 1 - event.detail.distance / 20);
-            distanceMsg.style.display = 'block';
-            message.style.display = 'none';
-          } else {
-            // 20mより離れると、明るさ0、メッセージ非表示、距離表示
-            directionLight.setAttribute('intensity', 0);
-            ambientLight.setAttribute('intensity', 0);
-            distanceMsg.style.display = 'block';
-            message.style.display = 'none';
-          }
-        });
-      });  */
-
       window.addEventListener('load', function () {
         const el = document.querySelector('[gps-entity-place]');
         const distanceMsg = document.getElementById('distance');
@@ -265,19 +231,6 @@
           }
         });
       });
-
-      /* AFRAME.registerComponent('cursor-listener', {
-        init: function () {
-          var el = this.el;
-          var defaultColor = el.getAttribute('material').color;
-          el.addEventListener('mouseenter', function () {
-            el.setAttribute('material', 'color', 'blue');
-          });
-          el.addEventListener('mouseleave', function () {
-            el.setAttribute('material', 'color', defaultColor);
-          });
-        }
-      });  */
 
 
       var image = document.querySelector('#snap');
