@@ -209,13 +209,13 @@
 
     
     <script>
+      var score = 0;
       window.addEventListener('load', function () {
         const el = document.querySelector('[gps-entity-place]');
         const scoreMsg = document.getElementById('score');
         // const message = document.getElementById('message');
         const directionLight = document.getElementById('directionLight');
         const ambientLight = document.getElementById('ambientLight');
-        var score = 0;
 
         el.addEventListener('gps-entity-place-update-position', (event) => {
           scoreMsg.textContent = `Score: ${score}`;
