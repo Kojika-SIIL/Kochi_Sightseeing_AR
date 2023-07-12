@@ -20,7 +20,6 @@
             score += 10;
             scoreMsg.textContent = 'Score: ' + score;
             sessionStorage.setItem('score', score.toString());
-            el.setAttibute('data-clicked', 'true');
             
             el.setAttribute('animation', {
               property: 'rotation',
@@ -39,7 +38,6 @@
               });
             } else {
               el.removeEventListener('mouseenter', mouseenterListener); // イベントリスナーを削除する
-              el.removeAttribute('data-clicked');
             }
           });
         }
