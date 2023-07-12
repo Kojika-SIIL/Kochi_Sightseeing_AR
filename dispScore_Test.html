@@ -3,12 +3,47 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Test App (Score Display)</title>
+    <title>Location Based AR Test</title>
     <!-- <script src="./lib/aframe.min.js"></script> -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
     <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
+    <script>
+      AFRAME.registerComponent('cursor-listener', {
+        init: function () {
+          var el = this.el;
+          var scoreMsg = document.getElementById('score');
+          var score = parseInt(sessionStorage.getItem('score')) || 0;
+          var mouseenterListener = function () {
+            // ここにイベント発生時の処理を追加する
+            score += 10;
+            scoreMsg.textContent = 'Score: ' + score;
+            sessionStrage.setItem('score', score.toString());
+            
+            el.setAttribute('animation', {
+              property: 'rotation',
+              to: '0 360 0',
+              dur: 1000,
+              easing: 'linear',
+              loop: true
+            });
+          };
+
+          el.addEventListener('gps-entity-place-update-position', function (event) {
+            if (event.detail.distance <= 10) {
+              el.addEventListener('mouseenter', mouseenterListener);
+              el.addEventListener('mouseleave', function () {
+                el.removeAttribute('animation');
+              });
+            } else {
+              el.removeEventListener('mouseenter', mouseenterListener); // イベントリスナーを削除する
+            }
+          });
+        }
+      });
+    </script>
+    
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
     <style>
@@ -170,67 +205,36 @@
     <script>
       window.addEventListener('load', function () {
         const el = document.querySelector('[gps-entity-place]');
-        const scoreMsg = document.getElementById('score');
+        // const distanceMsg = document.getElementById('distance');
         // const message = document.getElementById('message');
         const directionLight = document.getElementById('directionLight');
         const ambientLight = document.getElementById('ambientLight');
-        let score = 0;
+        const scoreMsg = document.getElementById('score');
+        let score = parseInt(sessionStorage.getItem('score')) || 0;
 
-        AFRAME.registerComponent('cursor-listener', {
-          init: function () {
-            const el = this.el;
+        el.addEventListener('gps-entity-place-update-position', (event) => {
+          if (event.detail.distance <= 10) {
+            // 10m以下で明るくする、メッセージ表示、距離非表示
+            directionLight.setAttribute('intensity', 1);
+            ambientLight.setAttribute('intensity', 1);
+            el.setAttribute('cursor-listener', '');
+          } else if (event.detail.distance <= 20) {
+            // 20m以下で近づくほど明るくする、メッセージ非表示、距離表示
+            directionLight.setAttribute('intensity', 1 - event.detail.distance / 20);
+            ambientLight.setAttribute('intensity', 1 - event.detail.distance / 20);
+            el.removeAttribute('cursor-listener');
+          } else {
+            // 20mより離れると、明るさ0、メッセージ非表示、距離表示
+            directionLight.setAttribute('intensity', 0);
+            ambientLight.setAttribute('intensity', 0);
+            el.removeAttribute('cursor-listener');
+          }
+        });
 
-            const mouseenterListener = function () {
-              updateScore();
-              el.setAttribute('animation', {
-                property: 'rotation',
-                to: '0 360 0',
-                dur: 1000,
-                easing: 'linear',
-                loop: true
-              });
-            };
-
-            const mouseleaveListener = function () {
-              el.removeAttribute('animation');
-            };
-
-          el.addEventListener('gps-entity-place-update-position', (event) => {
-            if (event.detail.distance <= 10) {
-              el.addEventListener('mouseenter', mouseenterListener);
-              el.addEventListener('mouseleave', mouseleaveListener);
-              // 10m以下で明るくする、メッセージ非表示、スコア表示
-              directionLight.setAttribute('intensity', 1);
-              ambientLight.setAttribute('intensity', 1);
-              scoreMsg.style.display = 'block';
-              el.setAttribute('cursor-listener', '');
-            } else if (event.detail.distance <= 20) {
-              el.removeEventListener('mouseenter', mouseenterListener);
-              el.removeEventListener('mouseleave', mouseleaveListener);
-              // 20m以下で近づくほど明るくする、メッセージ非表示、スコア表示
-              directionLight.setAttribute('intensity', 1 - event.detail.distance / 20);
-              ambientLight.setAttribute('intensity', 1 - event.detail.distance / 20);
-              scoreMsg.style.display = 'block';
-              el.removeAttribute('cursor-listener');
-            } else {
-              el.removeEventListener('mouseenter', mouseenterListener);
-              el.removeEventListener('mouseleave', mouseleaveListener);
-              // 20mより離れると、明るさ0、メッセージ非表示、スコア表示
-              directionLight.setAttribute('intensity', 0);
-              ambientLight.setAttribute('intensity', 0);
-              scoreMsg.style.display = 'block';
-              el.removeAttribute('cursor-listener');
-            }
-          });
-        }
+        scoreMsg.textContent = 'Score: ' + score;
       });
 
-      function updateScore() {
-        score += 10;
-        scoreMsg.textContent = `Score: ${score}`;
-      }
 
-        
       var image = document.querySelector('#snap');
       var take_photo_btn = document.querySelector('#take-photo');
       var delete_photo_btn = document.querySelector('#delete-photo');
@@ -242,7 +246,7 @@
         var video = document.querySelector('video');
         var snap = takeSnapshot(video);
     
-        // スナップショット表示
+        // スナップショット表示.
         image.setAttribute('src', snap);
         image.classList.add('visible');
     
