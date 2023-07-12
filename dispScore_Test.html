@@ -13,7 +13,7 @@
       AFRAME.registerComponent('cursor-listener', {
         init: function () {
           var el = this.el;
-          var distanceMsg = document.getElementById('distance');
+          var scoreMsg = document.getElementById('score');
           var score = 0;  //スコアの初期値
           
           var updateScore = function () {
@@ -211,7 +211,7 @@
     <script>
       window.addEventListener('load', function () {
         const el = document.querySelector('[gps-entity-place]');
-        const distanceMsg = document.getElementById('distance');
+        const scoreMsg = document.getElementById('score');
         const message = document.getElementById('message');
         const directionLight = document.getElementById('directionLight');
         const ambientLight = document.getElementById('ambientLight');
