@@ -19,7 +19,7 @@
             // ここにイベント発生時の処理を追加する
             score += 10;
             scoreMsg.textContent = 'Score: ' + score;
-            sessionStrage.setItem('score', score.toString());
+            sessionStorage.setItem('score', score.toString());
             
             el.setAttribute('animation', {
               property: 'rotation',
