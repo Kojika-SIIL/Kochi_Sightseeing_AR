@@ -10,17 +10,18 @@
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
     <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
     <script>
+      var score = 0;  //スコアの初期値
+          
+      var updateScore = function () {
+        score += 10;
+        // スコア表示の処理
+        scoreMsg.textContent = `Score: ${score}`;
+      };
+      
       AFRAME.registerComponent('cursor-listener', {
         init: function () {
           var el = this.el;
           var scoreMsg = document.getElementById('score');
-          var score = 0;  //スコアの初期値
-          
-          var updateScore = function () {
-            score += 10;
-            // スコア表示の処理
-            scoreMsg.textContent = `Score: ${score}`;
-          };
           
           var mouseenterListener = function () {
             // ここにイベント発生時の処理を追加する
@@ -46,10 +47,6 @@
               scoreMsg.style.display = 'block';
             }
           });
-
-          if (scoreMsg.style.display !== 'block') {
-            scoreMsg.style.display = 'block';
-          }
         }
       });
 
