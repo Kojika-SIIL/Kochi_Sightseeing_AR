@@ -215,6 +215,7 @@
         // const message = document.getElementById('message');
         const directionLight = document.getElementById('directionLight');
         const ambientLight = document.getElementById('ambientLight');
+        var score = 0;
 
         el.addEventListener('gps-entity-place-update-position', (event) => {
           scoreMsg.textContent = `Score: ${score}`;
