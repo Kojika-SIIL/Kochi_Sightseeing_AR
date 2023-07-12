@@ -11,8 +11,10 @@
     <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
     <script>
       var score = 0;  //スコアの初期値
+      var scoreMsg = document.getElementById('score');
       var updateScore = function () {
         score += 10;
+        scoreMsg.textContent = `Score: ${score}`;
       };
       
       AFRAME.registerComponent('cursor-listener', {
@@ -214,6 +216,8 @@
         const ambientLight = document.getElementById('ambientLight');
 
         el.addEventListener('gps-entity-place-update-position', (event) => {
+          scoreMsg.textContent = `Score: ${score}`;
+          
           if (event.detail.distance <= 10) {
             // 10m以下で明るくする、メッセージ非表示、スコア表示
             directionLight.setAttribute('intensity', 1);
