@@ -11,17 +11,16 @@
     <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
     <script>
       var score = 0;  //スコアの初期値
-          
+      var scoreMsg = document.getElementById('score');
       var updateScore = function () {
         score += 10;
         // スコア表示の処理
-        
+        scoreMsg.textContent = `Score: ${score}`;
       };
       
       AFRAME.registerComponent('cursor-listener', {
         init: function () {
           var el = this.el;
-          var scoreMsg = document.getElementById('score');
           
           var mouseenterListener = function () {
             // ここにイベント発生時の処理を追加する
