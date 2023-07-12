@@ -11,10 +11,8 @@
     <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
     <script>
       var score = 0;  //スコアの初期値
-      var scoreMsg = document.getElementById('score');
       var updateScore = function () {
         score += 10;
-        scoreMsg.textContent = `Score: ${score}`;
       };
       
       AFRAME.registerComponent('cursor-listener', {
