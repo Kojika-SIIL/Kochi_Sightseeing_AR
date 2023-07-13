@@ -17,6 +17,7 @@
           var scoreMsg = document.getElementById('score');
           var score = parseInt(sessionStorage.getItem('score')) || 0;
           var scoreFlag = false;
+          var cursorAudio = new Audio('./assets/cursor5.mp3');
 
           var mouseenterListener = function () {
             // ここにイベント発生時の処理を追加する
@@ -35,6 +36,8 @@
                 easing: 'linear',
                 loop: true
               });
+
+              cursorAudio.play();
             }
           };
 
