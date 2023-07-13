@@ -23,20 +23,20 @@
             // ここにイベント発生時の処理を追加する
             message.style.display = 'block';
             cursorAudio.play();
+
+            el.setAttribute('animation', {
+              property: 'rotation',
+              to: '0 360 0',
+              dur: 1000,
+              easing: 'linear',
+              loop: true
+            });
             
             if (!scoreFlag) {
               score += 10;
               scoreMsg.textContent = 'Score: ' + score;
               sessionStorage.setItem('score', score.toString());
               scoreFlag = true;
-              
-              el.setAttribute('animation', {
-                property: 'rotation',
-                to: '0 360 0',
-                dur: 1000,
-                easing: 'linear',
-                loop: true
-              });
             }
           };
 
@@ -250,6 +250,7 @@
         const ambientLight = document.getElementById('ambientLight');
         const scoreMsg = document.getElementById('score');
         const audio = new Audio('./assets/helicopter.mp3');
+        audio.loop = true;
         let score = parseInt(sessionStorage.getItem('score')) || 0;
 
         el.addEventListener('gps-entity-place-update-position', (event) => {
