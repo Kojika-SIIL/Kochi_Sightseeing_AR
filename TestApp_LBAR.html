@@ -22,6 +22,7 @@
           var mouseenterListener = function () {
             // ここにイベント発生時の処理を追加する
             message.style.display = 'block';
+            cursorAudio.play();
             
             if (!scoreFlag) {
               score += 10;
@@ -36,8 +37,6 @@
                 easing: 'linear',
                 loop: true
               });
-
-              cursorAudio.play();
             }
           };
 
