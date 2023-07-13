@@ -19,15 +19,13 @@
           var scoreFlag = false;
           var mouseenterListener = function () {
             // ここにイベント発生時の処理を追加する
+            message.style.display = 'block';
+            
             if (!scoreFlag) {
               score += 10;
               scoreMsg.textContent = 'Score: ' + score;
               sessionStorage.setItem('score', score.toString());
               scoreFlag = true;
-
-              el.setAttribute('message', {
-                message.style.display = 'block';
-              });
               
               el.setAttribute('animation', {
                 property: 'rotation',
@@ -43,7 +41,6 @@
             if (event.detail.distance <= 10) {
               el.addEventListener('mouseenter', mouseenterListener);
               el.addEventListener('mouseleave', function () {
-                el.removeAttribute('message');
                 el.removeAttribute('animation');
               });
             } else {
