@@ -80,7 +80,7 @@
         z-index: 10;
         left: 5%;
         width: 90%;
-        height: 20%
+        height: 30%
         padding: 5%;
         color: #fff;
         font-weight: bold;
@@ -240,7 +240,6 @@
             // 10m以下で明るくする
             directionLight.setAttribute('intensity', 1);
             ambientLight.setAttribute('intensity', 1);
-            message.style.display = 'none';
             el.setAttribute('cursor-listener', '');
           } else if (event.detail.distance <= 20) {
             // 20m以下で近づくほど明るくする
