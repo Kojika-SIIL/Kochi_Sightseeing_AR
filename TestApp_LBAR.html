@@ -249,6 +249,7 @@
         const directionLight = document.getElementById('directionLight');
         const ambientLight = document.getElementById('ambientLight');
         const scoreMsg = document.getElementById('score');
+        const audio = new Audio('./assets/helicopter.mp3');
         let score = parseInt(sessionStorage.getItem('score')) || 0;
 
         el.addEventListener('gps-entity-place-update-position', (event) => {
@@ -258,18 +259,23 @@
             ambientLight.setAttribute('intensity', 1);
             message.style.display = 'none';
             el.setAttribute('cursor-listener', '');
+            audio.volume = 1;
+            audio.play();
           } else if (event.detail.distance <= 20) {
             // 20m以下で近づくほど明るくする
             directionLight.setAttribute('intensity', 1 - event.detail.distance / 20);
             ambientLight.setAttribute('intensity', 1 - event.detail.distance / 20);
             message.style.display = 'none';
             el.removeAttribute('cursor-listener');
+            audio.volume = intensity;
+            audio.play();
           } else {
             // 20mより離れると明るさ0
             directionLight.setAttribute('intensity', 0);
             ambientLight.setAttribute('intensity', 0);
             message.style.display = 'none';
             el.removeAttribute('cursor-listener');
+            audio.pause();
           }
         });
 
