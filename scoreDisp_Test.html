@@ -13,11 +13,14 @@
       AFRAME.registerComponent('cursor-listener', {
         init: function () {
           var el = this.el;
+          var message = document.getElementById('message');
           var scoreMsg = document.getElementById('score');
           var score = parseInt(sessionStorage.getItem('score')) || 0;
           var scoreFlag = false;
           var mouseenterListener = function () {
             // ここにイベント発生時の処理を追加する
+            message.style.display = 'block';
+            
             if (!scoreFlag) {
               score += 10;
               scoreMsg.textContent = 'Score: ' + score;
@@ -72,12 +75,12 @@
       body {
         margin: 0;
       }
-      /* #message {
+      #message {
         position: fixed;
         z-index: 10;
         left: 5%;
-        top: 10px;
         width: 90%;
+        height: 20%
         padding: 5%;
         color: #fff;
         font-weight: bold;
@@ -85,7 +88,7 @@
         border-radius: 20px;
         border: 3px solid #fff;
         display: none;
-      } */
+      }
 
       /* スナップショットボタンの表示 */
       .ui {
@@ -144,9 +147,9 @@
 
   <body style="margin: 0; overflow: hidden;">
     <div id="score">Loading...</div>
-    <!--div id="message">
+    <div id="message">
       AR掩体壕(えんたいごう)
-    </div-->
+    </div>
     
     <a-scene
       vr-mode-ui="enabled: false"
@@ -226,7 +229,7 @@
       window.addEventListener('load', function () {
         const el = document.querySelector('[gps-entity-place]');
         // const distanceMsg = document.getElementById('distance');
-        // const message = document.getElementById('message');
+        const message = document.getElementById('message');
         const directionLight = document.getElementById('directionLight');
         const ambientLight = document.getElementById('ambientLight');
         const scoreMsg = document.getElementById('score');
@@ -234,19 +237,22 @@
 
         el.addEventListener('gps-entity-place-update-position', (event) => {
           if (event.detail.distance <= 10) {
-            // 10m以下で明るくする、メッセージ表示、距離非表示
+            // 10m以下で明るくする
             directionLight.setAttribute('intensity', 1);
             ambientLight.setAttribute('intensity', 1);
+            message.style.display = 'none';
             el.setAttribute('cursor-listener', '');
           } else if (event.detail.distance <= 20) {
-            // 20m以下で近づくほど明るくする、メッセージ非表示、距離表示
+            // 20m以下で近づくほど明るくする
             directionLight.setAttribute('intensity', 1 - event.detail.distance / 20);
             ambientLight.setAttribute('intensity', 1 - event.detail.distance / 20);
+            message.style.display = 'none';
             el.removeAttribute('cursor-listener');
           } else {
-            // 20mより離れると、明るさ0、メッセージ非表示、距離表示
+            // 20mより離れると明るさ0
             directionLight.setAttribute('intensity', 0);
             ambientLight.setAttribute('intensity', 0);
+            message.style.display = 'none';
             el.removeAttribute('cursor-listener');
           }
         });
