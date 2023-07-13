@@ -19,30 +19,33 @@
           var scoreFlag = false;
           var mouseenterListener = function () {
             // ここにイベント発生時の処理を追加する
-            message.style.display = 'block';
-            
             if (!scoreFlag) {
               score += 10;
               scoreMsg.textContent = 'Score: ' + score;
               sessionStorage.setItem('score', score.toString());
               scoreFlag = true;
-            
-              /* el.setAttribute('animation', {
+
+              el.setAttribute('message', {
+                message.style.display = 'block';
+              });
+              
+              el.setAttribute('animation', {
                 property: 'rotation',
                 to: '0 360 0',
                 dur: 1000,
                 easing: 'linear',
                 loop: true
-              }); */
+              });
             }
           };
 
           el.addEventListener('gps-entity-place-update-position', function (event) {
             if (event.detail.distance <= 10) {
               el.addEventListener('mouseenter', mouseenterListener);
-              /* el.addEventListener('mouseleave', function () {
+              el.addEventListener('mouseleave', function () {
+                el.removeAttribute('message');
                 el.removeAttribute('animation');
-              }); */
+              });
             } else {
               el.removeEventListener('mouseenter', mouseenterListener); // イベントリスナーを削除する
             }
@@ -79,7 +82,7 @@
         position: fixed;
         z-index: 10;
         left: 5%;
-        bottom: 10%;
+        bottom: 20%;
         width: 90%;
         padding: 5%;
         color: #fff;
