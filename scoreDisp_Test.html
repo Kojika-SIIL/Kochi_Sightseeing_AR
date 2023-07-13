@@ -15,8 +15,9 @@
           var el = this.el;
           var message = document.getElementById('message');
           var scoreMsg = document.getElementById('score');
-          var score = parseInt(sessionStorage.getItem('score')) || 0;
-          var scoreFlag = false;
+          var score = parseInt(localStorage.getItem('score')) || 0;
+          var scoreFlag = localStorage.getItem('scoreFlag') === 'true' || false;
+          
           var mouseenterListener = function () {
             // ここにイベント発生時の処理を追加する
             message.style.display = 'block';
@@ -24,7 +25,8 @@
             if (!scoreFlag) {
               score += 10;
               scoreMsg.textContent = 'Score: ' + score;
-              sessionStorage.setItem('score', score.toString());
+              localStorage.setItem('score', score.toString());
+              localStorage.setItem('scoreFlag', true.toString());
               scoreFlag = true;
               
               el.setAttribute('animation', {
