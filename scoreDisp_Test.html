@@ -42,6 +42,7 @@
             if (event.detail.distance <= 10) {
               el.addEventListener('mouseenter', mouseenterListener);
               el.addEventListener('mouseleave', function () {
+                message.style.display = 'none';
                 el.removeAttribute('animation');
               });
             } else {
