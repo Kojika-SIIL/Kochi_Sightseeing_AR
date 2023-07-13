@@ -27,22 +27,22 @@
               sessionStorage.setItem('score', score.toString());
               scoreFlag = true;
             
-              el.setAttribute('animation', {
+              /* el.setAttribute('animation', {
                 property: 'rotation',
                 to: '0 360 0',
                 dur: 1000,
                 easing: 'linear',
                 loop: true
-              });
+              }); */
             }
           };
 
           el.addEventListener('gps-entity-place-update-position', function (event) {
             if (event.detail.distance <= 10) {
               el.addEventListener('mouseenter', mouseenterListener);
-              el.addEventListener('mouseleave', function () {
+              /* el.addEventListener('mouseleave', function () {
                 el.removeAttribute('animation');
-              });
+              }); */
             } else {
               el.removeEventListener('mouseenter', mouseenterListener); // イベントリスナーを削除する
             }
