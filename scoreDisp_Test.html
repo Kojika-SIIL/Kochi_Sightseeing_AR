@@ -16,13 +16,13 @@
           var message = document.getElementById('message');
           var scoreMsg = document.getElementById('score');
           var score = parseInt(localStorage.getItem('score')) || 0;
-          var scoreFlag = localStorage.getItem('scoreFlag') !== 'true';
+          var scoreFlag = localStorage.getItem('scoreFlag') !== 'true' ? false : true;
           
           var mouseenterListener = function () {
             // ここにイベント発生時の処理を追加する
             message.style.display = 'block';
             
-            if (!scoreFlag) {
+            if (scoreFlag === false) {
               score += 10;
               scoreMsg.textContent = 'Score: ' + score;
               localStorage.setItem('score', score.toString());
