@@ -15,19 +15,23 @@
           var el = this.el;
           var scoreMsg = document.getElementById('score');
           var score = parseInt(sessionStorage.getItem('score')) || 0;
+          var scoreFlag = false;
           var mouseenterListener = function () {
             // ここにイベント発生時の処理を追加する
-            score += 10;
-            scoreMsg.textContent = 'Score: ' + score;
-            sessionStorage.setItem('score', score.toString());
+            if (!scoreFlag) {
+              score += 10;
+              scoreMsg.textContent = 'Score: ' + score;
+              sessionStorage.setItem('score', score.toString());
+              scoreFlag = true;
             
-            el.setAttribute('animation', {
-              property: 'rotation',
-              to: '0 360 0',
-              dur: 1000,
-              easing: 'linear',
-              loop: true
-            });
+              el.setAttribute('animation', {
+                property: 'rotation',
+                to: '0 360 0',
+                dur: 1000,
+                easing: 'linear',
+                loop: true
+              });
+            }
           };
 
           el.addEventListener('gps-entity-place-update-position', function (event) {
@@ -154,6 +158,8 @@
         <a-asset-item id="obj" src="./model/3133.obj"></a-asset-item>
         <a-asset-item id="mtl" src="./model/3133.mtl"></a-asset-item>
       </a-assets>
+      
+      <!-- Labo -->
       <!--a-entity
         gps-entity-place="latitude: 33.54881724530957; longitude: 133.68035668183893; elevation: 0;"
         obj-model="obj: #obj; mtl: #mtl"
@@ -163,7 +169,9 @@
         cursor-listener
         animation-mixer
       ></a-entity-->
-      <a-entity
+      
+      <!-- Dormitory 6 -->
+      <!--a-entity
         gps-entity-place="latitude: 33.54567330446067; longitude: 133.67793767363477; elevation: 0;"
         obj-model="obj: #obj; mtl: #mtl"
         scale="0.0005 0.0005 0.0005"
@@ -171,7 +179,19 @@
         look-at="[gps-camera]"
         cursor-listener
         animation-mixer
+      ></a-entity-->
+      
+      <!-- I5 -->
+      <a-entity
+        gps-entity-place="latitude: 33.54945734394876; longitude: 133.6809323924838; elevation: 0;"
+        obj-model="obj: #obj; mtl: #mtl"
+        scale="0.0005 0.0005 0.0005"
+        rotation="0 0 0"
+        look-at="[gps-camera]"
+        cursor-listener
+        animation-mixer
       ></a-entity>
+      
       <a-light
         id="directionLight"
         type="directional"
