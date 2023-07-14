@@ -60,6 +60,13 @@
           var scene = document.querySelector('a-scene');
           scene.object3D.add(plane);
 
+          // 認識された領域に立方体を表示する
+          var cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+          var cubeMaterial = new THREE.MeshBasicMaterial({ color: 'red' });
+          var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+          cube.position.set(0, 0.5, -2); // 立方体の位置
+          scene.object3D.add(cube);
+
           // メモリ解放
           src.delete();
           dst.delete();
