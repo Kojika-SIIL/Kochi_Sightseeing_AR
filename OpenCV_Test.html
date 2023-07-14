@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Oven CV Test</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script async src="https://docs.opencv.org/master/opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-entity camera look-controls></a-entity>
+    </a-scene>
+    <script>
+      // OpenCV.jsの読み込みが完了した時に呼び出される関数
+      function onOpenCvReady() {
+        // 画像認識の処理を実装する
+
+        // 画像を取得
+        var img = new Image();
+        img.src = './images/iwamon.png';
+
+        // 画像のロードが完了した時に呼び出される関数
+        img.onload = function() {
+          // 画像をキャンバスに描画
+          var canvas = document.createElement('canvas');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          var ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+
+          // 画像をOpenCV.jsのMatオブジェクトに変換
+          var src = cv.imread(canvas);
+
+          // 画像処理の処理を実装する（エッジ検出）
+          var dst = new cv.Mat();
+          cv.Canny(src, dst, 50, 200);
+
+          // オブジェクトの表示処理を実装する（矩形）
+          var contours = new cv.MatVector();
+          var hierarchy = new cv.Mat();
+          cv.findContours(dst, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
+          var dstCanvas = document.createElement('canvas');
+          dstCanvas.width = img.width;
+          dstCanvas.height = img.height;
+          var dstCtx = dstCanvas.getContext('2d');
+          dstCtx.strokeStyle = 'red';
+          dstCtx.lineWidth = 2;
+          for (var i = 0; i < contours.size(); i++) {
+            var contour = contours.get(i);
+            var rect = cv.boundingRect(contour);
+            dstCtx.strokeRect(rect.x, rect.y, rect.width, rect.height);
+          }
+
+          // A-Frameのシーンにキャンバス要素を追加
+          var canvasTexture = new THREE.CanvasTexture(dstCanvas);
+          var geometry = new THREE.PlaneGeometry(1, 1);
+          var material = new THREE.MeshBasicMaterial({ map: canvasTexture });
+          var plane = new THREE.Mesh(geometry, material);
+          plane.scale.set(img.width / img.height, 1, 1);
+          var scene = document.querySelector('a-scene');
+          scene.object3D.add(plane);
+
+          // メモリ解放
+          src.delete();
+          dst.delete();
+          contours.delete();
+          hierarchy.delete();
+        };
+      }
+    </script>
+  </body>
+</html>
