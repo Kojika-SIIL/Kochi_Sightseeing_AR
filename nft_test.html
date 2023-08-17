@@ -5,14 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>NFT Marker Test</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+
+    <!-- style for the loader -->
+    <style>
+      .arjs-loader {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .arjs-loader div {
+        text-align: center;
+        font-size: 1.25em;
+        color: white;
+      }
+    </style>
   </head>
-  <body>
+
+  <body style="margin : 0px; overflow: hidden;">
+    <div class="arjs-loader">
+      <div>Loading, please wait...</div>
+    </div>
+
     <a-scene
-      vr-mode-ui="enabled: false"
+      vr-mode-ui="enabled: false;"
+      renderer="logarithmicDepthBuffer: true;"
       embedded
-      arjs="debugUIEnabled: false"
+      arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
     >
       <a-assets>
         <a-asset-item id="obj" src="./model/3133.obj"></a-asset-item>
@@ -20,7 +47,7 @@
       </a-assets>
       <a-nft
         type="nft"
-        url="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex"
+        url="<path-to-your-image-descriptors>"
         smooth="true"
         smoothCount="10"
         smoothTolerance=".01"
@@ -33,6 +60,7 @@
           rotation="0 0 0"
         ></a-entity>
       </a-nft>
+      <a-entity camera></a-entity>
     </a-scene>
   </body>
 </html>
