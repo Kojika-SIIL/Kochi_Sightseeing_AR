@@ -49,15 +49,10 @@
         smoothTolerance=".01"
         smoothThreshold="5"
       >
-        <a-assets>
-          <a-asset-item id="obj" src="./model/3133.obj"></a-asset-item>
-          <a-asset-item id="mtl" src="./model/3133.mtl"></a-asset-item>
-        </a-assets>
         <a-entity
-          obj-model="obj: #obj; mtl: #mtl"
-          position="0 -1 -5"
-          scale="0.0005 0.0005 0.0005"
-          rotation="0 0 0"
+          gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+          scale="5 5 5"
+          position="50 150 0"
         ></a-entity>
       </a-nft>
       <a-entity camera></a-entity>
