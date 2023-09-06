@@ -6,10 +6,10 @@
     <title>NFT Marker Test</title>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
+    <!--link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"-->
+<!--  <style>
       /* スナップショットボタンの表示 */
-      .ui {
+    /*  .ui {
         position: absolute;
         z-index: 100;
         bottom: 0;
@@ -59,8 +59,8 @@
 
       #snap.visible {
         visibility: visible;
-      }
-    </style>
+      }  */
+    </style>  -->
     <style>
       .arjs-loader {
         height: 100%;
@@ -112,14 +112,14 @@
       <a-entity camera></a-entity>
     </a-scene>
     
-    <div class="ui">
+<!--    <div class="ui">
         <img id="snap">
         <a href="#" id="delete-photo" title="Delete Photo" class="disabled"><i class="material-icons">delete</i></a>
         <a href="" id="take-photo" title="Take Photo"><i class="material-icons">photo_camera</i></a>
         <a href="#" id="download-photo" download="selfie.png" title="Save Photo" class="disabled" target="_blank"><i class="material-icons">file_download</i></a>
-    </div>
+    </div>  -->
   </body>
-  <script>
+  <!--  <script>
     var image = document.querySelector('#snap');
     var take_photo_btn = document.querySelector('#take-photo');
     var delete_photo_btn = document.querySelector('#delete-photo');
@@ -188,5 +188,5 @@
         return resizedCanvas.toDataURL('image/png');
       }
     }
-  </script>
+  </script>  -->
 </html>
