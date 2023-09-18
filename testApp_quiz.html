@@ -86,16 +86,16 @@
     </div>
     <!-- 視点カーソル -->
     <script>
-      var text = document.querySelector('#ans1', '#ans2', '#ans3');
+      var ans1 = document.querySelector('#ans1');
       // カーソル要素に対するマウスエンターイベントをリッスン
-      text.addEventListener('mouseenter', function () {
+      ans1.addEventListener('mouseenter', function () {
         // マウスが要素に入ったときに色を黄色に変更
-        text.setAttribute('color', '#FFFF00');
+        ans1.setAttribute('color', '#FFFF00');
       });
       // カーソル要素から外れたときのマウスリーブイベントをリッスン
-      text.addEventListener('mouseleave', function () {
+      ans1.addEventListener('mouseleave', function () {
         // マウスが要素から出たときに色を元に戻す
-        text.setAttribute('color', '#EF2D5E');
+        ans1.setAttribute('color', '#EF2D5E');
       });
     </script>
   </body>
