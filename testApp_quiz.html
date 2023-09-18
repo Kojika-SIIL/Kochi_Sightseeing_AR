@@ -76,7 +76,7 @@
       </a-entity>
       <a-marker preset="hiro">
         <a-text id="quiz" value="QUIZ" align="center" position="0 2 -5" color="white" geometry="primitive:plane; width: 5" material="color: #4169E1"></a-text>
-        <a-text id="ans1" value="1" align="center" position="0 0 -5" color="white" geometry="primitive:plane; width: 5" material="color: #EF2D5E"></a-text>
+        <a-text id="ans1" value="1" align="center" position="0 0 -5" color="white" geometry="primitive:plane; width: 5" material="color: #EF2D5E" cursor-listener></a-text>
         <a-text id="ans2" value="2" align="center" position="0 -1.5 -5" color="white" geometry="primitive:plane; width: 5" material="color: #EF2D5E"></a-text>
         <a-text id="ans3" value="3" align="center" position="0 -3 -5" color="white" geometry="primitive:plane; width: 5" material="color: #EF2D5E"></a-text>
       </a-marker>
@@ -88,6 +88,26 @@
       <a href="" id="take-photo" title="Take Photo"><i class="material-icons">photo_camera</i></a>
       <a href="#" id="download-photo" download="selfie.png" title="Save Photo" class="disabled" target="_blank"><i class="material-icons">file_download</i></a>
     </div>
+    <!-- 視点カーソル -->
+    <script>
+      AFRAME.registerComponent('cursor-listener', {
+        init: function () {
+          var text = this.el;
+
+          // カーソル要素に対するマウスエンターイベントをリッスン
+          text.addEventListener('mouseenter', function () {
+            // マウスが要素に入ったときに色を黄色に変更
+            text.setAttribute('color', '#FFFF00');
+          });
+
+          // カーソル要素から外れたときのマウスリーブイベントをリッスン
+          text.addEventListener('mouseleave', function () {
+            // マウスが要素から出たときに色を元に戻す
+            text.setAttribute('color', '#EF2D5E');
+          });
+        }
+      });
+    </script>
   </body>
   <script>
     var image = document.querySelector('#snap');
