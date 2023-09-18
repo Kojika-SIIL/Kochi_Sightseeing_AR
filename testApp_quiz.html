@@ -88,7 +88,7 @@
     <script>
       AFRAME.registerComponent('cursor-listener', {
         init: function () {
-          var text = this.el;
+          var text = document.querySelector('a-text');
 
           // カーソル要素に対するマウスエンターイベントをリッスン
           text.addEventListener('mouseenter', function () {
