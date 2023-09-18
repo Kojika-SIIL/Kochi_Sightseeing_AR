@@ -86,6 +86,25 @@
     </div>
     <!-- 視点カーソル -->
     <script>
+      function changeColorOnHover(element) {
+        element.addEventListener('mouseenter', function () {
+          element.setAttribute('material', 'color: #FFFF00');
+        });
+
+        element.addEventListener('mouseleave', function () {
+          element.setAttribute('material', 'color: #EF2D5E');
+        });
+      }
+
+      var ans1 = document.querySelector('#ans1');
+      var ans2 = document.querySelector('#ans2');
+      var ans3 = document.querySelector('#ans3');
+
+      changeColorOnHover(ans1);
+      changeColorOnHover(ans2);
+      changeColorOnHover(ans3);
+    </script>
+    <!--script>
       var ans1 = document.querySelector('#ans1');
       var ans2 = document.querySelector('#ans2');
       var ans3 = document.querySelector('#ans3');
@@ -117,7 +136,7 @@
         // マウスが要素から出たときに色を元に戻す
         ans3.setAttribute('material', 'color: #EF2D5E');
       });
-    </script>
+  </script-->
   </body>
   <script>
     var image = document.querySelector('#snap');
