@@ -90,19 +90,21 @@
     </div>
     
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false;">
-      <a-nft
+      <!--a-nft
         type="nft"
         url="https://webarnow.github.io/arjs-test/assets/webar-now2"
         smooth="true"
         smoothCount="10"
         smoothTolerance=".01"
         smoothThreshold="5"
-      >
+      -->
+      <a-marker preset="hiro">
         <a-text id="quiz" value="Q01\n高知県出身の偉人は？" align="center" position="0 1.5 -5" color="white" geometry="primitive:plane; width: 5" material="color: #4169E1"></a-text>
         <a-text id="ans1" value="1. 岩崎弥太郎" align="center" position="0 -1 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
         <a-text id="ans2" value="2. 勝海舟" align="center" position="0 -2.5 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
         <a-text id="ans3" value="3. 真田幸村" align="center" position="0 -4 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
-      </a-nft>
+      </a-marker>
+      <!--/a-nft-->
       <a-entity camera look-controls>
         <a-entity cursor="fuse: true;"
           position="0 0 -3"
