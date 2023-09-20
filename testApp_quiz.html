@@ -141,6 +141,7 @@
       var correct = document.querySelector('#correct');
       var incorrect1 = document.querySelector('#incorrect1');
       var incorrect2 = document.querySelector('#incorrect2');
+      var cursorEnabled = true; // カーソルの反応
 
       changeColorOnHover(correct, shrinkCursorOnHover(correct));
       changeColorOnHover(incorrect1, shrinkCursorOnHover(incorrect1));
@@ -153,11 +154,15 @@
       /*----- カーソルを合わせると色が変わる -----*/
       function changeColorOnHover(element) {
         element.addEventListener('mouseenter', function () {
-          element.setAttribute('material', 'color: #FFFF00');
+          if (cursorEnabled) {
+            element.setAttribute('material', 'color: #FFFF00');
+          }
         });
 
         element.addEventListener('mouseleave', function () {
-          element.setAttribute('material', 'color: #EF2D5E');
+          if (cursorEnabled) {
+            element.setAttribute('material', 'color: #EF2D5E');
+          }
         });
       }
       
@@ -172,8 +177,10 @@
         var animationFrameId; // アニメーションフレームID
 
         element.addEventListener('mouseenter', function () {
-          animationStartTime = null;
-          animationFrameId = requestAnimationFrame(animate);
+          if (cursorEnabled) {
+            animationStartTime = null;
+            animationFrameId = requestAnimationFrame(animate);
+          }
         });
 
         element.addEventListener('mouseleave', function () {
@@ -219,12 +226,15 @@
         var timer = null;
 
         element.addEventListener('mouseenter', function () {
-          timer = setTimeout(function () {
-            score += 10;
-            updateScoreDisplay();
-            correctAudio.play();
-            showMessage('正解！！', true);
-          }, 2000); // 2秒後にスコアを増加, 正解音再生, メッセージ表示
+          if (cursorEnabled) {
+            timer = setTimeout(function () {
+              score += 10;
+              updateScoreDisplay();
+              correctAudio.play();
+              showMessage('正解！！', true);
+              cursorEnabled = false; // カーソルの反応を無効化
+            }, 2000); // 2秒後にスコアを増加, 正解音再生, メッセージ表示
+          }
         });
 
         element.addEventListener('mouseleave', function () {
@@ -244,10 +254,13 @@
         var timer = null;
 
         element.addEventListener('mouseenter', function () {
-          timer = setTimeout(function () {
-            incorrectAudio.play();
-            showMessage('ざんねん！！', false);
-          }, 2000); // 2秒後に不正解音を再生, メッセージ表示
+          if (cursorEnabled) {
+            timer = setTimeout(function () {
+              incorrectAudio.play();
+              showMessage('ざんねん！！', false);
+              cursorEnabled = false; // カーソルの反応を無効化
+            }, 2000); // 2秒後に不正解音を再生, メッセージ表示
+          }
         });
 
         element.addEventListener('mouseleave', function () {
