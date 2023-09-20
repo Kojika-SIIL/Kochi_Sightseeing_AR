@@ -145,37 +145,6 @@
       changeColorOnHover(ans2);
       changeColorOnHover(ans3);
 
-      // 現在のカーソルのサイズ
-      var cursorSize = 0.15; // 初期サイズ
-
-      // カーソルサイズを変更する関数
-      function changeCursorSize(size) {
-        var cursor = document.querySelector('a-entity[cursor]');
-        if (cursor) {
-          cursor.setAttribute('geometry', 'radiusInner', size * 0.1); // 内側の半径を変更
-          cursor.setAttribute('geometry', 'radiusOuter', size * 0.15); // 外側の半径を変更
-        }
-      }
-
-      // カーソル要素にマウスが乗ったときの処理
-      function cursorHoverStart() {
-        cursorSize = 0.05; // 小さなサイズに変更
-        changeCursorSize(cursorSize);
-      }
-
-      // カーソル要素からマウスが離れたときの処理
-      function cursorHoverEnd() {
-        cursorSize = 0.15; // 初期サイズに戻す
-        changeCursorSize(cursorSize);
-      }
-
-      // カーソル要素を検出
-      var cursor = document.querySelector('a-entity[cursor]');
-      if (cursor) {
-        // カーソル要素にマウスホバーのイベントリスナーを追加
-        cursor.addEventListener('mouseenter', cursorHoverStart);
-        cursor.addEventListener('mouseleave', cursorHoverEnd);
-      }
     </script>
   </body>
 
