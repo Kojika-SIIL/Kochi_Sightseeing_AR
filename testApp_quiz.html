@@ -157,7 +157,7 @@
       changeColorOnHover(ans2, shrinkCursorOnHover(ans2));
       changeColorOnHover(ans3, shrinkCursorOnHover(ans3));
 
-      increaseScoreOnHover(ans1);
+      correctOnHover(ans1);
 
       /*----- カーソルを合わせると色が変わる -----*/
       function changeColorOnHover(element) {
@@ -216,18 +216,22 @@
         }
       }
 
-      /*----- スコアの増加 -----*/
+      /*----- 正解・不正解の処理 -----*/
       var score = 0;
       var scoreElement = document.querySelector('#score');
+      var correctAudio = new Audio('./assets/correct.mp3');
+      var incorrectAudio = new Audio('./assets/incorrect.mp3');
 
-      // カーソルを合わせるとスコアが増加する処理
-      function increaseScoreOnHover(element) {
+      /* 正解の場合 */
+      // スコアが増加する処理
+      function correctOnHover(element) {
         var timer = null;
 
         element.addEventListener('mouseenter', function () {
           timer = setTimeout(function () {
             score += 10;
             updateScoreDisplay();
+            correctAudio.play();
           }, 2000); // 2秒後にスコアを増加
         });
 
@@ -242,6 +246,9 @@
       function updateScoreDisplay() {
         scoreElement.textContent = 'Score: ' + score;
       }
+
+      /* 不正解の場合 */
+      
     </script>
     <script type="text/javascript" src="./js/snapshot.js"></script>
   </body>
