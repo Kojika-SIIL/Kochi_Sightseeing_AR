@@ -298,14 +298,6 @@
         messageElement.style.display = 'block';
       }
 
-      // メッセージ非表示
-      var quizText = document.querySelector('#quiz');
-      quizText.addEventListener('componentchanged', function (event) {
-        if (event.detail.name === 'visible' && !event.detail.newData) {
-          // a-textが非表示になった場合
-          messageElement.style.display = 'none'; // メッセージを非表示にする
-        }
-      });
     </script>
     <script type="text/javascript" src="./js/snapshot.js"></script>
   </body>
