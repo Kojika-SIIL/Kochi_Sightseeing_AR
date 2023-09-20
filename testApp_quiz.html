@@ -172,16 +172,11 @@
 
       
       var cursorEnabled = true; // カーソルの反応
-      // クイズに解答済みかどうかのフラグ
-      var quizStatus = {
-        quiz01: false,
-        quiz02: false
-      };
 
       /*----- カーソルを合わせると色が変わる -----*/
       function changeColorOnHover(element) {
         element.addEventListener('mouseenter', function () {
-          if (cursorEnabled && !quizStatus[quizId]) {
+          if (cursorEnabled) {
             element.setAttribute('material', 'color: #FFFF00');
           }
         });
@@ -253,14 +248,13 @@
         var timer = null;
 
         element.addEventListener('mouseenter', function () {
-          if (cursorEnabled && !quizStatus[quizId]) {
+          if (cursorEnabled) {
             timer = setTimeout(function () {
               score += 10;
               updateScoreDisplay();
               correctAudio.play();
               showMessage('正解！！', true);
               cursorEnabled = false; // カーソルの反応を無効化
-              quizStatus[quizId] = true; // クイズの状態を解答済みに設定
             }, 2000); // 2秒後にスコアを増加, 正解音再生, メッセージ表示
           }
         });
@@ -282,12 +276,11 @@
         var timer = null;
 
         element.addEventListener('mouseenter', function () {
-          if (cursorEnabled && !quizStatus[quizId]) {
+          if (cursorEnabled) {
             timer = setTimeout(function () {
               incorrectAudio.play();
               showMessage('ざんねん！！', false);
               cursorEnabled = false; // カーソルの反応を無効化
-              quizStatus[quizId] = true; // クイズの状態を解答済みに設定
             }, 2000); // 2秒後に不正解音を再生, メッセージ表示
           }
         });
