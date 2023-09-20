@@ -9,6 +9,20 @@
     <script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <style>
+        /* スコアの表示 */
+        #score {
+          position: fixed;
+          z-index: 10000;
+          background-color: rgba(0,0,0,.8);
+          color: #fff;
+          text-align: center;
+          padding: 10px;
+          top: 10px;
+          left: 5%;
+          width: 90%;
+          display: block;
+        }
+        
         /* スナップショットボタンの表示 */
         .ui {
           position: absolute;
@@ -91,7 +105,7 @@
 
     <!-- スコア表示 -->
     <div class="ui" style="top: 0;">
-      <div id="score" style="color: #fff; font-size: 24px; padding: 10px;">Score: 0</div>
+      <div id="score">Score: 0</div>
     </div>
     
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false;">
