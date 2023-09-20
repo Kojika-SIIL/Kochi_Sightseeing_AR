@@ -147,9 +147,9 @@
       -->
       <a-marker preset="hiro">
         <a-text id="quiz" value="Q01\n高知県出身の偉人は？" align="center" position="0 1.5 -5" color="white" geometry="primitive:plane; width: 5" material="color: #4169E1"></a-text>
-        <a-text id="ans1" value="1. 岩崎弥太郎" align="center" position="0 -1 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
-        <a-text id="ans2" value="2. 勝海舟" align="center" position="0 -2.5 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
-        <a-text id="ans3" value="3. 真田幸村" align="center" position="0 -4 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
+        <a-text id="correct" value="1. 岩崎弥太郎" align="center" position="0 -1 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
+        <a-text id="incorrect" value="2. 勝海舟" align="center" position="0 -2.5 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
+        <a-text id="incorrect" value="3. 真田幸村" align="center" position="0 -4 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
       </a-marker>
       <!--/a-nft-->
       <a-entity camera look-controls wasd-controls>
@@ -170,17 +170,14 @@
 
     <script>
       /*----- 視点カーソル -----*/
-      var ans1 = document.querySelector('#ans1');
-      var ans2 = document.querySelector('#ans2');
-      var ans3 = document.querySelector('#ans3');
+      var correctAns = document.querySelector('#correct');
+      var incorrectAns = document.querySelector('#incorrect');
 
-      changeColorOnHover(ans1, shrinkCursorOnHover(ans1));
-      changeColorOnHover(ans2, shrinkCursorOnHover(ans2));
-      changeColorOnHover(ans3, shrinkCursorOnHover(ans3));
+      changeColorOnHover(correctAns, shrinkCursorOnHover(correctAns));
+      changeColorOnHover(incorrectAns, shrinkCursorOnHover(incorrectAns));
 
-      correctOnHover(ans1);
-      incorrectOnHover(ans2);
-      incorrectOnHover(ans3);
+      correctOnHover(correctAns);
+      incorrectOnHover(incorrectAns);
 
       /*----- カーソルを合わせると色が変わる -----*/
       function changeColorOnHover(element) {
