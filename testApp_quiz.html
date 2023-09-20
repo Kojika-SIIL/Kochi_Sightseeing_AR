@@ -145,6 +145,47 @@
         var cursor = document.querySelector('[cursor]'); // カーソルを取得
         var originalRadiusOuter = cursor.getAttribute('geometry').radiusOuter; // 元の半径を保存
         var originalRadiusInner = cursor.getAttribute('geometry').radiusInner; // 元の半径を保存
+        var targetRadiusOuter = originalRadiusOuter * 0.5; // カーソルが縮小する目標半径
+        var targetRadiusInner = originalRadiusInner * 0.5; // カーソルが縮小する目標半径
+        var animationStartTime; // アニメーション開始時間
+
+        function animate(currentTime) {
+          if (!animationStartTime) {
+            animationStartTime = currentTime;
+          }
+
+          var elapsedTime = currentTime - animationStartTime;
+          var progress = Math.min(elapsedTime / 2000, 1); // 2秒かけて縮小
+
+          var newRadiusOuter = originalRadiusOuter + (targetRadiusOuter - originalRadiusOuter) * progress;
+          var newRadiusInner = originalRadiusInner + (targetRadiusInner - originalRadiusInner) * progress;
+
+          cursor.setAttribute('geometry', 'radiusOuter', newRadiusOuter);
+          cursor.setAttribute('geometry', 'radiusInner', newRadiusInner);
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            animationStartTime = null; // アニメーションが終了したら開始時間をリセット
+          }
+        }
+
+        element.addEventListener('mouseenter', function () {
+          animationStartTime = null; // ホバー時に開始時間をリセット
+          requestAnimationFrame(animate);
+        });
+
+        element.addEventListener('mouseleave', function () {
+          cursor.setAttribute('geometry', 'radiusOuter', originalRadiusOuter); // カーソルの半径を元に戻す
+          cursor.setAttribute('geometry', 'radiusInner', originalRadiusInner); // カーソルの半径を元に戻す
+          animationStartTime = null; // マウスを離したときに開始時間をリセット
+        });
+      }
+      
+      /* function shrinkCursorOnHover(element) {
+        var cursor = document.querySelector('[cursor]'); // カーソルを取得
+        var originalRadiusOuter = cursor.getAttribute('geometry').radiusOuter; // 元の半径を保存
+        var originalRadiusInner = cursor.getAttribute('geometry').radiusInner; // 元の半径を保存
 
         element.addEventListener('mouseenter', function () {
           cursor.setAttribute('geometry', 'radiusOuter', originalRadiusOuter * 0.5); // カーソルの半径を小さくする
@@ -155,7 +196,7 @@
           cursor.setAttribute('geometry', 'radiusOuter', originalRadiusOuter); // カーソルの半径を元に戻す
           cursor.setAttribute('geometry', 'radiusInner', originalRadiusInner); // カーソルの半径を元に戻す
         });
-      }
+      } */
 
       var ans1 = document.querySelector('#ans1');
       var ans2 = document.querySelector('#ans2');
