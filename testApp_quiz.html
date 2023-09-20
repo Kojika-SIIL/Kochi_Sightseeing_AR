@@ -150,13 +150,17 @@
         var targetRadiusOuter = originalRadiusOuter * 0.5; // カーソルが縮小する目標半径
         var targetRadiusInner = originalRadiusInner * 0.5; // カーソルが縮小する目標半径
         var animationStartTime; // アニメーション開始時間
+        var animationFrameId; // アニメーションフレームID
 
         element.addEventListener('mouseenter', function () {
           animationStartTime = null;
-          requestAnimationFrame(animate);
+          animationFrameId = requestAnimationFrame(animate);
         });
 
         element.addEventListener('mouseleave', function () {
+          if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId); // アニメーションをキャンセル
+          }
           cursor.setAttribute('geometry', 'radiusOuter', originalRadiusOuter); // カーソルの半径を元に戻す
           cursor.setAttribute('geometry', 'radiusInner', originalRadiusInner); // カーソルの半径を元に戻す
           animationStartTime = null; // マウスを離したときに開始時間をリセット
@@ -177,7 +181,7 @@
           cursor.setAttribute('geometry', 'radiusInner', newRadiusInner);
 
           if (progress < 1) {
-            requestAnimationFrame(animate);
+            animationFrameId = requestAnimationFrame(animate);
           } else {
             animationStartTime = null; // アニメーションが終了したら開始時間をリセット
           }
