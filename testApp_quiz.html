@@ -113,13 +113,13 @@
     <div id="message"></div>
     
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false;">
-      <a-marker preset="hiro">
+      <a-marker preset="hiro" id="marker01">
         <a-text id="quiz01" value="Q01" align="center" position="0 1.5 -5" color="white" geometry="primitive:plane; width: 5" material="color: #4169E1"></a-text>
         <a-text id="incorrect1_01" value="Ans1" align="center" position="0 -1 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
         <a-text id="correct01" value="Ans2" align="center" position="0 -2.5 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
         <a-text id="incorrect2_01" value="Ans3" align="center" position="0 -4 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
       </a-marker>
-      <a-marker type="pattern" url="./images/pattern-iwamon.patt">
+      <a-marker type="pattern" url="./images/pattern-iwamon.patt" id="marker02">
         <a-text id="quiz02" value="Q02" align="center" position="0 1.5 -5" color="white" geometry="primitive:plane; width: 5" material="color: #4169E1"></a-text>
         <a-text id="correct02" value="Ans1" align="center" position="0 -1 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
         <a-text id="incorrect1_02" value="Ans2" align="center" position="0 -2.5 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
@@ -305,8 +305,14 @@
       }
 
       // メッセージを非表示にする
-      var marker = document.querySelector('a-marker');
-      marker.addEventListener('markerLost', function () {
+      var marker01 = document.querySelector('#marker01');
+      var marker02 = document.querySelector('#marker02');
+      
+      marker01.addEventListener('markerLost', function () {
+        messageElement.style.display = 'none';
+      });
+      
+      marker02.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
       });
 
