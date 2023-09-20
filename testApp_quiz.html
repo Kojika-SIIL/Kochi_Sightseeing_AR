@@ -149,6 +149,15 @@
         var targetRadiusInner = originalRadiusInner * 0.5; // カーソルが縮小する目標半径
         var animationStartTime; // アニメーション開始時間
 
+        element.addEventListener('mouseenter', function () {
+          animationStartTime = null;
+          requestAnimationFrame(animate);
+        });
+
+        element.addEventListener('mouseleave', function () {
+          // ホバー時以外はアニメーションをリセットしない
+        });
+
         function animate(currentTime) {
           if (!animationStartTime) {
             animationStartTime = currentTime;
@@ -170,7 +179,7 @@
           }
         }
 
-        element.addEventListener('mouseenter', function () {
+        /*element.addEventListener('mouseenter', function () {
           animationStartTime = null; // ホバー時に開始時間をリセット
           requestAnimationFrame(animate);
         });
@@ -179,7 +188,7 @@
           cursor.setAttribute('geometry', 'radiusOuter', originalRadiusOuter); // カーソルの半径を元に戻す
           cursor.setAttribute('geometry', 'radiusInner', originalRadiusInner); // カーソルの半径を元に戻す
           animationStartTime = null; // マウスを離したときに開始時間をリセット
-        });
+        }); */
       }
 
       var ans1 = document.querySelector('#ans1');
