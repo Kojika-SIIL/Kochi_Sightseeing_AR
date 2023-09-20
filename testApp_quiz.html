@@ -269,6 +269,13 @@
         messageElement.style.display = 'block';
       }
 
+      // メッセージを非表示にする
+      var marker = document.querySelector('a-marker');
+      
+      marker.addEventListener('markerLost', function () {
+        messageElement.style.display = 'none';
+      });
+
     </script>
     <script type="text/javascript" src="./js/snapshot.js"></script>
   </body>
