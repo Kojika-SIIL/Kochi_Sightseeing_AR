@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Cursor Test</title>
+    <title>AR Quiz</title>
     <script src = "https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src = "https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
@@ -105,11 +105,15 @@
         <a-text id="ans3" value="3. 真田幸村" align="center" position="0 -4 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
       </a-marker>
       <!--/a-nft-->
-      <a-entity camera look-controls>
+      <a-entity camera look-controls wasd-controls>
         <a-entity cursor="fuse: true;"
           position="0 0 -3"
           geometry="primitive: ring; radiusInner: 0.1; radiusOuter: 0.15;"
           material="color: #acacac; shader: flat; opacity: 0.6">
+          <a-animation begin="click" easing="ease-in" attribute="scale" dur="150"
+               fill="forwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+          <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="1500"
+               fill="backwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
         </a-entity>
       </a-entity>
     </a-scene>
