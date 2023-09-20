@@ -287,6 +287,7 @@
       }
 
       /* メッセージの表示に関する処理 */
+      // 正解・不正解のメッセージ表示
       function showMessage(text, isCorrect) {
         messageElement.textContent = text;
         if (isCorrect) {
@@ -296,6 +297,12 @@
         }
         messageElement.style.display = 'block';
       }
+
+      // メッセージ非表示
+      var quizElement = document.querySelector('#quiz');
+      quizElement.addEventListener('componentremoved', function () {
+        messageElement.style.display = 'none';
+      });
     </script>
     <script type="text/javascript" src="./js/snapshot.js"></script>
   </body>
