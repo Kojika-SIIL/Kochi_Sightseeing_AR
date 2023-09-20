@@ -133,14 +133,14 @@
       var ans2 = document.querySelector('#ans2');
       var ans3 = document.querySelector('#ans3');
 
-      changeColorOnHover(ans1);
-      changeColorOnHover(ans2);
-      changeColorOnHover(ans3);
-
+      changeColorOnHover(ans1, shrinkCursorOnHover);
+      changeColorOnHover(ans2, shrinkCursorOnHover);
+      changeColorOnHover(ans3, shrinkCursorOnHover);
+/*
       shrinkCursorOnHover(ans1);
       shrinkCursorOnHover(ans2);
       shrinkCursorOnHover(ans3);
-      
+*/      
       // カーソルを合わせると色が変わる
       function changeColorOnHover(element) {
         element.addEventListener('mouseenter', function () {
