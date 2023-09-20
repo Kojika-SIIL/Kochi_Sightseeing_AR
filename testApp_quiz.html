@@ -129,6 +129,7 @@
 
     <script>
       /* 視点カーソル */
+      // カーソルを合わせると色が変わる
       function changeColorOnHover(element) {
         element.addEventListener('mouseenter', function () {
           element.setAttribute('material', 'color: #FFFF00');
@@ -136,6 +137,20 @@
 
         element.addEventListener('mouseleave', function () {
           element.setAttribute('material', 'color: #EF2D5E');
+        });
+      }
+      
+      // カーソルを合わせると円が小さくなる
+      function shrinkCursorOnHover(element) {
+        var cursor = document.querySelector('[cursor]'); // カーソルを取得
+        var originalRadiusOuter = cursor.getAttribute('geometry').radiusOuter; // 元の半径を保存
+
+        element.addEventListener('mouseenter', function () {
+          cursor.setAttribute('geometry', 'radiusOuter', originalRadiusOuter * 0.5); // カーソルの半径を小さくする
+        });
+
+        element.addEventListener('mouseleave', function () {
+          cursor.setAttribute('geometry', 'radiusOuter', originalRadiusOuter); // カーソルの半径を元に戻す
         });
       }
 
@@ -146,6 +161,10 @@
       changeColorOnHover(ans1);
       changeColorOnHover(ans2);
       changeColorOnHover(ans3);
+
+      shrinkCursorOnHover(ans1);
+      shrinkCursorOnHover(ans2);
+      shrinkCursorOnHover(ans3);
 
     </script>
   </body>
