@@ -181,22 +181,6 @@
           animationStartTime = null; // マウスを離したときに開始時間をリセット
         });
       }
-      
-      /* function shrinkCursorOnHover(element) {
-        var cursor = document.querySelector('[cursor]'); // カーソルを取得
-        var originalRadiusOuter = cursor.getAttribute('geometry').radiusOuter; // 元の半径を保存
-        var originalRadiusInner = cursor.getAttribute('geometry').radiusInner; // 元の半径を保存
-
-        element.addEventListener('mouseenter', function () {
-          cursor.setAttribute('geometry', 'radiusOuter', originalRadiusOuter * 0.5); // カーソルの半径を小さくする
-          cursor.setAttribute('geometry', 'radiusInner', originalRadiusInner * 0.5); // カーソルの半径を小さくする
-        });
-
-        element.addEventListener('mouseleave', function () {
-          cursor.setAttribute('geometry', 'radiusOuter', originalRadiusOuter); // カーソルの半径を元に戻す
-          cursor.setAttribute('geometry', 'radiusInner', originalRadiusInner); // カーソルの半径を元に戻す
-        });
-      } */
 
       var ans1 = document.querySelector('#ans1');
       var ans2 = document.querySelector('#ans2');
