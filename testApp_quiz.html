@@ -127,8 +127,6 @@
       var ans2 = document.querySelector('#ans2');
       var ans3 = document.querySelector('#ans3');
 
-      var animationInProgress = false;
-
       changeColorOnHover(ans1, shrinkCursorOnHover(ans1));
       changeColorOnHover(ans2, shrinkCursorOnHover(ans2));
       changeColorOnHover(ans3, shrinkCursorOnHover(ans3));
@@ -140,9 +138,7 @@
         });
 
         element.addEventListener('mouseleave', function () {
-          if (!animationInProgress) {
-            element.setAttribute('material', 'color: #EF2D5E');
-          }
+          element.setAttribute('material', 'color: #EF2D5E');
         });
       }
       
@@ -156,10 +152,8 @@
         var animationStartTime; // アニメーション開始時間
 
         element.addEventListener('mouseenter', function () {
-          if(!animationInProgress) {
-            animationStartTime = null;
-            requestAnimationFrame(animate);
-          }
+          animationStartTime = null;
+          requestAnimationFrame(animate);
         });
 
         element.addEventListener('mouseleave', function () {
@@ -183,10 +177,8 @@
           cursor.setAttribute('geometry', 'radiusInner', newRadiusInner);
 
           if (progress < 1) {
-            animationInProgress = true;
             requestAnimationFrame(animate);
           } else {
-            animationInProgress = false;
             animationStartTime = null; // アニメーションが終了したら開始時間をリセット
           }
         }
