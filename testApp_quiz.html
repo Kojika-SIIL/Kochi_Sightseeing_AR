@@ -101,34 +101,10 @@
         #snap.visible {
           visibility: visible;
         }
-        
-        /* 読み込み画面の表示 */
-        /* .arjs-loader {
-          height: 100%;
-          width: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          background-color: rgba(0, 0, 0, 0.8);
-          z-index: 9999;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        .arjs-loader div {
-          text-align: center;
-          font-size: 1.25em;
-          color: white;
-        } */
       </style>
   </head>
   
   <body style="margin: 0; overflow: hidden;">
-    <!-- 読み込み画面 -->
-    <!-- <div class="arjs-loader">
-      <div>Loading, please wait...</div>
-    </div> -->
-
     <!-- スコア表示 -->
     <div class="ui" style="top: 0;">
       <div id="score">Score: 0</div>
@@ -137,21 +113,13 @@
     <div id="message"></div>
     
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false;">
-      <!--a-nft
-        type="nft"
-        url="https://webarnow.github.io/arjs-test/assets/webar-now2"
-        smooth="true"
-        smoothCount="10"
-        smoothTolerance=".01"
-        smoothThreshold="5"
-      -->
       <a-marker preset="hiro">
         <a-text id="quiz" value="Q01\n高知県出身の偉人は？" align="center" position="0 1.5 -5" color="white" geometry="primitive:plane; width: 5" material="color: #4169E1"></a-text>
         <a-text id="correct" value="1. 岩崎弥太郎" align="center" position="0 -1 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
         <a-text id="incorrect" value="2. 勝海舟" align="center" position="0 -2.5 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
         <a-text id="incorrect" value="3. 真田幸村" align="center" position="0 -4 -5" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
       </a-marker>
-      <!--/a-nft-->
+      <!-- カーソルの表示 -->
       <a-entity camera look-controls wasd-controls>
         <a-entity cursor="fuse: true;"
           position="0 0 -3"
