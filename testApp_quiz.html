@@ -158,6 +158,8 @@
       changeColorOnHover(ans3, shrinkCursorOnHover(ans3));
 
       correctOnHover(ans1);
+      incorrectOnHover(ans2);
+      incorrectOnHover(ans3);
 
       /*----- カーソルを合わせると色が変わる -----*/
       function changeColorOnHover(element) {
@@ -223,7 +225,6 @@
       var incorrectAudio = new Audio('./assets/incorrect.mp3');
 
       /* 正解の場合 */
-      // スコアが増加する処理
       function correctOnHover(element) {
         var timer = null;
 
@@ -232,7 +233,7 @@
             score += 10;
             updateScoreDisplay();
             correctAudio.play();
-          }, 2000); // 2秒後にスコアを増加
+          }, 2000); // 2秒後にスコアを増加, 正解音再生
         });
 
         element.addEventListener('mouseleave', function () {
@@ -248,7 +249,21 @@
       }
 
       /* 不正解の場合 */
-      
+      function incorrectOnHover(element) {
+        var timer = null;
+
+        element.addEventListener('mouseenter', function () {
+          timer = setTimeout(function () {
+            incorrectAudio.play();
+          }, 2000); // 2秒後に不正解音を再生
+        });
+
+        element.addEventListener('mouseleave', function () {
+          if (timer !== null) {
+            clearTimeout(timer); // タイマーをクリア
+          }
+        });
+      }
     </script>
     <script type="text/javascript" src="./js/snapshot.js"></script>
   </body>
