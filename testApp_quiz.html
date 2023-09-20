@@ -132,7 +132,6 @@
       var ans1 = document.querySelector('#ans1');
       var ans2 = document.querySelector('#ans2');
       var ans3 = document.querySelector('#ans3');
-      var cursorHovering = false;
 
       changeColorOnHover(ans1);
       changeColorOnHover(ans2);
@@ -145,15 +144,11 @@
       // カーソルを合わせると色が変わる
       function changeColorOnHover(element) {
         element.addEventListener('mouseenter', function () {
-          if (cursorHovering) {
-            element.setAttribute('material', 'color: #FFFF00');
-          }
+          element.setAttribute('material', 'color: #FFFF00');
         });
 
         element.addEventListener('mouseleave', function () {
-          if (cursorHovering) {
-            element.setAttribute('material', 'color: #EF2D5E');
-          }
+          element.setAttribute('material', 'color: #EF2D5E');
         });
       }
       
@@ -167,13 +162,14 @@
         var animationStartTime; // アニメーション開始時間
 
         element.addEventListener('mouseenter', function () {
-          cursorHovering = true;
           animationStartTime = null;
           requestAnimationFrame(animate);
         });
 
         element.addEventListener('mouseleave', function () {
-          cursorHovering = false;
+          cursor.setAttribute('geometry', 'radiusOuter', originalRadiusOuter); // カーソルの半径を元に戻す
+          cursor.setAttribute('geometry', 'radiusInner', originalRadiusInner); // カーソルの半径を元に戻す
+          animationStartTime = null; // マウスを離したときに開始時間をリセット
         });
 
         function animate(currentTime) {
@@ -196,17 +192,6 @@
             animationStartTime = null; // アニメーションが終了したら開始時間をリセット
           }
         }
-
-        /* element.addEventListener('mouseenter', function () {
-          animationStartTime = null; // ホバー時に開始時間をリセット
-          requestAnimationFrame(animate);
-        });
-
-        element.addEventListener('mouseleave', function () {
-          cursor.setAttribute('geometry', 'radiusOuter', originalRadiusOuter); // カーソルの半径を元に戻す
-          cursor.setAttribute('geometry', 'radiusInner', originalRadiusInner); // カーソルの半径を元に戻す
-          animationStartTime = null; // マウスを離したときに開始時間をリセット
-        }); */
       }
 
     </script>
