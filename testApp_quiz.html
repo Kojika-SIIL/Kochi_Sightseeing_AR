@@ -145,7 +145,7 @@
           font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
           negate="false"
           align="center" position="0 -1 -7" color="white" geometry="primitive:plane; width: 4" material="color: #EF2D5E"></a-text>
-        <a-text id="incorrect1_02" value="2. 新素材・生命コース"
+        <a-text id="incorrect1_02" value="2. 新素材生命コース"
           font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
           font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
           negate="false"
@@ -340,10 +340,12 @@
       
       marker01.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
+        cursorEnabled = true;
       });
       
       marker02.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
+        cursorEnabled = true;
       });
 
     </script>
