@@ -175,37 +175,38 @@
 
     <script>
       /*----- 視点カーソル -----*/
+      var cursorEnabled = true;
+      var marker01CursorEnabled = true;
+      var marker02CursorEnabled = true;
+      
       // Quiz01
       var correct01 = document.querySelector('#correct01');
       var incorrect1_01 = document.querySelector('#incorrect1_01');
       var incorrect2_01 = document.querySelector('#incorrect2_01');
 
-      changeColorOnHover(correct01, shrinkCursorOnHover(correct01));
-      changeColorOnHover(incorrect1_01, shrinkCursorOnHover(incorrect1_01));
-      changeColorOnHover(incorrect2_01, shrinkCursorOnHover(incorrect2_01));
+      changeColorOnHover(correct01, shrinkCursorOnHover(correct01, marker01CursorEnabled));
+      changeColorOnHover(incorrect1_01, shrinkCursorOnHover(incorrect1_01, marker01CursorEnabled));
+      changeColorOnHover(incorrect2_01, shrinkCursorOnHover(incorrect2_01, marker01CursorEnabled));
 
-      correctOnHover(correct01);
-      incorrectOnHover(incorrect1_01);
-      incorrectOnHover(incorrect2_01);
+      correctOnHover(correct01, marker01CursorEnabled);
+      incorrectOnHover(incorrect1_01, marker01CursorEnabled);
+      incorrectOnHover(incorrect2_01, marker01CursorEnabled);
 
       // Quiz02
       var correct02 = document.querySelector('#correct02');
       var incorrect1_02 = document.querySelector('#incorrect1_02');
       var incorrect2_02 = document.querySelector('#incorrect2_02');
       
-      changeColorOnHover(correct02, shrinkCursorOnHover(correct02));
-      changeColorOnHover(incorrect1_02, shrinkCursorOnHover(incorrect1_02));
-      changeColorOnHover(incorrect2_02, shrinkCursorOnHover(incorrect2_02));
+      changeColorOnHover(correct02, shrinkCursorOnHover(correct02, marker02CursorEnabled));
+      changeColorOnHover(incorrect1_02, shrinkCursorOnHover(incorrect1_02, marker02CursorEnabled));
+      changeColorOnHover(incorrect2_02, shrinkCursorOnHover(incorrect2_02, marker02CursorEnabled));
 
-      correctOnHover(correct02);
-      incorrectOnHover(incorrect1_02);
-      incorrectOnHover(incorrect2_02);
-
-      
-      var cursorEnabled = true; // カーソルの反応
+      correctOnHover(correct02, marker02CursorEnabled);
+      incorrectOnHover(incorrect1_02, marker02CursorEnabled);
+      incorrectOnHover(incorrect2_02, marker02CursorEnabled);
 
       /*----- カーソルを合わせると色が変わる -----*/
-      function changeColorOnHover(element) {
+      function changeColorOnHover(element, cursorEnabled) {
         element.addEventListener('mouseenter', function () {
           if (cursorEnabled) {
             element.setAttribute('material', 'color: #FFFF00');
@@ -220,7 +221,7 @@
       }
       
       /*----- カーソルを合わせると円が小さくなる -----*/
-      function shrinkCursorOnHover(element) {
+      function shrinkCursorOnHover(element, cursorEnabled) {
         var cursor = document.querySelector('[cursor]'); // カーソルを取得
         var originalRadiusOuter = cursor.getAttribute('geometry').radiusOuter; // 元の半径を保存
         var originalRadiusInner = cursor.getAttribute('geometry').radiusInner; // 元の半径を保存
@@ -275,7 +276,7 @@
       var messageElement = document.querySelector('#message');
 
       /* 正解の場合 */
-      function correctOnHover(element) {
+      function correctOnHover(element, cursorEnabled) {
         var timer = null;
 
         element.addEventListener('mouseenter', function () {
@@ -303,7 +304,7 @@
       }
 
       /* 不正解の場合 */
-      function incorrectOnHover(element) {
+      function incorrectOnHover(element, cursorEnabled) {
         var timer = null;
 
         element.addEventListener('mouseenter', function () {
@@ -341,10 +342,12 @@
       
       marker01.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
+        marker01CursorEnabled = true;
       });
       
       marker02.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
+        marker02CursorEnabled = true;
       });
 
     </script>
