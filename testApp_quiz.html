@@ -184,9 +184,13 @@
       var incorrect1_01 = document.querySelector('#incorrect1_01');
       var incorrect2_01 = document.querySelector('#incorrect2_01');
 
-      changeColorOnHover(correct01, shrinkCursorOnHover(correct01, marker01CursorEnabled));
-      changeColorOnHover(incorrect1_01, shrinkCursorOnHover(incorrect1_01, marker01CursorEnabled));
-      changeColorOnHover(incorrect2_01, shrinkCursorOnHover(incorrect2_01, marker01CursorEnabled));
+      changeColorOnHover(correct01, marker01CursorEnabled);
+      changeColorOnHover(incorrect1_01, marker01CursorEnabled);
+      changeColorOnHover(incorrect2_01, marker01CursorEnabled);
+
+      shrinkCursorOnHover(correct01, marker01CursorEnabled);
+      shrinkCursorOnHover(incorrect1_01, marker01CursorEnabled);
+      shrinkCursorOnHover(incorrect2_01, marker01CursorEnabled);
 
       correctOnHover(correct01, marker01CursorEnabled);
       incorrectOnHover(incorrect1_01, marker01CursorEnabled);
@@ -342,12 +346,10 @@
       
       marker01.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
-        marker01CursorEnabled = true;
       });
       
       marker02.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
-        marker02CursorEnabled = true;
       });
 
     </script>
