@@ -112,13 +112,11 @@
     <div id="message"></div>
     
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false;">
-      <a-assets>
-        <a-asset-item id="sansFont" src="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"></a-asset-item>
-        <img id="fontImage" src="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png" />
-      </a-assets>
       <a-marker preset="hiro" id="marker01">
         <a-text id="quiz01" value="Q01\n高知県出身の人物は?"
-          font="#sansFont" font-image="#fontImage" negate="false"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
           align="center" position="0 1.5 -7" color="white" geometry="primitive:plane; width: 5" material="color: #4169E1"></a-text>
         <a-text id="incorrect1_01" value="1. 勝海舟"
           font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
