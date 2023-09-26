@@ -6,7 +6,7 @@
     <script src = "https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src = "https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"-->
       <style>
         body {
           font-family: sans-serif;
@@ -49,7 +49,7 @@
         }
         
         /* スナップショットボタンの表示 */
-        .ui {
+        /* .ui {
           position: absolute;
           z-index: 100;
           bottom: 0;
@@ -99,7 +99,7 @@
 
         #snap.visible {
           visibility: visible;
-        }
+        } */
       </style>
   </head>
   
@@ -166,12 +166,12 @@
       </a-entity>
     </a-scene>
     <!-- スナップショットボタンの表示 -->
-    <div class="ui">
+    <!-- <div class="ui">
       <img id="snap">
       <a href="#" id="delete-photo" title="Delete Photo" class="disabled"><i class="material-icons">delete</i></a>
       <a href="" id="take-photo" title="Take Photo"><i class="material-icons">photo_camera</i></a>
       <a href="#" id="download-photo" download="selfie.png" title="Save Photo" class="disabled" target="_blank"><i class="material-icons">file_download</i></a>
-    </div>
+    </div> -->
 
     <script>
       /*----- 視点カーソル -----*/
@@ -349,6 +349,6 @@
       });
 
     </script>
-    <script type="text/javascript" src="./js/snapshot.js"></script>
+    <!--script type="text/javascript" src="./js/snapshot.js"></script-->
   </body>
 </html>
