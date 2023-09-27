@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Test App (Distance View)</title>
-    <!-- <script src="./lib/aframe.min.js"></script> -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
@@ -163,39 +162,6 @@
         animation-mixer
       ></a-entity>
       
-      <!-- Labo -->
-      <!--a-entity
-        gps-entity-place="latitude: 33.54881724530957; longitude: 133.68035668183893; elevation: 0;"
-        obj-model="obj: #obj; mtl: #mtl"
-        scale="0.0005 0.0005 0.0005"
-        rotation="0 0 0"
-        look-at="[gps-camera]"
-        cursor-listener
-        animation-mixer
-      ></a-entity-->
-
-      <!-- Dormitory 6 -->
-      <!--a-entity
-        gps-entity-place="latitude: 33.54567330446067; longitude: 133.67793767363477; elevation: 0;"
-        obj-model="obj: #obj; mtl: #mtl"
-        scale="0.0005 0.0005 0.0005"
-        rotation="0 0 0"
-        look-at="[gps-camera]"
-        cursor-listener
-        animation-mixer
-      ></a-entity-->
-      
-      <!-- I5 -->
-      <!--a-entity
-        gps-entity-place="latitude: 33.5494379684553; longitude: 133.68108393647458; elevation: 0;"
-        obj-model="obj: #obj; mtl: #mtl"
-        scale="0.0005 0.0005 0.0005"
-        rotation="0 0 0"
-        look-at="[gps-camera]"
-        cursor-listener
-        animation-mixer
-      ></a-entity-->
-      
       <a-light
         id="directionLight"
         type="directional"
@@ -261,76 +227,7 @@
           }
         });
       });
-
-
-      var image = document.querySelector('#snap');
-      var take_photo_btn = document.querySelector('#take-photo');
-      var delete_photo_btn = document.querySelector('#delete-photo');
-      var download_photo_btn = document.querySelector('#download-photo');
-    
-      // スナップショットボタン
-      take_photo_btn.addEventListener("click", function (e) {
-        e.preventDefault();
-        var video = document.querySelector('video');
-        var snap = takeSnapshot(video);
-    
-        // スナップショット表示.
-        image.setAttribute('src', snap);
-        image.classList.add('visible');
-    
-        // 削除ボタンと保存ボタン有効
-        delete_photo_btn.classList.remove("disabled");
-        download_photo_btn.classList.remove("disabled");
-    
-        // 保存ボタンにスナップショットを渡す
-        download_photo_btn.href = snap;
-      });
-    
-      // 削除ボタン
-      delete_photo_btn.addEventListener("click", function(e){
-    
-        e.preventDefault();
-    
-        // スナップショットを隠す
-        image.setAttribute('src', "");
-        image.classList.remove("visible");
-    
-        // 削除ボタンと保存ボタン無効
-        delete_photo_btn.classList.add("disabled");
-        download_photo_btn.classList.add("disabled");
-    
-      });
-    
-      // スナップショットを撮る
-      function takeSnapshot(video) {
-        var resizedCanvas = document.createElement("canvas");
-        var resizedContext = resizedCanvas.getContext("2d");
-        var width = video.videoWidth;
-        var height = video.videoHeight;
-        var aScene = document.querySelector("a-scene").components.screenshot.getCanvas("perspective");
-    
-        if (width && height) {
-          // videoのサイズをキャンバスにセット
-          resizedCanvas.width = width;
-          resizedCanvas.height = height;
-
-          // キャンバスにvideoをコピー
-          resizedContext.drawImage(video, 0, 0, width, height);
-    
-          // カメラの画角でAR側の縮小処理を変える
-          if (width > height) {
-            // 横長 (PC)
-            resizedContext.drawImage(aScene, 0, 0, width, height);
-          } else {
-            // 縦長 (スマホ)
-            var scale = height / width;
-            var scaledWidth = height * scale;
-            var marginLeft = (width - scaledWidth) / 2;
-            resizedContext.drawImage(aScene, marginLeft, 0, scaledWidth, height);
-          }
-          return resizedCanvas.toDataURL('image/png');
-        }
-      }
     </script>
+    <script type="text/javascript" src="./js/snapshot.js"></script>
   </body>
 </html>
