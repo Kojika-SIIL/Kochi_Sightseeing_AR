@@ -43,7 +43,7 @@
           };
 
           el.addEventListener('gps-entity-place-update-position', function (event) {
-            if (event.detail.distance <= 10) {
+            if (event.detail.distance <= 20) {
               el.addEventListener('mouseenter', mouseenterListener);
               el.addEventListener('mouseleave', function () {
                 message.style.display = 'none';
@@ -206,7 +206,7 @@
         intensity="0"
         color="#FFF">
       </a-light>
-      <a-camera gps-camera="minDistance:5; maxDistance:20" rotation-reader look-controls>
+      <a-camera gps-camera="minDistance:10; maxDistance:50" rotation-reader look-controls>
         <a-entity cursor="fuse: true"
           position="0 0 -3"
           geometry="primitive: ring; radiusInner: 0.1; radiusOuter: 0.15"
@@ -236,24 +236,24 @@
         let score = parseInt(sessionStorage.getItem('score')) || 0;
 
         el.addEventListener('gps-entity-place-update-position', (event) => {
-          if (event.detail.distance <= 10) {
-            // 10m以下で明るくする
+          if (event.detail.distance <= 20) {
+            // 20m以下で明るくする
             directionLight.setAttribute('intensity', 1);
             ambientLight.setAttribute('intensity', 1);
             message.style.display = 'none';
             el.setAttribute('cursor-listener', '');
             audio.volume = 1;
             audio.play();
-          } else if (event.detail.distance <= 20) {
-            // 20m以下で近づくほど明るくする
-            directionLight.setAttribute('intensity', 1 - event.detail.distance / 20);
-            ambientLight.setAttribute('intensity', 1 - event.detail.distance / 20);
+          } else if (event.detail.distance <= 50) {
+            // 50m以下で近づくほど明るくする
+            directionLight.setAttribute('intensity', 1 - event.detail.distance / 50);
+            ambientLight.setAttribute('intensity', 1 - event.detail.distance / 50);
             message.style.display = 'none';
             el.removeAttribute('cursor-listener');
             audio.volume = intensity;
             audio.play();
           } else {
-            // 20mより離れると明るさ0
+            // 50mより離れると明るさ0
             directionLight.setAttribute('intensity', 0);
             ambientLight.setAttribute('intensity', 0);
             message.style.display = 'none';
