@@ -25,7 +25,7 @@
           };
 
           el.addEventListener('gps-entity-place-update-position', function (event) {
-            if (event.detail.distance <= 10) {
+            if (event.detail.distance <= 20) {
               el.addEventListener('mouseenter', mouseenterListener);
               el.addEventListener('mouseleave', function () {
                 el.removeAttribute('animation');
@@ -198,7 +198,7 @@
         intensity="0"
         color="#FFF">
       </a-light>
-      <a-camera gps-camera="minDistance:5; maxDistance:30" rotation-reader look-controls>
+      <a-camera gps-camera="minDistance:10; maxDistance:50" rotation-reader look-controls>
         <a-entity cursor="fuse: true"
           position="0 0 -3"
           geometry="primitive: ring; radiusInner: 0.1; radiusOuter: 0.15"
@@ -226,22 +226,22 @@
         el.addEventListener('gps-entity-place-update-position', (event) => {
           distanceMsg.textContent = `あと${event.detail.distance}m`;
 
-          if (event.detail.distance <= 10) {
-            // 10m以下で明るくする、メッセージ表示、距離非表示
+          if (event.detail.distance <= 20) {
+            // 20m以下で明るくする、メッセージ表示、距離非表示
             directionLight.setAttribute('intensity', 1);
             ambientLight.setAttribute('intensity', 1);
             distanceMsg.style.display = 'none';
             message.style.display = 'block';
             el.setAttribute('cursor-listener', '');
-          } else if (event.detail.distance <= 30) {
-            // 30m以下で近づくほど明るくする、メッセージ非表示、距離表示
-            directionLight.setAttribute('intensity', 1 - event.detail.distance / 30);
-            ambientLight.setAttribute('intensity', 1 - event.detail.distance / 30);
+          } else if (event.detail.distance <= 50) {
+            // 50m以下で近づくほど明るくする、メッセージ非表示、距離表示
+            directionLight.setAttribute('intensity', 1 - event.detail.distance / 50);
+            ambientLight.setAttribute('intensity', 1 - event.detail.distance / 50);
             distanceMsg.style.display = 'block';
             message.style.display = 'none';
             el.removeAttribute('cursor-listener');
           } else {
-            // 30mより離れると、明るさ0、メッセージ非表示、距離表示
+            // 50mより離れると、明るさ0、メッセージ非表示、距離表示
             directionLight.setAttribute('intensity', 0);
             ambientLight.setAttribute('intensity', 0);
             distanceMsg.style.display = 'block';
