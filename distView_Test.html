@@ -163,7 +163,7 @@
       ></a-entity-->
 
       <!-- Library -->
-      <a-entity
+      <!--a-entity
         gps-entity-place="latitude: 33.54832811138921; longitude: 133.68118929088473; elevation: 0;"
         obj-model="obj: #obj; mtl: #mtl"
         scale="0.03 0.03 0.03"
@@ -171,6 +171,18 @@
         look-at="[gps-camera]"
         cursor-listener
         animation-mixer
+      ></a-entity-->
+
+      <a-entity
+        gps-entity-place="latitude: 33.54831098033912; longitude: 133.68148564640015;"
+        obj-model="obj: #obj; mtl: #mtl"
+        scale="0.03 0.03 0.03"
+        rotation="-90 -90 0"
+        look-at="[gps-camera]"
+        cursor-listener
+        animation-mixer
+        smooth-position="duration: 1000"
+        interpolate-position="duration: 500"
       ></a-entity>
       
       <a-light
