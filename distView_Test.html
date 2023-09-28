@@ -135,7 +135,7 @@
   </head>
 
   <body style="margin: 0; overflow: hidden;">
-    <div id="distance"></div>
+    <div id="distance">Loading...</div>
     <div id="message">
       こうちやん (高知高専キャラクター)
     </div>
@@ -211,11 +211,7 @@
         const directionLight = document.getElementById('directionLight');
         const ambientLight = document.getElementById('ambientLight');
 
-        // 距離メッセージの初期化
-        distanceMsg.textContent = 'Loading...';
-
         el.addEventListener('gps-entity-place-update-position', (event) => {
-          const distanceMsg = document.getElementById('distance');
           distanceMsg.textContent = `あと${event.detail.distance}m`;
 
           if (event.detail.distance <= 10) {
