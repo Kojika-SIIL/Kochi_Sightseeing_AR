@@ -198,7 +198,7 @@
         intensity="0"
         color="#FFF">
       </a-light>
-      <a-camera gps-camera="minDistance:5; maxDistance:20" rotation-reader look-controls>
+      <a-camera gps-camera="minDistance:5; maxDistance:30" rotation-reader look-controls>
         <a-entity cursor="fuse: true"
           position="0 0 -3"
           geometry="primitive: ring; radiusInner: 0.1; radiusOuter: 0.15"
@@ -233,15 +233,15 @@
             distanceMsg.style.display = 'none';
             message.style.display = 'block';
             el.setAttribute('cursor-listener', '');
-          } else if (event.detail.distance <= 20) {
-            // 20m以下で近づくほど明るくする、メッセージ非表示、距離表示
-            directionLight.setAttribute('intensity', 1 - event.detail.distance / 20);
-            ambientLight.setAttribute('intensity', 1 - event.detail.distance / 20);
+          } else if (event.detail.distance <= 30) {
+            // 30m以下で近づくほど明るくする、メッセージ非表示、距離表示
+            directionLight.setAttribute('intensity', 1 - event.detail.distance / 30);
+            ambientLight.setAttribute('intensity', 1 - event.detail.distance / 30);
             distanceMsg.style.display = 'block';
             message.style.display = 'none';
             el.removeAttribute('cursor-listener');
           } else {
-            // 20mより離れると、明るさ0、メッセージ非表示、距離表示
+            // 30mより離れると、明るさ0、メッセージ非表示、距離表示
             directionLight.setAttribute('intensity', 0);
             ambientLight.setAttribute('intensity', 0);
             distanceMsg.style.display = 'block';
