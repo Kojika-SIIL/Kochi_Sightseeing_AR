@@ -233,7 +233,15 @@
         const message = document.getElementById('message');
         const directionLight = document.getElementById('directionLight');
         const ambientLight = document.getElementById('ambientLight');
+        /*
+        const objModel = document.querySelector('#obj');
+        const mtlModel = document.querySelector('#mtl');
 
+        if (!objModel || !mtlModel) {
+          console.error('Error loading 3D models.');
+        }
+        */
+        
         el.addEventListener('gps-entity-place-update-position', (event) => {
           distanceMsg.textContent = `あと${event.detail.distance}m`;
 
