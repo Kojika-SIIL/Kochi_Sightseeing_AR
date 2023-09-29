@@ -137,7 +137,7 @@
   <body style="margin: 0; overflow: hidden;">
     <div id="distance">Loading...</div>
     <div id="message">
-      こうちやん (高知高専キャラクター)
+      AR掩体壕(えんたいごう)
     </div>
     
     <a-scene
@@ -147,8 +147,8 @@
     >
       <!-- 3Dモデルの読み込み -->
       <a-assets>
-        <a-asset-item id="obj" src="./model/Kochiyan.obj"></a-asset-item>
-        <a-asset-item id="mtl" src="./model/Kochiyan.mtl"></a-asset-item>
+        <a-asset-item id="obj" src="./model/3133.obj"></a-asset-item>
+        <a-asset-item id="mtl" src="./model/3133.mtl"></a-asset-item>
       </a-assets>
 
       <!-- Labo -->
@@ -173,11 +173,12 @@
         animation-mixer
       ></a-entity-->
 
+      <!-- Park -->
       <a-entity
-        gps-entity-place="latitude: 33.54831098033912; longitude: 133.68148564640015;"
+        gps-entity-place="latitude: 33.53558137375638; longitude: 133.68147737630474;"
         obj-model="obj: #obj; mtl: #mtl"
-        scale="0.03 0.03 0.03"
-        rotation="-90 -90 0"
+        scale="0.0005 0.0005 0.0005"
+        rotation="0 0 0"
         look-at="[gps-camera]"
         cursor-listener
         animation-mixer
