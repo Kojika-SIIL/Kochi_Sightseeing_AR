@@ -58,6 +58,10 @@
     <div id="message"></div>
     
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false;">
+      <!-- 画像 -->
+      <a-assets>
+        <img id="ans01" src="./images/pencil_pink.png">
+      </a-assets>
       <a-marker preset="hiro" id="marker01">
         <a-text id="quiz01" value="Q01\n高知県出身の人物は?"
           font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
@@ -68,7 +72,7 @@
           font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
           font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
           negate="false"
-          material="src: ./image/pencil_pink.png; shader: flat"
+          material="src: #ans01; shader: flat"
           align="center" position="0 -1 -7" color="#c71585"></a-text>
         <a-text id="correct01" value="2. 岩崎弥太郎"
           font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
