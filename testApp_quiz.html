@@ -130,9 +130,9 @@
       var incorrect1_01 = document.querySelector('#incorrect1_01');
       var incorrect2_01 = document.querySelector('#incorrect2_01');
 
-      changeSizeOnHover(correct01, shrinkCursorOnHover(correct01));
-      changeSizeOnHover(incorrect1_01, shrinkCursorOnHover(incorrect1_01));
-      changeSizeOnHover(incorrect2_01, shrinkCursorOnHover(incorrect2_01));
+      changeColorOnHover(correct01, shrinkCursorOnHover(correct01));
+      changeColorOnHover(incorrect1_01, shrinkCursorOnHover(incorrect1_01));
+      changeColorOnHover(incorrect2_01, shrinkCursorOnHover(incorrect2_01));
 
       correctOnHover(correct01);
       incorrectOnHover(incorrect1_01);
@@ -152,35 +152,18 @@
       incorrectOnHover(incorrect2_02);
 
       /*----- カーソルを合わせると色が変わる -----*/
-/*      function changeColorOnHover(element) {
+      function changeColorOnHover(element) {
+        let originalColor;
         element.addEventListener('mouseenter', function () {
           if (cursorEnabled) {
+            originalColor = element.getAttribute('material').color;
             element.setAttribute('material', 'color: #FFFF00');
           }
         });
 
         element.addEventListener('mouseleave', function () {
           if (cursorEnabled) {
-            element.setAttribute('material', 'color: #EF2D5E');
-          }
-        });
-      }
-*/
-
-      /*----- カーソルを合わせると大きさが変わる -----*/
-      function changeSizeOnHover(element) {
-        var originalWidth = element.getAttribute('geometry').width;
-
-        element.addEventListener('mouseenter', function () {
-          if (cursorEnabled) {
-            var enlargedWidth = originalWidth * 1.1; // 10% increase in width
-            element.setAttribute('geometry', 'primitive: plane; width: ' + enlargedWidth);
-          }
-        });
-
-        element.addEventListener('mouseleave', function () {
-          if (cursorEnabled) {
-            element.setAttribute('geometry', 'primitive: plane; width: ' + originalWidth);
+            element.setAttribute('material', 'color: ' + originalColor);
           }
         });
       }
