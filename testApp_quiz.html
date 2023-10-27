@@ -60,7 +60,7 @@
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false;">
       <!-- 画像 -->
       <a-assets>
-        <img id="cursor" src="./images/cursor.png">
+        <img id="cursor" src="./images/cursor_scope.png">
         <img id="ans01" src="./images/pencil_pink.png">
         <img id="ans02" src="./images/pencil_blue.png">
         <img id="ans03" src="./images/pencil_green.png">
@@ -119,8 +119,8 @@
       <a-entity camera look-controls wasd-controls>
         <a-entity cursor="fuse: true;"
           position="0 0 -5"
-          geometry="primitive: ring; radiusInner: 0.1; radiusOuter: 0.15;"
-          material="src: #cursor; shader: flat; opacity: 0.6">
+          geometry="primitive: circle; radius: 0.15;"
+          material="src: #cursor; shader: flat">
         </a-entity>
       </a-entity>
     </a-scene>
@@ -175,10 +175,10 @@
       /*----- カーソルを合わせると円が小さくなる -----*/
       function shrinkCursorOnHover(element) {
         var cursor = document.querySelector('[cursor]'); // カーソルを取得
-        var originalRadiusOuter = cursor.getAttribute('geometry').radiusOuter; // 元の半径を保存
-        var originalRadiusInner = cursor.getAttribute('geometry').radiusInner; // 元の半径を保存
-        var targetRadiusOuter = originalRadiusOuter * 0.5; // カーソルが縮小する目標半径
-        var targetRadiusInner = originalRadiusInner * 0.5; // カーソルが縮小する目標半径
+        var originalRadius = cursor.getAttribute('geometry').radius; // 元の半径を保存
+        // var originalRadiusInner = cursor.getAttribute('geometry').radiusInner; // 元の半径を保存
+        var targetRadius = originalRadius * 0.5; // カーソルが縮小する目標半径
+        // var targetRadiusInner = originalRadiusInner * 0.5; // カーソルが縮小する目標半径
         var animationStartTime; // アニメーション開始時間
         var animationFrameId; // アニメーションフレームID
 
@@ -193,8 +193,8 @@
           if (animationFrameId) {
             cancelAnimationFrame(animationFrameId); // アニメーションをキャンセル
           }
-          cursor.setAttribute('geometry', 'radiusOuter', originalRadiusOuter); // カーソルの半径を元に戻す
-          cursor.setAttribute('geometry', 'radiusInner', originalRadiusInner); // カーソルの半径を元に戻す
+          cursor.setAttribute('geometry', 'radius', originalRadius); // カーソルの半径を元に戻す
+          // cursor.setAttribute('geometry', 'radiusInner', originalRadiusInner); // カーソルの半径を元に戻す
           animationStartTime = null; // マウスを離したときに開始時間をリセット
         });
 
@@ -206,11 +206,11 @@
           var elapsedTime = currentTime - animationStartTime;
           var progress = Math.min(elapsedTime / 2000, 1); // 2秒かけて縮小
 
-          var newRadiusOuter = originalRadiusOuter + (targetRadiusOuter - originalRadiusOuter) * progress;
-          var newRadiusInner = originalRadiusInner + (targetRadiusInner - originalRadiusInner) * progress;
+          var newRadius = originalRadius + (targetRadius - originalRadius) * progress;
+          // var newRadiusInner = originalRadiusInner + (targetRadiusInner - originalRadiusInner) * progress;
 
-          cursor.setAttribute('geometry', 'radiusOuter', newRadiusOuter);
-          cursor.setAttribute('geometry', 'radiusInner', newRadiusInner);
+          cursor.setAttribute('geometry', 'radius', newRadius);
+          // cursor.setAttribute('geometry', 'radiusInner', newRadiusInner);
 
           if (progress < 1) {
             animationFrameId = requestAnimationFrame(animate);
