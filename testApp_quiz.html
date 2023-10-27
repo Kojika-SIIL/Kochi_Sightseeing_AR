@@ -60,6 +60,7 @@
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false;">
       <!-- 画像 -->
       <a-assets>
+        <img id="cursor" src="./images/cursor.png">
         <img id="ans01" src="./images/pencil_pink.png">
         <img id="ans02" src="./images/pencil_blue.png">
         <img id="ans03" src="./images/pencil_green.png">
@@ -119,7 +120,7 @@
         <a-entity cursor="fuse: true;"
           position="0 0 -5"
           geometry="primitive: ring; radiusInner: 0.1; radiusOuter: 0.15;"
-          material="color: #acacac; shader: flat; opacity: 0.6">
+          material="src: #cursor; shader: flat; opacity: 0.6">
         </a-entity>
       </a-entity>
     </a-scene>
