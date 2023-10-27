@@ -65,14 +65,7 @@
         <img id="ans02" src="./images/pencil_blue.png">
         <img id="ans03" src="./images/pencil_green.png">
       </a-assets>
-      <!-- カーソルの表示 -->
-      <a-entity camera look-controls wasd-controls>
-        <a-entity cursor="fuse: true;"
-          position="0 0 -5"
-          geometry="primitive: circle; radius: 0.5"
-          material="src: #cursor; shader: flat; transparent: true">
-        </a-entity>
-      </a-entity>
+      
       <!-- Quiz01 -->
       <a-marker preset="hiro" id="marker01">
         <a-text id="quiz01" value="Q01\n高知県出身の人物は?"
@@ -99,6 +92,7 @@
           material="src: #ans03; shader: flat; transparent: true; opacity: 0.9"
           align="center" position="0 -4 -7" color="#008000" geometry="primitive: plane; width: 4"></a-text>
       </a-marker>
+      
       <!-- Quiz02 -->
       <a-marker type="pattern" url="./images/pattern-iwamon.patt" id="marker02">
         <a-text id="quiz02" value="Q02\n高知高専に無いコースはどれ?"
@@ -125,6 +119,15 @@
           material="src: #ans03; shader: flat; transparent: true; opacity: 0.9"
           align="center" position="0 -4 -7" color="#008000" geometry="primitive: plane; width: 4"></a-text>
       </a-marker>
+
+      <!-- カーソルの表示 -->
+      <a-entity camera look-controls wasd-controls>
+        <a-entity cursor="fuse: true;"
+          position="0 0 -5"
+          geometry="primitive: circle; radius: 0.5"
+          material="src: #cursor; shader: flat; transparent: true">
+        </a-entity>
+      </a-entity>
     </a-scene>
 
     <script>
