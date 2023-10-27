@@ -163,9 +163,9 @@
       /*----- カーソルを合わせると色が変わる -----*/
       function changeColorOnHover(element) {
         let originalColor;
+        originalColor = element.getAttribute('material').color;
         element.addEventListener('mouseenter', function () {
           if (cursorEnabled) {
-            originalColor = element.getAttribute('material').color;
             element.setAttribute('material', 'color: #f0e68c');
           }
         });
