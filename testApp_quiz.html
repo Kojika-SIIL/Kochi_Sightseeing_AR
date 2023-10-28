@@ -174,7 +174,7 @@
       incorrectOnHover(incorrect2_02);
 
       /*----- カーソルを合わせると色が変わる -----*/
-/*      function changeColorOnHover(element) {
+      function changeColorOnHover(element) {
         let originalColor;
         element.addEventListener('mouseenter', function () {
           originalColor  = element.getAttribute('material').color;
@@ -186,26 +186,6 @@
         element.addEventListener('mouseleave', function () {
           if (cursorEnabled) {
             element.setAttribute('material', 'color: ' + originalColor);
-          }
-        });
-      }
- */
-      function changeColorOnHover(element) {
-        let originalColor;
-        let materialComponent = element.getAttribute('material');
-
-        element.addEventListener('mouseenter', function () {
-          if (cursorEnabled) {
-            originalColor = materialComponent.color;
-            materialComponent.color = '#f0e68c';
-            element.setAttribute('material', materialComponent);
-          }
-        });
-
-        element.addEventListener('mouseleave', function () {
-          if (cursorEnabled) {
-            materialComponent.color = originalColor;
-            element.setAttribute('material', materialComponent);
           }
         });
       }
