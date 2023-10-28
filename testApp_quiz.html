@@ -90,7 +90,7 @@
           font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
           font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
           negate="false"
-          material="color: #ffc0cb"
+          material="src: #ans01; shader: flat; transparent: true; opacity: 0.8"
           align="center" position="0 -1 -7" color="#c71585" geometry="primitive: plane; width: 4"></a-text>
         <a-text id="correct01" value="2. 岩崎弥太郎"
           font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
@@ -136,11 +136,15 @@
 
       <!-- カーソルの表示 -->
       <a-entity camera look-controls wasd-controls>
-        <a-entity cursor="fuse: true;"
+        <!--a-entity cursor="fuse: true;"
           position="0 0 -3"
           geometry="primitive: circle; radius: 0.1"
           material="src: #cursor; shader: flat; transparent: true">
-        </a-entity>
+        </a-entity-->
+        <a-entity cursor="fuse: true;"
+          position="0 0 -3"
+          geometry="primitive: ring; radiusInner: 0.1; radiusOuter: 0.15;"
+          material="color: #acacac; shader: flat; opacity: 0.6">
       </a-entity>
     </a-scene>
 
