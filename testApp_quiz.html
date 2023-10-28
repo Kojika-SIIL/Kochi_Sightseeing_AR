@@ -15,19 +15,6 @@
       }
         
       /* スコアの表示 */
-/*      #score {
-        position: fixed;
-        z-index: 10000;
-        background-color: rgba(0,0,0,.8);
-        color: #fff;
-        text-align: center;
-        padding: 10px;
-        top: 10px;
-        left: 5%;
-        width: 90%;
-        display: block;
-      }
-*/
       #score {
         position: fixed;
         z-index: 10000;
@@ -74,8 +61,8 @@
   
   <body style="margin: 0; overflow: hidden;">
     <!-- スコア表示 -->
-    <div class="ui" style="top: 0;">
-      <div id="score">Score<br><span id="scoreValue">0</span></div>
+    <div id="score">
+      <div>Score<br><span id="scoreValue">0</span></div>
     </div>
     
     <!-- メッセージ表示 -->
@@ -234,10 +221,6 @@
       }
 
       // スコア表示を更新する処理
-/*      function updateScoreDisplay() {
-        scoreElement.textContent = 'Score: ' + score;
-      }
-*/
       function updateScoreDisplay() {
         var scoreValueElement = document.querySelector('#scoreValue');
         scoreValueElement.textContent = score;
