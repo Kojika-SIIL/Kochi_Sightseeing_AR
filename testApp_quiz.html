@@ -28,7 +28,7 @@
         display: block;
       }
 */
-      #scoreContainer {
+      #score {
         position: fixed;
         z-index: 10000;
         background-color: rgba(0, 0, 0, 0.8);
@@ -74,11 +74,8 @@
   
   <body style="margin: 0; overflow: hidden;">
     <!-- スコア表示 -->
-    <!--div class="ui" style="top: 0;">
-      <div id="score">Score: 0</div>
-  </div-->
-    <div id="scoreContainer">
-      <div>Score<br><span id="scoreValue">0</span></div>
+    <div class="ui" style="top: 0;">
+      <div id="score">Score<br><span id="scoreValue">0</span></div>
     </div>
     
     <!-- メッセージ表示 -->
@@ -208,7 +205,7 @@
      
       /*----- 正解・不正解の処理 -----*/
       var score = 0;
-      var scoreElement = document.querySelector('#scoreContainer');
+      var scoreElement = document.querySelector('#score');
       var correctAudio = new Audio('./assets/correct.mp3');
       var incorrectAudio = new Audio('./assets/incorrect.mp3');
       var messageElement = document.querySelector('#message');
