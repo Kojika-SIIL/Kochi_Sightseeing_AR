@@ -162,8 +162,9 @@
       embedded
       arjs="debugUIEnabled: false;"
     >
-      <!-- 3Dモデルの読み込み -->
+      <!-- カーソルと3Dモデルの読み込み -->
       <a-assets>
+        <img id="cursor" src="./images/cursor_scope.png">
         <a-asset-item id="obj" src="./model/3133.obj"></a-asset-item>
         <a-asset-item id="mtl" src="./model/3133.mtl"></a-asset-item>
       </a-assets>
@@ -204,10 +205,15 @@
         color="#FFF">
       </a-light>
       <a-camera gps-camera="gpsMinDistance:10; minDistance:10; maxDistance:50" rotation-reader look-controls>
-        <a-entity cursor="fuse: true"
+        <!--a-entity cursor="fuse: true"
           position="0 0 -3"
           geometry="primitive: ring; radiusInner: 0.1; radiusOuter: 0.15"
           material="color: #acacac; shader: flat; opacity: 0.6">
+        </a-entity-->
+        <a-entity cursor="fuse: true;"
+          position="0 0 -3"
+          geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.1"
+          material="src: #cursor; shader: flat; transparent: true">
         </a-entity>
       </a-camera>
     </a-scene>
