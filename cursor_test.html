@@ -36,20 +36,20 @@
     >
       <a-assets>
         <img id="cursor" src="./images/cursor_scope.png">
-        <!--
         <a-asset-item id="obj1" src="./model/3133.obj"></a-asset-item>
         <a-asset-item id="mtl1" src="./model/3133.mtl"></a-asset-item>
+        <!--
         <a-asset-item id="obj2" src="./model/Kochiyan.obj"></a-asset-item>
         <a-asset-item id="mtl2" src="./model/Kochiyan.mtl"></a-asset-item>
         -->
       </a-assets>
-      <!--a-entity
+      <a-entity
         obj-model="obj: #obj1; mtl: #mtl1"
         position="0 -1 -10"
         scale="0.001 0.001 0.001"
         rotation="0 0 0"
         cursor-listener
-      ></a-entity-->
+      ></a-entity>
       <!--a-entity
         obj-model="obj: #obj2; mtl: #mtl2"
         position="0 -1 -10"
@@ -71,7 +71,7 @@
           material="src: #cursor; shader: flat; transparent: true">
         </a-entity>
       </a-entity>
-      <a-box
+      <!--a-box
         id="box"
         geometry="primitive: box"
         position="0 0 -5"
@@ -79,7 +79,7 @@
         color="red"
         scale="1 1 1"
         cursor-listener
-      ></a-box>
+      ></a-box-->
     </a-scene>
   </body>
 </html>
