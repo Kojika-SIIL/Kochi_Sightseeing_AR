@@ -139,10 +139,6 @@
       var incorrect1_01 = document.querySelector('#incorrect1_01');
       var incorrect2_01 = document.querySelector('#incorrect2_01');
 
-      // changeColorOnHover(correct01, shrinkCursorOnHover(correct01));
-      // changeColorOnHover(incorrect1_01, shrinkCursorOnHover(incorrect1_01));
-      // changeColorOnHover(incorrect2_01, shrinkCursorOnHover(incorrect2_01));
-
       changeColorOnHover(correct01);
       changeColorOnHover(incorrect1_01);
       changeColorOnHover(incorrect2_01);
@@ -155,10 +151,6 @@
       var correct02 = document.querySelector('#correct02');
       var incorrect1_02 = document.querySelector('#incorrect1_02');
       var incorrect2_02 = document.querySelector('#incorrect2_02');
-      
-      // changeColorOnHover(correct02, shrinkCursorOnHover(correct02));
-      // changeColorOnHover(incorrect1_02, shrinkCursorOnHover(incorrect1_02));
-      // changeColorOnHover(incorrect2_02, shrinkCursorOnHover(incorrect2_02));
 
       changeColorOnHover(correct02);
       changeColorOnHover(incorrect1_02);
@@ -185,49 +177,6 @@
         });
       }
      
-      /*----- カーソルを合わせると円が小さくなる -----*/
-      /*function shrinkCursorOnHover(element) {
-        var cursor = document.querySelector('[cursor]'); // カーソルを取得
-        var originalRadius = cursor.getAttribute('geometry').radius; // 元の半径を保存
-        var targetRadius = originalRadius * 0.5; // カーソルが縮小する目標半径
-        var animationStartTime; // アニメーション開始時間
-        var animationFrameId; // アニメーションフレームID
-
-        element.addEventListener('mouseenter', function () {
-          if (cursorEnabled) {
-            animationStartTime = null;
-            animationFrameId = requestAnimationFrame(animate);
-          }
-        });
-
-        element.addEventListener('mouseleave', function () {
-          if (animationFrameId) {
-            cancelAnimationFrame(animationFrameId); // アニメーションをキャンセル
-          }
-          cursor.setAttribute('geometry', 'radius', originalRadius); // カーソルの半径を元に戻す
-          animationStartTime = null; // マウスを離したときに開始時間をリセット
-        });
-
-        function animate(currentTime) {
-          if (!animationStartTime) {
-            animationStartTime = currentTime;
-          }
-
-          var elapsedTime = currentTime - animationStartTime;
-          var progress = Math.min(elapsedTime / 2000, 1); // 2秒かけて縮小
-
-          var newRadius = originalRadius + (targetRadius - originalRadius) * progress;
-
-          cursor.setAttribute('geometry', 'radius', newRadius);
-
-          if (progress < 1) {
-            animationFrameId = requestAnimationFrame(animate);
-          } else {
-            animationStartTime = null; // アニメーションが終了したら開始時間をリセット
-          }
-        }
-      }
-*/
       /*----- 正解・不正解の処理 -----*/
       var score = 0;
       var scoreElement = document.querySelector('#score');
