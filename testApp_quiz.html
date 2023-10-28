@@ -15,7 +15,7 @@
       }
         
       /* スコアの表示 */
-      #score {
+/*      #score {
         position: fixed;
         z-index: 10000;
         background-color: rgba(0,0,0,.8);
@@ -27,7 +27,30 @@
         width: 90%;
         display: block;
       }
-
+*/
+      #scoreContainer {
+        position: fixed;
+        z-index: 10000;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        top: 10px;
+        right: 10px;
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+      }
+      
+      #scoreValue {
+        font-size: 24px;
+        font-weight: bold;
+      }
+      
       /* メッセージの表示 */
       body {
         margin: 0;
@@ -51,9 +74,13 @@
   
   <body style="margin: 0; overflow: hidden;">
     <!-- スコア表示 -->
-    <div class="ui" style="top: 0;">
+    <!--div class="ui" style="top: 0;">
       <div id="score">Score: 0</div>
+  </div-->
+    <div id="scoreContainer">
+      <div id="score">Score<br><span id="scoreValue">0</span></div>
     </div>
+    
     <!-- メッセージ表示 -->
     <div id="message"></div>
     
@@ -210,10 +237,15 @@
       }
 
       // スコア表示を更新する処理
-      function updateScoreDisplay() {
+/*      function updateScoreDisplay() {
         scoreElement.textContent = 'Score: ' + score;
       }
-
+*/
+      function updateScoreDisplay() {
+        var scoreValueElement = document.querySelector('#scoreValue');
+        scoreValueElement.textContent = score;
+      }
+      
       /* 不正解の場合 */
       function incorrectOnHover(element) {
         var timer = null;
