@@ -56,17 +56,6 @@
         border: 3px solid #fff;
         display: none;
       }
-
-      /* 不正解のバツの表示 */
-      #cross {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 200px;
-        color: #ff0000;
-        opacity: 0.6;
-      }
     </style>
   </head>
   
@@ -152,12 +141,6 @@
           geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.1"
           material="src: #cursor; shader: flat; transparent: true">
         </a-entity>
-      </a-entity>
-
-      <!-- バツ印の表示 -->
-      <a-entity id="cross"
-        geometry="primitive: text; value: X; width: 1; height: 1;"
-        position="0 0 -5" material="color: red; opacity: 0.6">
       </a-entity>
     </a-scene>
 
@@ -245,12 +228,6 @@
       }
       
       /* 不正解の場合 */
-      // バツ印の表示
-      function showCross() {
-        var cross = document.getElementById('cross');
-        cross.setAttribute('visible', true);
-      }
-      
       function incorrectOnHover(element) {
         var timer = null;
 
@@ -259,7 +236,6 @@
             timer = setTimeout(function () {
               incorrectAudio.play();
               showMessage('ざんねん！！', false);
-              showCross(); // バツ印の表示
               cursorEnabled = false; // カーソルの反応を無効化
             }, 2000); // 2秒後に不正解音を再生, メッセージ表示
           }
@@ -290,13 +266,11 @@
       
       marker01.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
-        cross.setAttribute('visible', false);
         cursorEnabled = true;
       });
       
       marker02.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
-        cross.setAttribute('visible', false);
         cursorEnabled = true;
       });
     </script>
