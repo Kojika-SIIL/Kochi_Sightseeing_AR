@@ -143,11 +143,6 @@
           material="src: #cursor; shader: flat; transparent: true">
         </a-entity>
       </a-entity>
-      <!-- バツ印の表示 -->
-        <a-entity id="wrongIcon" geometry="primitive: plane; width: 1; height: 1"
-          material="src: #cross; shader: flat; transparent: true; opacity: 0.6"
-          position="0 0 -5" visible="false">
-        </a-entity>
     </a-scene>
 
     <script>
@@ -216,7 +211,7 @@
               correctAudio.play();
               showMessage('正解！！', true);
               cursorEnabled = false; // カーソルの反応を無効化
-            }, 2000); // 2秒後にスコアを増加, 正解音再生, メッセージ表示
+            }, 3000); // 3秒後にスコアを増加, 正解音再生, メッセージ表示
           }
         });
 
@@ -242,7 +237,6 @@
             timer = setTimeout(function () {
               incorrectAudio.play();
               showMessage('ざんねん！！', false);
-              document.querySelector('#wrongIcon').setAttribute('visible', 'true'); // バツ印を表示
               cursorEnabled = false; // カーソルの反応を無効化
             }, 3000); // 3秒後に不正解音を再生, メッセージ表示
           }
@@ -273,13 +267,11 @@
       
       marker01.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
-        document.querySelector('#wrongIcon').setAttribute('visible', 'false');
         cursorEnabled = true;
       });
       
       marker02.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
-        document.querySelector('#wrongIcon').setAttribute('visible', 'false');
         cursorEnabled = true;
       });
     </script>
