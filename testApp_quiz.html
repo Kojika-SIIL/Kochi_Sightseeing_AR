@@ -248,7 +248,7 @@
       // バツ印の表示
       function showCross() {
         var cross = document.getElementById('cross');
-        cross.style.display = 'block';
+        cross.setAttribute('visible', true);
       }
       
       function incorrectOnHover(element) {
@@ -290,13 +290,13 @@
       
       marker01.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
-        cross.style.display = 'none';
+        cross.setAttribute('visible', false);
         cursorEnabled = true;
       });
       
       marker02.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
-        cross.style.display = 'none';
+        cross.setAttribute('visible', false);
         cursorEnabled = true;
       });
     </script>
