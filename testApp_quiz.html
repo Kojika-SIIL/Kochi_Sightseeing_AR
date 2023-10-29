@@ -75,9 +75,6 @@
     <div id="score">
       <div>Score<br><span id="scoreValue">0</span></div>
     </div>
-
-    <!-- バツ印の表示 -->
-    <div id="cross" style="display: none">×</div>
     
     <!-- メッセージ表示 -->
     <div id="message"></div>
@@ -155,6 +152,12 @@
           geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.1"
           material="src: #cursor; shader: flat; transparent: true">
         </a-entity>
+      </a-entity>
+
+      <!-- バツ印の表示 -->
+      <a-entity id="cross"
+        geometry="primitive: text; value: X; width: 1; height: 1;"
+        position="0 0 -5" material="color: red; opacity: 0.6">
       </a-entity>
     </a-scene>
 
