@@ -76,6 +76,7 @@
         <img id="ans01" src="./images/pencil_pink.png">
         <img id="ans02" src="./images/pencil_blue.png">
         <img id="ans03" src="./images/pencil_green.png">
+        <img id="cross" src="./images/cross.png">
       </a-assets>
       
       <!-- Quiz01 -->
@@ -141,6 +142,12 @@
           geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.1"
           material="src: #cursor; shader: flat; transparent: true">
         </a-entity>
+      </a-entity>
+
+      <!-- バツ印の表示 -->
+      <a-entity id="wrongIcon" geometry="primitive: plane; width: 1; height: 1"
+        material="src: #cross; shader: flat; transparent: true; opacity: 0.6"
+        position="0 0 -5" visible="false">
       </a-entity>
     </a-scene>
 
@@ -236,8 +243,9 @@
             timer = setTimeout(function () {
               incorrectAudio.play();
               showMessage('ざんねん！！', false);
+              document.querySelector('#wrongIcon').setAttribute('visible', 'true'); // バツ印を表示
               cursorEnabled = false; // カーソルの反応を無効化
-            }, 2000); // 2秒後に不正解音を再生, メッセージ表示
+            }, 3000); // 3秒後に不正解音を再生, メッセージ表示
           }
         });
 
@@ -266,11 +274,13 @@
       
       marker01.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
+        document.querySelector('#wrongIcon').setAttribute('visible', 'false');
         cursorEnabled = true;
       });
       
       marker02.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
+        document.querySelector('#wrongIcon').setAttribute('visible', 'false');
         cursorEnabled = true;
       });
     </script>
