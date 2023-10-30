@@ -209,7 +209,7 @@
               score += 10;
               updateScoreDisplay();
               correctAudio.play();
-              showMessage('正解！！', true);
+              showMessage('正解！！ 10ptゲット！', true);
               cursorEnabled = false; // カーソルの反応を無効化
             }, 3000); // 3秒後にスコアを増加, 正解音再生, メッセージ表示
           }
@@ -254,9 +254,9 @@
       function showMessage(text, isCorrect) {
         messageElement.textContent = text;
         if (isCorrect) {
-          messageElement.style.backgroundColor = 'rgba(0, 255, 0, 0.8)'; // 正解メッセージの背景色
+          messageElement.style.backgroundColor = 'rgba(0, 255, 0, 0.6)'; // 正解メッセージの背景色
         } else {
-          messageElement.style.backgroundColor = 'rgba(255, 0, 0, 0.8)'; // 不正解メッセージの背景色
+          messageElement.style.backgroundColor = 'rgba(255, 0, 0, 0.6)'; // 不正解メッセージの背景色
         }
         messageElement.style.display = 'block';
       }
