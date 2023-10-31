@@ -298,7 +298,7 @@
         var timer = null;
 
         element.addEventListener('mouseenter', function () {
-          if (cursorEnabled && !quizAnswered) {
+          if (cursorEnabled) {
             timer = setTimeout(function () {
               score += 10;
               updateScoreDisplay();
@@ -333,7 +333,7 @@
         var timer = null;
 
         element.addEventListener('mouseenter', function () {
-          if (cursorEnabled && !quizAnswered) {
+          if (cursorEnabled) {
             timer = setTimeout(function () {
               incorrectAudio.play();
               showMessage('ざんねん！！', false);
