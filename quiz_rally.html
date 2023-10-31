@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>AR Quiz</title>
+    <script src = "https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src = "https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src = "https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+        
+      /* スコアの表示 */
+      #score {
+        position: fixed;
+        z-index: 10000;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+        top: 10px;
+        right: 10px;
+        width: 70px;
+        height: 70px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+      }
+      
+      #scoreValue {
+        font-size: 36px;
+        font-weight: bold;
+      }
+      
+      /* メッセージの表示 */
+      body {
+        margin: 0;
+      }
+      #message {
+        position: fixed;
+        z-index: 10;
+        left: 5%;
+        bottom: 30px;
+        width: 90%;
+        padding: 5%;
+        color: #fff;
+        font-weight: bold;
+        background-color: rgba(0,0,0,.8);
+        border-radius: 20px;
+        border: 3px solid #fff;
+        display: none;
+      }
+
+      .stamp-history {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        z-index: 100;
+      }
+
+      .stamp-history img {
+        width: 30px;
+        height: 30px;
+      }
+  
+      .feedback-image {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 100;
+      }
+    </style>
+  </head>
+  
+  <body style="margin: 0; overflow: hidden;">
+    <!-- スコア表示 -->
+    <div id="score">
+      <div>Score<br><span id="scoreValue">0</span></div>
+    </div>
+    
+    <!-- メッセージ表示 -->
+    <div id="message"></div>
+
+    <!-- スタンプ履歴表示 -->
+    <div class="stamp-history"></div>
+
+    <!-- フィードバック画像表示 -->
+    <div class="feedback-image" style="display: none;">
+      <img id="feedbackImage" src="" alt="feedback">
+    </div>
+    
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false;">
+      <!-- 画像 -->
+      <a-assets>
+        <img id="cursor" src="./images/cursor_scope.png">
+        <img id="quiz" src="./images/blackboard.png">
+        <img id="ans01" src="./images/pencil_pink.png">
+        <img id="ans02" src="./images/pencil_blue.png">
+        <img id="ans03" src="./images/pencil_green.png">
+        <img id="cross" src="./images/cross.png">
+      </a-assets>
+      
+      <!-- Quiz01 -->
+      <a-marker preset="hiro" id="marker01">
+        <a-text id="quiz01" value="Q01\n高知県出身の人物は?"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          material="src: #quiz; shader: flat; transparent: true"
+          align="center" position="0 1.5 -7" color="#ffffff" geometry="primitive: plane; width: 5"></a-text>
+        <a-text id="incorrect1_01" value="1. 勝海舟"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          material="src: #ans01; shader: flat; transparent: true; opacity: 0.8"
+          align="center" position="0 -1 -7" color="#c71585" geometry="primitive: plane; width: 4"></a-text>
+        <a-text id="correct01" value="2. 岩崎弥太郎"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          material="src: #ans02; shader: flat; transparent: true; opacity: 0.8"
+          align="center" position="0 -2.5 -7" color="#4169e1" geometry="primitive: plane; width: 4"></a-text>
+        <a-text id="incorrect2_01" value="3. 真田幸村"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          material="src: #ans03; shader: flat; transparent: true; opacity: 0.8"
+          align="center" position="0 -4 -7" color="#008000" geometry="primitive: plane; width: 4"></a-text>
+      </a-marker>
+      
+      <!-- Quiz02 -->
+      <a-marker type="pattern" url="./images/pattern-iwamon.patt" id="marker02">
+        <a-text id="quiz02" value="Q02\n高知高専に無いコースはどれ?"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          material="src: #quiz; shader: flat; transparent: true"
+          align="center" position="0 1.5 -7" color="#ffffff" geometry="primitive: plane; width: 5"></a-text>
+        <a-text id="correct02" value="1. 環境都市デザインコース"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          material="src: #ans01; shader: flat; transparent: true; opacity: 0.8"
+          align="center" position="0 -1 -7" color="#c71585" geometry="primitive: plane; width: 4"></a-text>
+        <a-text id="incorrect1_02" value="2. 新素材生命コース"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          material="src: #ans02; shader: flat; transparent: true; opacity: 0.8"
+          align="center" position="0 -2.5 -7" color="#4169e1" geometry="primitive: plane; width: 4"></a-text>
+        <a-text id="incorrect2_02" value="3. ロボティクスコース"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          material="src: #ans03; shader: flat; transparent: true; opacity: 0.8"
+          align="center" position="0 -4 -7" color="#008000" geometry="primitive: plane; width: 4"></a-text>
+      </a-marker>
+
+      <a-entity camera look-controls wasd-controls>
+        <!-- カーソルの表示 -->
+        <a-entity cursor="fuse: true;"
+          position="0 0 -3"
+          geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.1"
+          material="src: #cursor; shader: flat; transparent: true">
+        </a-entity>
+      </a-entity>
+    </a-scene>
+
+    <script>
+      /*----- 視点カーソル -----*/
+      var cursorEnabled = true;
+      
+      // Quiz01
+      var correct01 = document.querySelector('#correct01');
+      var incorrect1_01 = document.querySelector('#incorrect1_01');
+      var incorrect2_01 = document.querySelector('#incorrect2_01');
+
+      changeColorOnHover(correct01);
+      changeColorOnHover(incorrect1_01);
+      changeColorOnHover(incorrect2_01);
+
+      correctOnHover(correct01);
+      incorrectOnHover(incorrect1_01);
+      incorrectOnHover(incorrect2_01);
+
+      // Quiz02
+      var correct02 = document.querySelector('#correct02');
+      var incorrect1_02 = document.querySelector('#incorrect1_02');
+      var incorrect2_02 = document.querySelector('#incorrect2_02');
+
+      changeColorOnHover(correct02);
+      changeColorOnHover(incorrect1_02);
+      changeColorOnHover(incorrect2_02);
+
+      correctOnHover(correct02);
+      incorrectOnHover(incorrect1_02);
+      incorrectOnHover(incorrect2_02);
+
+      /*----- カーソルを合わせると色が変わる -----*/
+      function changeColorOnHover(element) {
+        let originalColor;
+        element.addEventListener('mouseenter', function () {
+          originalColor  = element.getAttribute('material').color;
+          if (cursorEnabled) {
+            element.setAttribute('material', 'color: #f0e68c');
+          }
+        });
+
+        element.addEventListener('mouseleave', function () {
+          if (cursorEnabled) {
+            element.setAttribute('material', 'color: ' + originalColor);
+          }
+        });
+      }
+      
+      /*----- 正解・不正解の処理 -----*/
+      var score = 0;
+      var scoreElement = document.querySelector('#score');
+      var correctAudio = new Audio('./assets/correct.mp3');
+      var incorrectAudio = new Audio('./assets/incorrect.mp3');
+      var messageElement = document.querySelector('#message');
+      var stampHistory = []; // スタンプの履歴を保存する配列
+
+      function showFeedback(isCorrect) {
+        var feedbackImage = document.getElementById('feedbackImage');
+        var feedbackContainer = document.querySelector('.feedback-image');
+        if (isCorrect) {
+          feedbackImage.src = './images/stamp.png'; // 正解のスタンプ画像のパス
+        } else {
+          feedbackImage.src = './images/cross.png'; // 不正解のバツ印画像のパス
+        }
+
+        feedbackContainer.style.display = 'block';
+
+        // スタンプの履歴に追加
+        stampHistory.push(feedbackImage.src);
+        updateStampHistory();
+
+        setTimeout(function () {
+          feedbackContainer.style.display = 'none';
+        }, 3000); // 3秒後にフィードバック画像を非表示にする
+      }
+
+      function updateStampHistory() {
+        var stampHistoryContainer = document.querySelector('.stamp-history');
+        stampHistoryContainer.innerHTML = ''; // スタンプ履歴をクリア
+
+        // スタンプの履歴を表示
+        stampHistory.forEach(function (stamp) {
+          var stampImg = document.createElement('img');
+          stampImg.src = stamp;
+          stampHistoryContainer.appendChild(stampImg);
+        });
+      }
+
+      /* 正解の場合 */
+      function correctOnHover(element) {
+        var timer = null;
+
+        element.addEventListener('mouseenter', function () {
+          if (cursorEnabled) {
+            timer = setTimeout(function () {
+              score += 10;
+              updateScoreDisplay();
+              correctAudio.play();
+              showMessage('正解！！ 10ptゲット！', true);
+              showFeedback(true); // 正解のフィードバック画像を表示
+              cursorEnabled = false; // カーソルの反応を無効化
+            }, 3000); // 3秒後にスコアを増加, 正解音再生, メッセージ表示
+          }
+        });
+
+        element.addEventListener('mouseleave', function () {
+          if (timer !== null) {
+            clearTimeout(timer); // タイマーをクリア
+          }
+        });
+      }
+
+      // スコア表示を更新する処理
+      function updateScoreDisplay() {
+        var scoreValueElement = document.querySelector('#scoreValue');
+        scoreValueElement.textContent = score;
+      }
+      
+      /* 不正解の場合 */
+      function incorrectOnHover(element) {
+        var timer = null;
+
+        element.addEventListener('mouseenter', function () {
+          if (cursorEnabled) {
+            timer = setTimeout(function () {
+              incorrectAudio.play();
+              showMessage('ざんねん！！', false);
+              showFeedback(false); // 不正解のフィードバック画像を表示
+              cursorEnabled = false; // カーソルの反応を無効化
+            }, 3000); // 3秒後に不正解音を再生, メッセージ表示
+          }
+        });
+
+        element.addEventListener('mouseleave', function () {
+          if (timer !== null) {
+            clearTimeout(timer); // タイマーをクリア
+          }
+        });
+      }
+
+      /* メッセージの表示に関する処理 */
+      // 正解・不正解のメッセージ表示
+      function showMessage(text, isCorrect) {
+        messageElement.textContent = text;
+        if (isCorrect) {
+          messageElement.style.backgroundColor = 'rgba(0, 255, 0, 0.6)'; // 正解メッセージの背景色
+        } else {
+          messageElement.style.backgroundColor = 'rgba(255, 0, 0, 0.6)'; // 不正解メッセージの背景色
+        }
+        messageElement.style.display = 'block';
+      }
+
+      // メッセージを非表示にする
+      var marker01 = document.querySelector('#marker01');
+      var marker02 = document.querySelector('#marker02');
+      
+      marker01.addEventListener('markerLost', function () {
+        messageElement.style.display = 'none';
+        cursorEnabled = true;
+      });
+      
+      marker02.addEventListener('markerLost', function () {
+        messageElement.style.display = 'none';
+        cursorEnabled = true;
+      });
+    </script>
+  </body>
+</html>
