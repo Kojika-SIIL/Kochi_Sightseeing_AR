@@ -250,9 +250,9 @@
         stampHistory.push(feedbackImage.src);
         updateStampHistory();
 
-/*        setTimeout(function () {
+        setTimeout(function () {
           feedbackContainer.style.display = 'none';
-        }, 3000); // 3秒後にフィードバック画像を非表示にする  */
+        }, 3000); // 3秒後にフィードバック画像を非表示にする
       }
 
       function updateStampHistory() {
@@ -337,13 +337,11 @@
       
       marker01.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
-        feedbackContainer.style.display = 'none';
         cursorEnabled = true;
       });
       
       marker02.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
-        feedbackContainer.style.display = 'none';
         cursorEnabled = true;
       });
     </script>
