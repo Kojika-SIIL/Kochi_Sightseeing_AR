@@ -234,12 +234,26 @@
       var incorrectAudio = new Audio('./assets/incorrect.mp3');
       var messageElement = document.querySelector('#message');
       var stampHistory = []; // スタンプの履歴を保存する配列
+      var stampImages = {
+        quiz01: './images/yataro_iwasaki.png',  // Quiz01のスタンプ
+        quiz02: './images/stamp.png'  // Quiz02のスタンプ
+      }
 
-      function showFeedback(isCorrect) {
+      function getStampImageId(element) {
+        if (element.id === 'correct01' || element.id === 'incorrect1_01' || element.id === 'incorrect2_01') {
+          return 'quiz01';
+        } else if (element.id === 'correct02' || element.id === 'incorrect1_02' || element.id === 'incorrect2_02') {
+          return 'quiz02';
+        }
+      }
+
+      function showFeedback(isCorrect, element) {
         var feedbackImage = document.getElementById('feedbackImage');
         var feedbackContainer = document.querySelector('.feedback-image');
+        var stampImageId = getStampImageId(element);
+        
         if (isCorrect) {
-          feedbackImage.src = './images/stamp.png'; // 正解のスタンプ画像のパス
+          feedbackImage.src = stampImages[stampImageId]; // 正解のスタンプ画像のパス
         } else {
           feedbackImage.src = './images/cross.png'; // 不正解のバツ印画像のパス
         }
