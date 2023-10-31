@@ -56,6 +56,34 @@
         border: 3px solid #fff;
         display: none;
       }
+
+      .stamp-history {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        z-index: 100;
+      }
+
+      .stamp-history img {
+        width: 30px;
+        height: 30px;
+      }
+  
+      .feedback-image {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 100;
+      }
+
+      .feedback-image img {
+        width: 360px;
+        height: 360px;
+      }
     </style>
   </head>
   
@@ -67,6 +95,14 @@
     
     <!-- メッセージ表示 -->
     <div id="message"></div>
+
+    <!-- スタンプ履歴表示 -->
+    <div class="stamp-history"></div>
+
+    <!-- フィードバック画像表示 -->
+    <div class="feedback-image" style="display: none;">
+      <img id="feedbackImage" src="" alt="feedback">
+    </div>
     
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false;">
       <!-- 画像 -->
@@ -76,7 +112,6 @@
         <img id="ans01" src="./images/pencil_pink.png">
         <img id="ans02" src="./images/pencil_blue.png">
         <img id="ans03" src="./images/pencil_green.png">
-        <img id="cross" src="./images/cross.png">
       </a-assets>
       
       <!-- Quiz01 -->
@@ -148,6 +183,9 @@
     <script>
       /*----- 視点カーソル -----*/
       var cursorEnabled = true;
+
+      var marker01 = document.querySelector('#marker01');
+      var marker02 = document.querySelector('#marker02');
       
       // Quiz01
       var correct01 = document.querySelector('#correct01');
@@ -175,6 +213,18 @@
       incorrectOnHover(incorrect1_02);
       incorrectOnHover(incorrect2_02);
 
+      marker01.addEventListener('markerFound', function () {
+        // マーカーが見つかった時の処理
+        cursorEnabled = true;
+        quizNumber = 1; // marker01の場合、quizNumberを1に設定
+      });
+  
+      marker02.addEventListener('markerFound', function () {
+        // マーカーが見つかった時の処理
+        cursorEnabled = true;
+        quizNumber = 2; // marker02の場合、quizNumberを2に設定
+      });
+
       /*----- カーソルを合わせると色が変わる -----*/
       function changeColorOnHover(element) {
         let originalColor;
@@ -198,6 +248,43 @@
       var correctAudio = new Audio('./assets/correct.mp3');
       var incorrectAudio = new Audio('./assets/incorrect.mp3');
       var messageElement = document.querySelector('#message');
+      var stampHistory = []; // スタンプの履歴を保存する配列
+
+      function showFeedback(isCorrect) {
+        var feedbackImage = document.getElementById('feedbackImage');
+        var feedbackContainer = document.querySelector('.feedback-image');
+        
+        if (isCorrect) {
+          if (quizNumber === 1) {
+            feedbackImage.src = './images/yataro_iwasaki.png'; // Quiz1の正解のスタンプ画像のパス
+          } else if (quizNumber === 2) {
+            feedbackImage.src = './images/iwamon.png'; // Quiz2の正解のスタンプ画像のパス
+          } else {
+            feedbackImage.src = './images/cross.png'; // 不正解のバツ印画像のパス
+          }
+
+        feedbackContainer.style.display = 'block';
+
+        // スタンプの履歴に追加
+        stampHistory.push(feedbackImage.src);
+        updateStampHistory();
+
+        setTimeout(function () {
+          feedbackContainer.style.display = 'none';
+        }, 3000); // 3秒後にフィードバック画像を非表示にする
+      }
+
+      function updateStampHistory() {
+        var stampHistoryContainer = document.querySelector('.stamp-history');
+        stampHistoryContainer.innerHTML = ''; // スタンプ履歴をクリア
+
+        // スタンプの履歴を表示
+        stampHistory.forEach(function (stamp) {
+          var stampImg = document.createElement('img');
+          stampImg.src = stamp;
+          stampHistoryContainer.appendChild(stampImg);
+        });
+      }
 
       /* 正解の場合 */
       function correctOnHover(element) {
@@ -210,6 +297,7 @@
               updateScoreDisplay();
               correctAudio.play();
               showMessage('正解！！ 10ptゲット！', true);
+              showFeedback(true); // 正解のフィードバック画像を表示
               cursorEnabled = false; // カーソルの反応を無効化
             }, 3000); // 3秒後にスコアを増加, 正解音再生, メッセージ表示
           }
@@ -237,6 +325,7 @@
             timer = setTimeout(function () {
               incorrectAudio.play();
               showMessage('ざんねん！！', false);
+              showFeedback(false); // 不正解のフィードバック画像を表示
               cursorEnabled = false; // カーソルの反応を無効化
             }, 3000); // 3秒後に不正解音を再生, メッセージ表示
           }
@@ -262,9 +351,6 @@
       }
 
       // メッセージを非表示にする
-      var marker01 = document.querySelector('#marker01');
-      var marker02 = document.querySelector('#marker02');
-      
       marker01.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
         cursorEnabled = true;
