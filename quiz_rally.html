@@ -107,7 +107,6 @@
         <img id="ans01" src="./images/pencil_pink.png">
         <img id="ans02" src="./images/pencil_blue.png">
         <img id="ans03" src="./images/pencil_green.png">
-        <img id="cross" src="./images/cross.png">
       </a-assets>
       
       <!-- Quiz01 -->
@@ -237,7 +236,7 @@
         if (isCorrect) {
           feedbackImage.src = './images/stamp.png'; // 正解のスタンプ画像のパス
         } else {
-          feedbackImage.src = '#cross'; // 不正解のバツ印画像のパス
+          feedbackImage.src = './images/cross.png'; // 不正解のバツ印画像のパス
         }
 
         feedbackContainer.style.display = 'block';
@@ -246,9 +245,9 @@
         stampHistory.push(feedbackImage.src);
         updateStampHistory();
 
-        setTimeout(function () {
+/*        setTimeout(function () {
           feedbackContainer.style.display = 'none';
-        }, 3000); // 3秒後にフィードバック画像を非表示にする
+        }, 3000); // 3秒後にフィードバック画像を非表示にする  */
       }
 
       function updateStampHistory() {
@@ -333,11 +332,13 @@
       
       marker01.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
+        feedbackContainer.style.display = 'none';
         cursorEnabled = true;
       });
       
       marker02.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
+        feedbackContainer.style.display = 'none';
         cursorEnabled = true;
       });
     </script>
