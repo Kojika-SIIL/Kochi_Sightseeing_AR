@@ -259,9 +259,10 @@
             feedbackImage.src = './images/yataro_iwasaki.png'; // Quiz1の正解のスタンプ画像のパス
           } else if (quizNumber === 2) {
             feedbackImage.src = './images/iwamon.png'; // Quiz2の正解のスタンプ画像のパス
-          } else {
-            feedbackImage.src = './images/cross.png'; // 不正解のバツ印画像のパス
           }
+        } else {
+          feedbackImage.src = './images/cross.png'; // 不正解のバツ印画像のパス
+        }
 
         feedbackContainer.style.display = 'block';
 
