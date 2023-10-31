@@ -183,6 +183,9 @@
     <script>
       /*----- 視点カーソル -----*/
       var cursorEnabled = true;
+
+      var marker01 = document.querySelector('#marker01');
+      var marker02 = document.querySelector('#marker02');
       
       // Quiz01
       var correct01 = document.querySelector('#correct01');
@@ -209,6 +212,16 @@
       correctOnHover(correct02);
       incorrectOnHover(incorrect1_02);
       incorrectOnHover(incorrect2_02);
+
+      marker01.addEventListener('markerFound', function () {
+        // マーカーが見つかった時の処理
+        quizNumber = 1; // marker01の場合、quizNumberを1に設定
+      });
+  
+      marker02.addEventListener('markerFound', function () {
+        // マーカーが見つかった時の処理
+        quizNumber = 2; // marker02の場合、quizNumberを2に設定
+      });
 
       /*----- カーソルを合わせると色が変わる -----*/
       function changeColorOnHover(element) {
@@ -240,7 +253,11 @@
         var feedbackContainer = document.querySelector('.feedback-image');
         
         if (isCorrect) {
-          feedbackImage.src = './images/yataro_iwasaki.png'; // 正解のスタンプ画像のパス
+          if (quizNumber === 1) {
+            feedbackImage.src = './images/yataro_iwasaki.png'; // Quiz1の正解のスタンプ画像のパス
+          } else if (quizNumber === 2) {
+            feedbackImage.src = './images/iwamon.png'; // Quiz2の正解のスタンプ画像のパス
+          }
         } else {
           feedbackImage.src = './images/cross.png'; // 不正解のバツ印画像のパス
         }
@@ -280,7 +297,15 @@
               correctAudio.play();
               showMessage('正解！！ 10ptゲット！', true);
               showFeedback(true); // 正解のフィードバック画像を表示
-              cursorEnabled = false; // カーソルの反応を無効化
+              if (quizNumber === 1) {
+                marker01.addEventListener('mouseenter', function () {
+                  cursorEnabled = false; // カーソルの反応を無効化
+                }
+              } else if (quizNumber === 2) {
+                marker02.addEventListener('mouseenter', function () {
+                  cursorEnabled = false; // カーソルの反応を無効化
+                }
+              }
             }, 3000); // 3秒後にスコアを増加, 正解音再生, メッセージ表示
           }
         });
@@ -333,17 +358,12 @@
       }
 
       // メッセージを非表示にする
-      var marker01 = document.querySelector('#marker01');
-      var marker02 = document.querySelector('#marker02');
-      
       marker01.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
-        cursorEnabled = true;
       });
       
       marker02.addEventListener('markerLost', function () {
         messageElement.style.display = 'none';
-        cursorEnabled = true;
       });
     </script>
   </body>
