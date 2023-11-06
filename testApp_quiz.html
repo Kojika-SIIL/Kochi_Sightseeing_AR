@@ -116,12 +116,14 @@
       
       <!-- Quiz01 -->
       <a-marker preset="hiro" id="marker01">
+        <a-entity geometry="primitive: plane; width: 5; height: 2"
+          material="src: #quiz; shader: flat; transparent: true"
+          position="0 1.5 -7"></a-entity>
         <a-text id="quiz01" value="Q01\n高知県出身の人物は?"
           font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
           font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
           negate="false"
-          material="src: #quiz; shader: flat; transparent: true; side: double"
-          align="center" position="0 1.5 -7" color="#ffffff" geometry="primitive: plane; width: 5"></a-text>
+          align="center" position="0 1.5 -7" color="#ffffff"></a-text>
         <a-text id="incorrect1_01" value="1. 勝海舟"
           font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
           font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
