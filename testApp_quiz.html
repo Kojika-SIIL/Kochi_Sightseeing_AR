@@ -133,18 +133,24 @@
           font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
           negate="false"
           align="center" position="0 -1 -7" color="#c71585"></a-text>
-        <a-text id="correct01" value="2. 岩崎弥太郎"
-          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
-          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
-          negate="false"
+        <a-entity id="correct01"
+          geometry="primitive: plane; width: 4.5; height: 1"
           material="src: #ans02; shader: flat; transparent: true; opacity: 0.8"
-          align="center" position="0 -2.5 -7" color="#4169e1" geometry="primitive: plane; width: 4"></a-text>
-        <a-text id="incorrect2_01" value="3. 真田幸村"
+          position="0 -2.5 -7.1"></a-entity>
+        <a-text value="2. 岩崎弥太郎"
           font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
           font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
           negate="false"
+          align="center" position="0 -2.5 -7" color="#4169e1"></a-text>
+        <a-entity id="incorrect2_01"
+          geometry="primitive: plane; width: 4.5; height: 1"
           material="src: #ans03; shader: flat; transparent: true; opacity: 0.8"
-          align="center" position="0 -4 -7" color="#008000" geometry="primitive: plane; width: 4"></a-text>
+          position="0 -4 -7.1"></a-entity>
+        <a-text value="3. 真田幸村"
+          font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
+          font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
+          negate="false"
+          align="center" position="0 -4 -7" color="#008000"></a-text>
       </a-marker>
       
       <!-- Quiz02 -->
