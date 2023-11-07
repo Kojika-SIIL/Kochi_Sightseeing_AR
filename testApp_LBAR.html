@@ -235,7 +235,7 @@
     <script>
       window.addEventListener('load', function () {
         const el = document.querySelector('[gps-entity-place]');
-        const distanceMsg = document.getElementById('distValue');
+        const distanceMsg = document.getElementById('distance');
         const message = document.getElementById('message');
         const directionLight = document.getElementById('directionLight');
         const ambientLight = document.getElementById('ambientLight');
@@ -247,7 +247,7 @@
         }
          
         el.addEventListener('gps-entity-place-update-position', (event) => {
-          distanceMsg.textContent = roundToInteger(event.detail.distance);
+          document.getElementById('distValue').textContent = roundToInteger(event.detail.distance);
           if (event.detail.distance <= 20) {
             // 20m以下で明るくする
             directionLight.setAttribute('intensity', 1);
