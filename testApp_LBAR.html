@@ -66,18 +66,31 @@
       * {
         box-sizing: border-box;
       }
-      #score {
+      /* 距離の表示 */
+      #distance {
         position: fixed;
         z-index: 10000;
-        background-color: rgba(0,0,0,.8);
+        background-color: rgba(0, 0, 0, 0.5);
         color: #fff;
         text-align: center;
-        padding: 10px;
+        padding: 20px;
         top: 10px;
-        left: 5%;
-        width: 90%;
-        display: block;
+        right: 10px;
+        width: 70px;
+        height: 70px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
       }
+      
+      #distValue {
+        font-size: 36px;
+        font-weight: bold;
+      }
+
+      /* メッセージの表示 */
       body {
         margin: 0;
       }
@@ -152,7 +165,12 @@
   </head>
 
   <body style="margin: 0; overflow: hidden;">
-    <div id="score">Loading...</div>
+    <!-- 距離の表示 -->
+    <div id="distance">
+      <div>あと<br><span id="distValue">0</span>m</div>
+    </div>
+
+    <!-- メッセージ表示 -->
     <div id="message">
       AR掩体壕(えんたいごう)
     </div>
@@ -232,12 +250,13 @@
         const message = document.getElementById('message');
         const directionLight = document.getElementById('directionLight');
         const ambientLight = document.getElementById('ambientLight');
-        const scoreMsg = document.getElementById('score');
         const audio = new Audio('./assets/helicopter.mp3');
         audio.loop = true;
-        let score = parseInt(sessionStorage.getItem('score')) || 0;
 
         el.addEventListener('gps-entity-place-update-position', (event) => {
+          var distance = event.detail.distance;
+          var intDistance = parseInt(distance);
+          document.getElementById('distValue').textContent = intDistance;
           if (event.detail.distance <= 20) {
             // 20m以下で明るくする
             directionLight.setAttribute('intensity', 1);
@@ -263,8 +282,6 @@
             audio.pause();
           }
         });
-
-        scoreMsg.textContent = 'Score: ' + score;
       });
     </script>
     <script type="text/javascript" src="./js/snapshot.js"></script>
