@@ -13,11 +13,7 @@
         init: function () {
           var el = this.el;
           var message = document.getElementById('message');
-          var scoreMsg = document.getElementById('score');
-          var score = parseInt(sessionStorage.getItem('score')) || 0;
-          var scoreFlag = false;
           var cursorAudio = new Audio('./assets/cursor5.mp3');
-          var scoreAudio = new Audio('./assets/GameScore.mp3');
 
           var mouseenterListener = function () {
             // ここにイベント発生時の処理を追加する
@@ -32,13 +28,6 @@
               loop: true
             });
           */  
-            if (!scoreFlag) {
-              score += 10;
-              scoreMsg.textContent = 'Score: ' + score;
-              sessionStorage.setItem('score', score.toString());
-              scoreFlag = true;
-              scoreAudio.play();
-            }
           };
 
           el.addEventListener('gps-entity-place-update-position', function (event) {
