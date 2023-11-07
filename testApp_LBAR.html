@@ -172,16 +172,16 @@
       <!-- カーソルと3Dモデルの読み込み -->
       <a-assets>
         <img id="cursor" src="./images/cursor_scope.png">
-        <a-asset-item id="obj" src="./model/Kochiyan.obj"></a-asset-item>
-        <a-asset-item id="mtl" src="./model/Kochiyan.mtl"></a-asset-item>
+        <a-asset-item id="obj" src="./model/3133.obj"></a-asset-item>
+        <a-asset-item id="mtl" src="./model/3133.mtl"></a-asset-item>
       </a-assets>
       
       <!-- Labo -->
       <a-entity
         gps-entity-place="latitude: 33.548645891279065; longitude: 133.6806812626101;"
         obj-model="obj: #obj; mtl: #mtl"
-        scale="0.05 0.05 0.05"
-        rotation="-90 -90 0"
+        scale="0.001 0.001 0.001"
+        rotation="0 0 0"
         look-at="[gps-camera]"
         cursor-listener
       ></a-entity>
