@@ -247,37 +247,33 @@
         }
          
         el.addEventListener('gps-entity-place-update-position', (event) => {
-          if (event.detail.distance !== null) {
-            distanceMsg.textContent = roundToInteger(event.detail.distance);
-            if (event.detail.distance <= 20) {
-              // 20m以下で明るくする
-              directionLight.setAttribute('intensity', 1);
-              ambientLight.setAttribute('intensity', 1);
-              distanceMsg.style.display = 'none';
-              message.style.display = 'block';
-              el.setAttribute('cursor-listener', '');
-              audio.volume = 1;
-              audio.play();
-            } else if (event.detail.distance <= 50) {
-              // 50m以下で近づくほど明るくする
-              directionLight.setAttribute('intensity', 1 - event.detail.distance / 50);
-              ambientLight.setAttribute('intensity', 1 - event.detail.distance / 50);
-              distanceMsg.style.display = 'block';
-              message.style.display = 'none';
-              el.removeAttribute('cursor-listener');
-              audio.volume = intensity;
-              audio.play();
-            } else {
-              // 50mより離れると明るさ0
-              directionLight.setAttribute('intensity', 0);
-              ambientLight.setAttribute('intensity', 0);
-              distanceMsg.style.display = 'none';
-              message.style.display = 'none';
-              el.removeAttribute('cursor-listener');
-              audio.pause();
-            }
-          } else {
+          distanceMsg.textContent = roundToInteger(event.detail.distance);
+          if (event.detail.distance <= 20) {
+            // 20m以下で明るくする
+            directionLight.setAttribute('intensity', 1);
+            ambientLight.setAttribute('intensity', 1);
             distanceMsg.style.display = 'none';
+            message.style.display = 'block';
+            el.setAttribute('cursor-listener', '');
+            audio.volume = 1;
+            audio.play();
+          } else if (event.detail.distance <= 50) {
+            // 50m以下で近づくほど明るくする
+            directionLight.setAttribute('intensity', 1 - event.detail.distance / 50);
+            ambientLight.setAttribute('intensity', 1 - event.detail.distance / 50);
+            distanceMsg.style.display = 'block';
+            message.style.display = 'none';
+            el.removeAttribute('cursor-listener');
+            audio.volume = intensity;
+            audio.play();
+          } else {
+            // 50mより離れると明るさ0
+            directionLight.setAttribute('intensity', 0);
+            ambientLight.setAttribute('intensity', 0);
+            distanceMsg.style.display = 'none';
+            message.style.display = 'none';
+            el.removeAttribute('cursor-listener');
+            audio.pause();
           }
         });
       });
