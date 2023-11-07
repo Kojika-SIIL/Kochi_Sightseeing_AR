@@ -7,7 +7,7 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-    <script>
+    <!--script>
       AFRAME.registerComponent('cursor-listener', {
         init: function () {
           var el = this.el; 
@@ -26,7 +26,7 @@
           });
         }
       });
-    </script>
+  </script-->
   </head>
   <body>
     <a-scene
@@ -36,41 +36,40 @@
     >
       <a-assets>
         <img id="cursor" src="./images/cursor_scope.png">
+        <!--
         <a-asset-item id="obj1" src="./model/3133.obj"></a-asset-item>
         <a-asset-item id="mtl1" src="./model/3133.mtl"></a-asset-item>
-        <!--
+        -->
         <a-asset-item id="obj2" src="./model/Kochiyan.obj"></a-asset-item>
         <a-asset-item id="mtl2" src="./model/Kochiyan.mtl"></a-asset-item>
-        -->
+        
       </a-assets>
-      <a-entity
+      <!--a-entity
         obj-model="obj: #obj1; mtl: #mtl1"
         position="0 -1 -10"
         scale="0.001 0.001 0.001"
         rotation="0 0 0"
         cursor-listener
-      ></a-entity>
-      <!--a-entity
+      ></a-entity-->
+      <a-entity
         obj-model="obj: #obj2; mtl: #mtl2"
         position="0 -1 -10"
         scale="0.05 0.05 0.05"
         rotation="-90 -90 0"
         cursor-listener
-      ></a-entity-->
+      ></a-entity>
       <a-entity camera look-controls wasd-controls>
-        <a-entity cursor="fuse: true"
+        <!--a-entity cursor="fuse: true"
           position="0 0 -3"
           geometry="primitive: ring; radiusInner: 0.1; radiusOuter: 0.15"
           material="color: #acacac; shader: flat; opacity: 0.6">
-        </a-entity>
-      </a-entity>
-      <!--a-entity camera look-controls wasd-controls>
+        </a-entity-->
         <a-entity cursor="fuse: true;"
           position="0 0 -3"
-          geometry="primitive: circle; radius: 0.1"
+          geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.1"
           material="src: #cursor; shader: flat; transparent: true">
         </a-entity>
-      </a-entity-->
+      </a-entity>
       <!--a-box
         id="box"
         geometry="primitive: box"
