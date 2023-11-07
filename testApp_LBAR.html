@@ -24,14 +24,14 @@
             message.style.display = 'block';
             cursorAudio.play();
 
-            el.setAttribute('animation', {
+          /*  el.setAttribute('animation', {
               property: 'rotation',
               to: '0 360 0',
               dur: 2000,
               easing: 'linear',
               loop: true
             });
-            
+          */  
             if (!scoreFlag) {
               score += 10;
               scoreMsg.textContent = 'Score: ' + score;
@@ -46,7 +46,7 @@
               el.addEventListener('mouseenter', mouseenterListener);
               el.addEventListener('mouseleave', function () {
                 message.style.display = 'none';
-                el.removeAttribute('animation');
+              //  el.removeAttribute('animation');
               });
             } else {
               el.removeEventListener('mouseenter', mouseenterListener); // イベントリスナーを削除する
@@ -177,7 +177,6 @@
         rotation="0 0 0"
         look-at="[gps-camera]"
         cursor-listener
-        animation-mixer
       ></a-entity>
       
       <!-- Park -->
