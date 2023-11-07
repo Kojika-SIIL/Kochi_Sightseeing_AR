@@ -242,8 +242,12 @@
         const audio = new Audio('./assets/helicopter.mp3');
         audio.loop = true;
 
+        function roundToInteger(value) {
+          return Math.round(value);
+        }
+         
         el.addEventListener('gps-entity-place-update-position', (event) => {
-          distanceMsg.textContent = parseInt(event.detail.distance);
+          distanceMsg.textContent = roundToInteger(event.detail.distance);
           if (event.detail.distance <= 20) {
             // 20m以下で明るくする
             directionLight.setAttribute('intensity', 1);
