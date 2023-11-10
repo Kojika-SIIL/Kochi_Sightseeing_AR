@@ -118,39 +118,39 @@
       <a-marker type="pattern" url="./images/marker/pattern-iwamon.patt" id="marker01">
         <a-entity id="quiz01" geometry="primitive: plane; width: 5; height: 1.5"
           material="src: #quiz; shader: flat; transparent: true"
-          position="0 -3 -9" rotation="-90 0 0"></a-entity>
+          position="0 -3 -2.5" rotation="-90 0 0"></a-entity>
         <a-text value="Q01\n情報セキュリティコースのコース長は誰?"
           font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
           font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
           negate="false"
-          align="center" position="0 -2.9 -9" rotation="-90 0 0" color="#ffffff"></a-text>
+          align="center" position="0 -2.9 -2.4" rotation="-90 0 0" color="#ffffff"></a-text>
         <a-entity id="incorrect1_01"
           geometry="primitive: plane; width: 4.5; height: 1"
           material="src: #ans01; shader: flat; transparent: true; opacity: 0.8"
-          position="0 -3 -6.5" rotation="-90 0 0"></a-entity>
+          position="0 -3 0" rotation="-90 0 0"></a-entity>
         <a-text value="1. ウラヤマ"
           font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
           font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
           negate="false"
-          align="center" position="0 -2.9 -6.5" rotation="-90 0 0" color="#c71585"></a-text>
+          align="center" position="0 -2.9 -0.1" rotation="-90 0 0" color="#c71585"></a-text>
         <a-entity id="correct01"
           geometry="primitive: plane; width: 4.5; height: 1"
           material="src: #ans02; shader: flat; transparent: true; opacity: 0.8"
-          position="0 -3 -4"></a-entity>
+          position="0 -3 -1.5" rotation="-90 0 0"></a-entity>
         <a-text value="2. タテカワ"
           font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
           font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
           negate="false"
-          align="center" position="0 -2.9 -4" color="#4169e1"></a-text>
+          align="center" position="0 -2.9 -1.4" rotation="-90 0 0" color="#4169e1"></a-text>
         <a-entity id="incorrect2_01"
           geometry="primitive: plane; width: 4.5; height: 1"
           material="src: #ans03; shader: flat; transparent: true; opacity: 0.8"
-          position="0 -3 -3.5" rotation="-90 0 0"></a-entity>
+          position="0 -3 -3" rotation="-90 0 0"></a-entity>
         <a-text value="3. イワサキ"
           font="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.json"
           font-image="./fonts/noto-sans-cjk-jp/noto-sans-cjk-jp-msdf.png"
           negate="false"
-          align="center" position="0 -2.9 -3.5" rotation="-90 0 0" color="#008000"></a-text>
+          align="center" position="0 -2.9 -3.1" rotation="-90 0 0" color="#008000"></a-text>
       </a-marker>
       
       <!-- Quiz02 -->
@@ -234,7 +234,7 @@
       <a-entity camera look-controls wasd-controls>
         <!-- カーソルの表示 -->
         <a-entity cursor="fuse: true;"
-          position="0 0 -3"
+          position="0 -2 0" rotation="-90 0 0"
           geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.1"
           material="src: #cursor; shader: flat; transparent: true">
         </a-entity>
