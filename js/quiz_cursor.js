@@ -73,17 +73,6 @@ marker03.addEventListener('markerFound', function () {
   }
 });
 
-// ハズレマーカーの処理
-var missMessage = "ハズレ.  No quiz here."
-
-marker04.addEventListener('markerFound', function () {
-  showMessage(missMessage, false);
-});
-
-marker05.addEventListener('markerFound', function () {
-  showMessage(missMessage, false);
-});
-
 /*----- カーソルを合わせると色が変わる -----*/
 function changeColorOnHover(element) {
   let originalColor;
@@ -236,13 +225,5 @@ marker02.addEventListener('markerLost', function () {
 });
 
 marker03.addEventListener('markerLost', function () {
-  messageElement.style.display = 'none';
-});
-
-marker04.addEventListener('markerLost', function () {
-  messageElement.style.display = 'none';
-});
-
-marker05.addEventListener('markerLost', function () {
   messageElement.style.display = 'none';
 });
