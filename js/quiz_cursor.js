@@ -7,6 +7,8 @@ var quiz03Answered = false;
 var marker01 = document.querySelector('#marker01');
 var marker02 = document.querySelector('#marker02');
 var marker03 = document.querySelector('#marker03');
+var marker04 = document.querySelector('#marker04');
+var marker05 = document.querySelector('#marker05');
       
 // Quiz01
 var correct01 = document.querySelector('#correct01');
@@ -69,6 +71,17 @@ marker03.addEventListener('markerFound', function () {
     cursorEnabled = true;
     quizNumber = 3; // marker03の場合、quizNumberを3に設定
   }
+});
+
+// ハズレマーカーの処理
+var missMessage = "ハズレ.  No quiz here."
+
+marker04.addEventListener('markerFound', function () {
+  showMessage(missMessage, false);
+});
+
+marker05.addEventListener('markerFound', function () {
+  showMessage(missMessage, false);
 });
 
 /*----- カーソルを合わせると色が変わる -----*/
@@ -223,5 +236,13 @@ marker02.addEventListener('markerLost', function () {
 });
 
 marker03.addEventListener('markerLost', function () {
+  messageElement.style.display = 'none';
+});
+
+marker04.addEventListener('markerLost', function () {
+  messageElement.style.display = 'none';
+});
+
+marker05.addEventListener('markerLost', function () {
   messageElement.style.display = 'none';
 });
