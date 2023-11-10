@@ -102,7 +102,7 @@ function showFeedback(isCorrect) {
         
   if (isCorrect) {
     if (quizNumber === 1) {
-      feedbackImage.src = './images/stamp/yataro_iwasaki.png'; // Quiz1の正解のスタンプ画像のパス
+      feedbackImage.src = './images/stamp/computer_dog.png'; // Quiz1の正解のスタンプ画像のパス
     } else if (quizNumber === 2) {
       feedbackImage.src = './images/stamp/yosakoi_naruko.png'; // Quiz2の正解のスタンプ画像のパス
     } else if (quizNumber === 3) {
