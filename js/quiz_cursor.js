@@ -81,6 +81,11 @@ marker03.addEventListener('markerFound', function () {
   }
 });
 
+testMarker.addEventListener('markerFound', function () {
+  // マーカーが見つかった時の処理
+  cursorEnabled = true;
+});
+
 /*----- カーソルを合わせると色が変わる -----*/
 function changeColorOnHover(element) {
   let originalColor;
