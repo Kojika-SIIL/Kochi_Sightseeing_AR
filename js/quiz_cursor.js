@@ -6,7 +6,7 @@ var quiz03Answered = false;
 
 var marker01 = document.querySelector('#marker01');
 var marker02 = document.querySelector('#marker02');
-var testMarker = document.querySelector('#testMarker');
+var marker03 = document.querySelector('#marker03');
       
 // Quiz01
 var correct01 = document.querySelector('#correct01');
@@ -47,15 +47,6 @@ correctOnHover(correct03);
 incorrectOnHover(incorrect1_03);
 incorrectOnHover(incorrect2_03);
 
-// Test Marker
-var testAns01 = document.querySelector('#testAns01');
-var testans02 = document.querySelector('#testAns02');
-var testans03 = document.querySelector('#testAns03');
-
-changeColorOnHover(testAns01);
-changeColorOnHover(testAns02);
-changeColorOnHover(testAns03);
-
 
 marker01.addEventListener('markerFound', function () {
   if (!quiz01Answered) {
@@ -79,11 +70,6 @@ marker03.addEventListener('markerFound', function () {
     cursorEnabled = true;
     quizNumber = 3; // marker03の場合、quizNumberを3に設定
   }
-});
-
-testMarker.addEventListener('markerFound', function () {
-  // マーカーが見つかった時の処理
-  cursorEnabled = true;
 });
 
 /*----- カーソルを合わせると色が変わる -----*/
