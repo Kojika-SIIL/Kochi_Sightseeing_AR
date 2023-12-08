@@ -223,6 +223,13 @@
             cursorAudio.play();
             // メッセージを表示
             showMessage(element);
+            // 回転のアニメーション(3秒)
+            el.setAttribute('animation', {
+              property: 'rotation',
+              to: '0 360 0',
+              dur: 3000,
+              easing: 'linear'
+            });
           }
         });
 
