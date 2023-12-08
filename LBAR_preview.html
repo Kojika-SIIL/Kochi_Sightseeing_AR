@@ -144,6 +144,21 @@
         look-at="[gps-camera]"
       ></a-entity>
 
+      <!-- 位置情報による明るさの設定(ライト) -->
+      <a-light
+        id="directionLight"
+        type="directional"
+        color="#FFF"
+        intensity="0"
+        position="-1 1 2">
+      </a-light>
+      <a-light
+        id="ambientLight"
+        type="ambient"
+        intensity="0"
+        color="#FFF">
+      </a-light>
+
       <a-camera gps-camera="minDistance:10; maxDistance:50">
         <!-- カーソルの表示 -->
         <a-entity cursor="fuse: true;"
@@ -166,6 +181,8 @@
       var distanceMsg = document.getElementById('distance');
       var distanceValue = document.getElementById('distValue');
       var message = document.getElementById('message');
+      var directionLight = document.getElementById('directionLight');
+      var ambientLight = document.getElementById('ambientLight');
       var cursorAudio = new Audio('./assets/cursor5.mp3');
       var cursorEnabled = false;
 
@@ -176,16 +193,22 @@
         distanceValue.textContent = Math.round(event.detail.distance);
         if (event.detail.distance <= 20) {
           // 20m以下のとき
+          directionLight.setAttribute('intensity', 1);
+          ambientLight.setAttribute('intensity', 1);
           cursorEnabled = true;
           distanceMsg.style.display = 'block';
           cursorListener(entaigo);
         } else if (event.detail.distance <= 50) {
           // 50m以下のとき
+          directionLight.setAttribute('intensity', 1 - event.detail.distance / 50);
+          ambientLight.setAttribute('intensity', 1 - event.detail.distance / 50);
           cursorEnabled = false;
           distanceMsg.style.display = 'block';
           message.style.display = 'none';
         } else {
           // 50mより離れたとき
+          directionLight.setAttribute('intensity', 0);
+          ambientLight.setAttribute('intensity', 0);
           cursorEnabled = false;
           distanceMsg.style.display = 'block';
           message.style.display = 'none';
