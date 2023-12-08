@@ -121,7 +121,7 @@
     </div>
 
     <!-- メッセージ表示 -->
-    <div id="message">AR戦闘機 (@前浜掩体壕)</div>
+    <div id="message"></div>
 
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false;">
       <!-- カーソルと3Dモデルの読み込み -->
@@ -196,7 +196,7 @@
             // カーソルの効果音を再生
             cursorAudio.play();
             // メッセージを表示
-            message.style.display = 'block';
+            showMessage(element);
           }
         });
 
@@ -206,6 +206,14 @@
             message.style.display = 'none';
           }
         });
+      }
+
+      /*----- メッセージの表示に関する処理 -----*/
+      function showMessage(element) {
+        if (element == entaigo) {
+          message.textContent = 'AR戦闘機 (掩体壕)';
+        }
+        message.style.display = 'block';
       }
     </script>
     <script type="text/javascript" src="./js/snapshot.js"></script>
