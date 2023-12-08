@@ -235,6 +235,8 @@
           if (cursorEnabled) {
             // メッセージ非表示
             message.style.display = 'none';
+            // アニメーションの中断
+            el.removeAttribute('animation');
           }
         });
       }
