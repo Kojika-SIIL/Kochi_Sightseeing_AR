@@ -123,7 +123,10 @@
     <!-- メッセージ表示 -->
     <div id="message"></div>
 
-    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false;">
+    <a-scene
+      vr-mode-ui="enabled: false"
+      arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
+    >
       <!-- カーソルと3Dモデルの読み込み -->
       <a-assets>
         <img id="cursor" src="./images/cursor_scope.png">
