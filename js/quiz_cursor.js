@@ -67,22 +67,17 @@ function changeColorOnHover(element) {
     originalColor  = element.getAttribute('material').color;
     if (cursorEnabled) {
       element.setAttribute('material', 'color: #f0e68c');
+      if (element === correct01 || element === correct02 || element === correct03) {
+        correctOnHover(element);
+      } else {
+        incorrectOnHover(element);
+      }
     }
   });
 
   element.addEventListener('mouseleave', function () {
     if (cursorEnabled) {
       element.setAttribute('material', 'color: ' + originalColor);
-    }
-  });
-
-  element.addEventListener('click', function () {
-    if (cursorEnabled) {
-      if (element === correct01 || element === correct02 || element === correct03) {
-        correctOnHover(element);
-      } else {
-        incorrectOnHover(element);
-      }
     }
   });
 }
