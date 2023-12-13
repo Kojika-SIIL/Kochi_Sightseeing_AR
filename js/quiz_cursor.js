@@ -17,6 +17,10 @@ changeColorOnHover(correct01);
 changeColorOnHover(incorrect1_01);
 changeColorOnHover(incorrect2_01);
 
+correctOnHover(correct01);
+incorrectOnHover(incorrect1_01);
+incorrectOnHover(incorrect2_01);
+
 // Quiz02
 var correct02 = document.querySelector('#correct02');
 var incorrect1_02 = document.querySelector('#incorrect1_02');
@@ -26,6 +30,10 @@ changeColorOnHover(correct02);
 changeColorOnHover(incorrect1_02);
 changeColorOnHover(incorrect2_02);
 
+correctOnHover(correct02);
+incorrectOnHover(incorrect1_02);
+incorrectOnHover(incorrect2_02);
+
 // Quiz03
 var correct03 = document.querySelector('#correct03');
 var incorrect1_03 = document.querySelector('#incorrect1_03');
@@ -34,6 +42,10 @@ var incorrect2_03 = document.querySelector('#incorrect2_03');
 changeColorOnHover(correct03);
 changeColorOnHover(incorrect1_03);
 changeColorOnHover(incorrect2_03);
+
+correctOnHover(correct03);
+incorrectOnHover(incorrect1_03);
+incorrectOnHover(incorrect2_03);
 
 
 marker01.addEventListener('markerFound', function () {
@@ -75,13 +87,6 @@ function changeColorOnHover(element) {
       element.setAttribute('material', 'color: ' + originalColor);
     }
   });
-
-  element.addEventListener('click', function () {
-    if (cursorEnabled) {
-      cursorEnabled = false;
-      handleTap(element);
-    }
-  });
 }
       
 /*----- 正解・不正解の処理 -----*/
@@ -92,7 +97,6 @@ var incorrectAudio = new Audio('./assets/incorrect.mp3');
 var messageElement = document.querySelector('#message');
 var stampHistory = []; // スタンプの履歴を保存する配列
 
-/* スタンプの表示に関する処理 */
 function showFeedback(isCorrect) {
   var feedbackImage = document.getElementById('feedbackImage');
   var feedbackContainer = document.querySelector('.feedback-image');
@@ -120,7 +124,6 @@ function showFeedback(isCorrect) {
   }, 3000); // 3秒後にフィードバック画像を非表示にする
 }
 
-/* 獲得したスタンプの履歴 */
 function updateStampHistory() {
   var stampHistoryContainer = document.querySelector('.stamp-history');
   stampHistoryContainer.innerHTML = ''; // スタンプ履歴をクリア
@@ -133,30 +136,70 @@ function updateStampHistory() {
   });
 }
 
-/* 解答を確定したときの処理 */
-function handleTap(element) {
-  if (isCorrectAns(element)) {
-    // 正解の場合
-    score += 10;
-    updateScoreDisplay();
-    correctAudio.play();
-    showMessage('正解！！ 10ptゲット！', true);
-    showFeedback(true); // 正解のフィードバック画像を表示
-  } else {
-    // 不正解の場合
-    incorrectAudio.play();
-    showMessage('ざんねん！！', false);
-    showFeedback(false);
-  }
+/* 正解の場合 */
+function correctOnHover(element) {
+  var timer = null;
 
-  // 解答済に設定
-  setAnswered();
+  element.addEventListener('mouseenter', function () {
+    if (cursorEnabled) {
+      timer = setTimeout(function () {
+        score += 10;
+        updateScoreDisplay();
+        correctAudio.play();
+        showMessage('正解！！ 10ptゲット！', true);
+        showFeedback(true); // 正解のフィードバック画像を表示
+        cursorEnabled = false; // カーソルの反応を無効化
+        if (quizNumber === 1) {
+          quiz01Answered = true;  // 解答済に設定
+        } else if (quizNumber === 2) {
+          quiz02Answered = true;
+        } else if (quizNumber === 3) {
+          quiz03Answered = true;
+        }
+      }, 3000); // 3秒後にスコアを増加, 正解音再生, メッセージ表示
+    }
+  });
+
+  element.addEventListener('mouseleave', function () {
+    if (timer !== null) {
+      clearTimeout(timer); // タイマーをクリア
+    }
+  });
 }
 
-/* スコア表示を更新する処理 */
+// スコア表示を更新する処理
 function updateScoreDisplay() {
   var scoreValueElement = document.querySelector('#scoreValue');
   scoreValueElement.textContent = score;
+}
+      
+/* 不正解の場合 */
+function incorrectOnHover(element) {
+  var timer = null;
+
+  element.addEventListener('mouseenter', function () {
+    if (cursorEnabled) {
+      timer = setTimeout(function () {
+        incorrectAudio.play();
+        showMessage('ざんねん！！', false);
+        showFeedback(false); // 不正解のフィードバック画像を表示
+        cursorEnabled = false; // カーソルの反応を無効化
+        if (quizNumber === 1) {
+          quiz01Answered = true;  // 解答済に設定
+        } else if (quizNumber === 2) {
+          quiz02Answered = true;
+        } else if (quizNumber === 3) {
+          quiz03Answered = true;
+        }
+      }, 3000); // 3秒後に不正解音を再生, メッセージ表示
+    }
+  });
+
+  element.addEventListener('mouseleave', function () {
+    if (timer !== null) {
+      clearTimeout(timer); // タイマーをクリア
+    }
+  });
 }
 
 /* メッセージの表示に関する処理 */
@@ -183,20 +226,3 @@ marker02.addEventListener('markerLost', function () {
 marker03.addEventListener('markerLost', function () {
   messageElement.style.display = 'none';
 });
-
-
-/* 正解・不正解の判定 */
-function isCorrectAns(element) {
-  return element === correct01 || element === correct02 || element === correct03;
-}
-
-/* 解答済の設定 */
-function setAnswered() {
-  if (quizNumber === 1) {
-    quiz01Answered = true;
-  } else if (quizNumber === 2) {
-    quiz02Answered = true;
-  } else if (quizNumber === 3) {
-    quiz03Answered = true;
-  }
-}
