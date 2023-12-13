@@ -35,7 +35,7 @@ changeColorOnHover(correct03);
 changeColorOnHover(incorrect1_03);
 changeColorOnHover(incorrect2_03);
 
-
+/*----- クイズ番号の設定 -----*/
 marker01.addEventListener('markerFound', function () {
   if (!quiz01Answered) {
     // マーカーが見つかった時の処理
@@ -134,26 +134,21 @@ function updateStampHistory() {
 /* 正解の場合 */
 function correctOnHover(element) {
   var timer = null;
-
-  element.addEventListener('mouseenter', function () {
-    if (cursorEnabled) {
-      timer = setTimeout(function () {
-        score += 10;
-        updateScoreDisplay();
-        correctAudio.play();
-        showMessage('正解！！ 10ptゲット！', true);
-        showFeedback(true); // 正解のフィードバック画像を表示
-        cursorEnabled = false; // カーソルの反応を無効化
-        if (quizNumber === 1) {
-          quiz01Answered = true;  // 解答済に設定
-        } else if (quizNumber === 2) {
-          quiz02Answered = true;
-        } else if (quizNumber === 3) {
-          quiz03Answered = true;
-        }
-      }, 3000); // 3秒後にスコアを増加, 正解音再生, メッセージ表示
+  timer = setTimeout(function () {
+    score += 10;
+    updateScoreDisplay();
+    correctAudio.play();
+    showMessage('正解！！ 10ptゲット！', true);
+    showFeedback(true); // 正解のフィードバック画像を表示
+    cursorEnabled = false; // カーソルの反応を無効化
+    if (quizNumber === 1) {
+      quiz01Answered = true;  // 解答済に設定
+    } else if (quizNumber === 2) {
+      quiz02Answered = true;
+    } else if (quizNumber === 3) {
+      quiz03Answered = true;
     }
-  });
+  }, 3000); // 3秒後にスコアを増加, 正解音再生, メッセージ表示
 
   element.addEventListener('mouseleave', function () {
     if (timer !== null) {
@@ -171,24 +166,19 @@ function updateScoreDisplay() {
 /* 不正解の場合 */
 function incorrectOnHover(element) {
   var timer = null;
-
-  element.addEventListener('mouseenter', function () {
-    if (cursorEnabled) {
-      timer = setTimeout(function () {
-        incorrectAudio.play();
-        showMessage('ざんねん！！', false);
-        showFeedback(false); // 不正解のフィードバック画像を表示
-        cursorEnabled = false; // カーソルの反応を無効化
-        if (quizNumber === 1) {
-          quiz01Answered = true;  // 解答済に設定
-        } else if (quizNumber === 2) {
-          quiz02Answered = true;
-        } else if (quizNumber === 3) {
-          quiz03Answered = true;
-        }
-      }, 3000); // 3秒後に不正解音を再生, メッセージ表示
+  timer = setTimeout(function () {
+    incorrectAudio.play();
+    showMessage('ざんねん！！', false);
+    showFeedback(false); // 不正解のフィードバック画像を表示
+    cursorEnabled = false; // カーソルの反応を無効化
+    if (quizNumber === 1) {
+      quiz01Answered = true;  // 解答済に設定
+    } else if (quizNumber === 2) {
+      quiz02Answered = true;
+    } else if (quizNumber === 3) {
+      quiz03Answered = true;
     }
-  });
+  }, 3000); // 3秒後に不正解音を再生, メッセージ表示
 
   element.addEventListener('mouseleave', function () {
     if (timer !== null) {
