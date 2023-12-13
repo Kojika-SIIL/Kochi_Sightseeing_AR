@@ -76,7 +76,7 @@ function changeColorOnHover(element) {
     }
   });
 
-  element.addEventListener('click', function () {
+  element.addEventListener('touchstart', function () {
     if (cursorEnabled) {
       if (element === correct01 || element === correct02 || element === correct03) {
         correctOnHover(element);
