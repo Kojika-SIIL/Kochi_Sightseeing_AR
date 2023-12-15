@@ -203,12 +203,15 @@ function showMessage(text, isCorrect) {
 // メッセージを非表示にする
 marker01.addEventListener('markerLost', function () {
   messageElement.style.display = 'none';
+  cursorEnabled = false;
 });
       
 marker02.addEventListener('markerLost', function () {
   messageElement.style.display = 'none';
+  cursorEnabled = false;
 });
 
 marker03.addEventListener('markerLost', function () {
   messageElement.style.display = 'none';
+  cursorEnabled = false;
 });
