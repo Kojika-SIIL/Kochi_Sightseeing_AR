@@ -1,5 +1,5 @@
 /*----- 視点カーソル -----*/
-var cursorEnabled = true;
+var cursorEnabled = false;
 var quiz01Answered = false;
 var quiz02Answered = false;
 var quiz03Answered = false;
