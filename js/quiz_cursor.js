@@ -36,6 +36,8 @@ changeColorOnHover(incorrect1_03);
 changeColorOnHover(incorrect2_03);
 
 /*----- クイズ番号の設定 -----*/
+var quizNumber;
+
 marker01.addEventListener('markerFound', function () {
   if (!quiz01Answered) {
     // マーカーが見つかった時の処理
