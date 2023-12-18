@@ -62,6 +62,19 @@ marker03.addEventListener('markerFound', function () {
   }
 });
 
+// カーソルを無効にする
+marker01.addEventListener('markerLost', function () {
+  cursorEnabled = false;
+});
+      
+marker02.addEventListener('markerLost', function () {
+  cursorEnabled = false;
+});
+
+marker03.addEventListener('markerLost', function () {
+  cursorEnabled = false;
+});
+
 /*----- カーソルを合わせると色が変わる -----*/
 function changeColorOnHover(element) {
   let originalColor;
@@ -203,16 +216,3 @@ function showMessage(text, isCorrect) {
     messageElement.style.display = 'none';
   }, 3000); // 3秒後にメッセージを非表示にする
 }
-
-// カーソルを無効にする
-marker01.addEventListener('markerLost', function () {
-  cursorEnabled = false;
-});
-      
-marker02.addEventListener('markerLost', function () {
-  cursorEnabled = false;
-});
-
-marker03.addEventListener('markerLost', function () {
-  cursorEnabled = false;
-});
