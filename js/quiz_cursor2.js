@@ -8,7 +8,7 @@ var marker01 = document.querySelector('#marker01');
 var marker02 = document.querySelector('#marker02');
 var marker03 = document.querySelector('#marker03');
 
-var textElement = document.querySelector('a-text');
+var aTextElement = document.querySelector('a-text');
 
 // Quiz01
 var correct01 = document.querySelector('#correct01');
@@ -37,10 +37,21 @@ changeColorOnHover(correct03);
 changeColorOnHover(incorrect1_03);
 changeColorOnHover(incorrect2_03);
 
-/*----- カーソルの有効化 -----*/
-textElement.addEventListener('componentchanged', function () {
-  if (textElement.object.visible) {
+/*----- カーソルの反応 -----*/
+function handleATextVisibility() {
+  if (aTextElement.getAttribute('visible')) {
     cursorEnabled = true;
+  } else {
+    cursorEnabled = false;
+  }
+}
+
+handleATextVisibility();
+
+// a-textの表示が変更されたときに呼び出す
+aTextElement.addEventListener('componentchanged', function (event) {
+  if (event.detail.name === 'visible') {
+    handleATextVisibility();
   }
 });
 
@@ -201,12 +212,16 @@ function showMessage(text, isCorrect) {
     messageElement.style.backgroundColor = 'rgba(255, 0, 0, 0.8)'; // 不正解メッセージの背景色
   }
   messageElement.style.display = 'block';
+
+  setTimeout(function () {
+    messageElement.style.display = 'none';
+  }, 3000); // 3秒後にメッセージを非表示にする
 }
 
 // メッセージの非表示とカーソルの無効化
-textElement.addEventListener('componentchanged', function () {
-  if (!textElement.object.visible) {
+/* aTextElement.addEventListener('componentchanged', function () {
+  if (!aTextElement.object.visible) {
     messageElement.style.display = 'none';
     cursorEnabled = false;
   }
-});
+}); */
