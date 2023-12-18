@@ -46,8 +46,6 @@ function handleATextVisibility() {
   }
 }
 
-handleATextVisibility();
-
 // a-textの表示が変更されたときに呼び出す
 aTextElement.addEventListener('componentchanged', function (event) {
   if (event.detail.name === 'visible') {
@@ -217,11 +215,3 @@ function showMessage(text, isCorrect) {
     messageElement.style.display = 'none';
   }, 3000); // 3秒後にメッセージを非表示にする
 }
-
-// メッセージの非表示とカーソルの無効化
-/* aTextElement.addEventListener('componentchanged', function () {
-  if (!aTextElement.object.visible) {
-    messageElement.style.display = 'none';
-    cursorEnabled = false;
-  }
-}); */
