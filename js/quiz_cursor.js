@@ -198,20 +198,21 @@ function showMessage(text, isCorrect) {
     messageElement.style.backgroundColor = 'rgba(255, 0, 0, 0.8)'; // 不正解メッセージの背景色
   }
   messageElement.style.display = 'block';
+
+  setTimeout(function () {
+    messageElement.style.display = 'none';
+  }, 3000); // 3秒後にメッセージを非表示にする
 }
 
-// メッセージを非表示にする
+// カーソルを無効にする
 marker01.addEventListener('markerLost', function () {
-  messageElement.style.display = 'none';
   cursorEnabled = false;
 });
       
 marker02.addEventListener('markerLost', function () {
-  messageElement.style.display = 'none';
   cursorEnabled = false;
 });
 
 marker03.addEventListener('markerLost', function () {
-  messageElement.style.display = 'none';
   cursorEnabled = false;
 });
