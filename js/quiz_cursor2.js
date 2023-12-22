@@ -71,38 +71,35 @@ marker03.addEventListener('markerFound', function () {
 });
 
 /*----- カーソルを合わせると色が変わる -----*/
-var button = document.getElementById('chooseAnswerButton');
-
 function changeColorOnHover(element) {
   let originalColor;
   element.addEventListener('mouseenter', function () {
     originalColor  = element.getAttribute('material').color;
     if (cursorEnabled) {
       element.setAttribute('material', 'color: #f0e68c');
-      // ボタンを有効にする
-      button.addEventListener('click', function () {
-        // 背景色を薄くする処理
-        button.style.backgroundColor = 'rgba(135, 250, 0, 1)';
-        setTimeout(function() {
-          // 一定時間後に背景色を元に戻す処理
-          button.style.backgroundColor = 'rgba(0, 0, 255, 1)';
-        }, 300); // 300ミリ秒後に元に戻す（必要に応じて調整）
-        
-        tapButton(element);
-      });
+      tapButton(element);
     }
   });
 
   element.addEventListener('mouseleave', function () {
     if (cursorEnabled) {
       element.setAttribute('material', 'color: ' + originalColor);
-      // ボタンを無効にする処理を加える
     }
   });
 }
 
 /*----- ボタンをタップしたときの処理 -----*/
 function tapButton(element) {
+  var button = document.getElementById('chooseAnswerButton');
+
+  button.addEventListener('click', function() {
+    // 背景色を薄くする処理
+    button.style.backgroundColor = 'rgba(135, 250, 0, 1)';
+    setTimeout(function() {
+      // 一定時間後に背景色を元に戻す処理
+      button.style.backgroundColor = 'rgba(0, 0, 255, 1)';
+    }, 300); // 300ミリ秒後に元に戻す（必要に応じて調整）
+
     if (element === correct01 || element === correct02 || element === correct03) {
       correctOnHover(element);
     } else {
