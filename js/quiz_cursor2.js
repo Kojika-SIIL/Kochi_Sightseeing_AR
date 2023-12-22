@@ -98,7 +98,7 @@ var button = document.getElementById('chooseAnswerButton');
 
 button.addEventListener('click', function() {
   // 背景色を薄くする処理
-  button.style.backgroundColor = 'rgba(80, 100, 225, 0.8)';
+  button.style.backgroundColor = 'rgba(135, 200, 250, 1)';
   setTimeout(function() {
     // 一定時間後に背景色を元に戻す処理
     button.style.backgroundColor = 'rgba(0, 0, 255, 1)';
