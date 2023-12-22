@@ -94,7 +94,6 @@ function changeColorOnHover(element) {
 
 /*----- ボタンをタップしたときの処理 -----*/
 var button = document.getElementById('chooseAnswerButton');
-// var tapButton = document.getElementById('answerButton');
 
 button.addEventListener('click', function() {
   // 背景色を薄くする処理
