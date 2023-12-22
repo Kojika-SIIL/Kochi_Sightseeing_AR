@@ -86,6 +86,7 @@ function changeColorOnHover(element) {
   element.addEventListener('mouseleave', function () {
     if (cursorEnabled) {
       element.setAttribute('material', 'color: ' + originalColor);
+      element.removeEventListener('click', tapButton);
     }
   });
 }
@@ -105,8 +106,6 @@ function tapButton(element) {
   } else {
     incorrectOnHover(element);
   }
-
-  element.removeEventListener('click', tapButton);
 }
       
 /*----- 正解・不正解の処理 -----*/
