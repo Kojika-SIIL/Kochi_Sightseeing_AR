@@ -71,36 +71,36 @@ marker03.addEventListener('markerFound', function () {
 });
 
 /*----- カーソルを合わせると色が変わる -----*/
+var button = document.getElementById('chooseAnswerButton');
+
 function changeColorOnHover(element) {
   let originalColor;
   element.addEventListener('mouseenter', function () {
     originalColor  = element.getAttribute('material').color;
     if (cursorEnabled) {
       element.setAttribute('material', 'color: #f0e68c');
-      tapButton(element);
+      button.addEventListener('click', function() {
+        tapButton(element);
+      }
     }
   });
 
   element.addEventListener('mouseleave', function () {
     if (cursorEnabled) {
       element.setAttribute('material', 'color: ' + originalColor);
+      button.removeEventListener('click', tapButton);
     }
   });
 }
 
 /*----- ボタンをタップしたときの処理 -----*/
 function tapButton(element) {
-  var button = document.getElementById('chooseAnswerButton');
-
-  button.addEventListener('click', function() {
-    // 背景色を薄くする処理
-    button.style.backgroundColor = 'rgba(135, 250, 0, 1)';
-    setTimeout(function() {
-      // 一定時間後に背景色を元に戻す処理
-      button.style.backgroundColor = 'rgba(0, 0, 255, 1)';
-    }, 300); // 300ミリ秒後に元に戻す（必要に応じて調整）
-  });
-
+  // 背景色を薄くする処理
+  button.style.backgroundColor = 'rgba(135, 250, 0, 1)';
+  setTimeout(function() {
+    // 一定時間後に背景色を元に戻す処理
+    button.style.backgroundColor = 'rgba(0, 0, 255, 1)';
+  }, 300); // 300ミリ秒後に元に戻す（必要に応じて調整）
   chooseAnswer(element);
 }
       
@@ -119,47 +119,6 @@ function chooseAnswer(element) {
   } else {
     incorrectOnHover(element);
   }
-}
-
-/* 獲得したスタンプの表示に関する処理 */
-function showFeedback(isCorrect) {
-  var feedbackImage = document.getElementById('feedbackImage');
-  var feedbackContainer = document.querySelector('.feedback-image');
-        
-  if (isCorrect) {
-    if (quizNumber === 1) {
-      feedbackImage.src = './images/stamp/computer_dog.png'; // Quiz1の正解のスタンプ画像のパス
-    } else if (quizNumber === 2) {
-      feedbackImage.src = './images/stamp/yosakoi_naruko.png'; // Quiz2の正解のスタンプ画像のパス
-    } else if (quizNumber === 3) {
-      feedbackImage.src = './images/stamp/katsuo_tataki.png'; // Quiz3の正解のスタンプ画像のパス
-    }
-  } else {
-    feedbackImage.src = './images/stamp/cross.png'; // 不正解のバツ印画像のパス
-  }
-
-  feedbackContainer.style.display = 'block';
-
-  // スタンプの履歴に追加
-  stampHistory.push(feedbackImage.src);
-  updateStampHistory();
-
-  setTimeout(function () {
-    feedbackContainer.style.display = 'none';
-  }, 3000); // 3秒後にフィードバック画像を非表示にする
-}
-
-/* スタンプの履歴に関する処理 */
-function updateStampHistory() {
-  var stampHistoryContainer = document.querySelector('.stamp-history');
-  stampHistoryContainer.innerHTML = ''; // スタンプ履歴をクリア
-
-  // スタンプの履歴を表示
-  stampHistory.forEach(function (stamp) {
-    var stampImg = document.createElement('img');
-    stampImg.src = stamp;
-    stampHistoryContainer.appendChild(stampImg);
-  });
 }
 
 /* 正解の場合 */
@@ -219,4 +178,45 @@ function showMessage(text, isCorrect) {
   setTimeout(function () {
     messageElement.style.display = 'none';
   }, 3000); // 3秒後にメッセージを非表示にする
+}
+
+/* 獲得したスタンプの表示に関する処理 */
+function showFeedback(isCorrect) {
+  var feedbackImage = document.getElementById('feedbackImage');
+  var feedbackContainer = document.querySelector('.feedback-image');
+        
+  if (isCorrect) {
+    if (quizNumber === 1) {
+      feedbackImage.src = './images/stamp/computer_dog.png'; // Quiz1の正解のスタンプ画像のパス
+    } else if (quizNumber === 2) {
+      feedbackImage.src = './images/stamp/yosakoi_naruko.png'; // Quiz2の正解のスタンプ画像のパス
+    } else if (quizNumber === 3) {
+      feedbackImage.src = './images/stamp/katsuo_tataki.png'; // Quiz3の正解のスタンプ画像のパス
+    }
+  } else {
+    feedbackImage.src = './images/stamp/cross.png'; // 不正解のバツ印画像のパス
+  }
+
+  feedbackContainer.style.display = 'block';
+
+  // スタンプの履歴に追加
+  stampHistory.push(feedbackImage.src);
+  updateStampHistory();
+
+  setTimeout(function () {
+    feedbackContainer.style.display = 'none';
+  }, 3000); // 3秒後にフィードバック画像を非表示にする
+}
+
+/* スタンプの履歴に関する処理 */
+function updateStampHistory() {
+  var stampHistoryContainer = document.querySelector('.stamp-history');
+  stampHistoryContainer.innerHTML = ''; // スタンプ履歴をクリア
+
+  // スタンプの履歴を表示
+  stampHistory.forEach(function (stamp) {
+    var stampImg = document.createElement('img');
+    stampImg.src = stamp;
+    stampHistoryContainer.appendChild(stampImg);
+  });
 }
