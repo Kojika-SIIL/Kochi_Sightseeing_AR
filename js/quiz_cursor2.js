@@ -105,6 +105,8 @@ function tapButton(element) {
     } else {
       incorrectOnHover(element);
     }
+
+    element.removeEventListener('click', tapButton);
   });
 }
       
