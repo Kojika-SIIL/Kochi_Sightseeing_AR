@@ -159,22 +159,28 @@ function updateStampHistory() {
 
 /* 正解の場合 */
 function correctOnHover(element) {
-  score += 10;
-  updateScoreDisplay();
-  correctAudio.play();
-  showMessage('正解！！ 10ptゲット！', true);
-  showFeedback(true); // 正解のフィードバック画像を表示
-  cursorEnabled = false; // カーソルの反応を無効化
-  setAnswered();
+  var timer = null;
+  timer = setTimeout(function () {
+    score += 10;
+    updateScoreDisplay();
+    correctAudio.play();
+    showMessage('正解！！ 10ptゲット！', true);
+    showFeedback(true); // 正解のフィードバック画像を表示
+    cursorEnabled = false; // カーソルの反応を無効化
+    setAnswered();
+  }, 500);
 }
       
 /* 不正解の場合 */
 function incorrectOnHover(element) {
-  incorrectAudio.play();
-  showMessage('ざんねん！！', false);
-  showFeedback(false); // 不正解のフィードバック画像を表示
-  cursorEnabled = false; // カーソルの反応を無効化
-  setAnswered();
+  var timer = null;
+  timer = setTimeout(function () {
+    incorrectAudio.play();
+    showMessage('ざんねん！！', false);
+    showFeedback(false); // 不正解のフィードバック画像を表示
+    cursorEnabled = false; // カーソルの反応を無効化
+    setAnswered();
+  }, 500);
 }
 
 /* 解答済に設定 */
