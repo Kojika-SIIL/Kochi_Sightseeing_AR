@@ -87,8 +87,9 @@ function changeColorOnHover(element) {
           // 一定時間後に背景色を元に戻す処理
           button.style.backgroundColor = 'rgba(0, 0, 255, 1)';
         }, 300); // 300ミリ秒後に元に戻す（必要に応じて調整）
+        
+        tapButton(element);
       });
-      tapButton(element);
     }
   });
 
