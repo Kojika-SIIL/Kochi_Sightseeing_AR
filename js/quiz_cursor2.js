@@ -70,19 +70,6 @@ marker03.addEventListener('markerFound', function () {
   }
 });
 
-// カーソルを無効にする
-/* marker01.addEventListener('markerLost', function () {
-  cursorEnabled = false;
-});
-      
-marker02.addEventListener('markerLost', function () {
-  cursorEnabled = false;
-});
-
-marker03.addEventListener('markerLost', function () {
-  cursorEnabled = false;
-}); */
-
 /*----- カーソルを合わせると色が変わる -----*/
 function changeColorOnHover(element) {
   let originalColor;
@@ -104,6 +91,19 @@ function changeColorOnHover(element) {
     }
   });
 }
+
+/*----- ボタンをタップしたときの処理 -----*/
+document.getElementById('answerButton').addEventListener('click', function() {
+  // ボタンがクリックされたときに実行する処理
+  var button = document.getElementById('answerButton');
+    
+  // 背景色を薄くする処理
+  button.style.backgroundColor = 'rgba(80, 100, 225, 0.8)'; // 0.8は透明度を表します
+  setTimeout(function() {
+    // 一定時間後に背景色を元に戻す処理
+    button.style.backgroundColor = 'rgba(0, 0, 255, 1)';
+  }, 300); // 300ミリ秒後に元に戻す（必要に応じて調整）
+});
       
 /*----- 正解・不正解の処理 -----*/
 var score = 0;
