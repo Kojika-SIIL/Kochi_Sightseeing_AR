@@ -100,11 +100,7 @@ function tapButton(element) {
       button.style.backgroundColor = 'rgba(0, 0, 255, 1)';
     }, 300); // 300ミリ秒後に元に戻す（必要に応じて調整）
 
-    if (element === correct01 || element === correct02 || element === correct03) {
-      correctOnHover(element);
-    } else {
-      incorrectOnHover(element);
-    }
+    chooseAnswer(element);
   });
 }
       
@@ -115,6 +111,15 @@ var correctAudio = new Audio('./assets/correct.mp3');
 var incorrectAudio = new Audio('./assets/incorrect.mp3');
 var messageElement = document.querySelector('#message');
 var stampHistory = []; // スタンプの履歴を保存する配列
+
+/* 選択した解答に対する処理 */
+function chooseAnswer(element) {
+  if (element === correct01 || element === correct02 || element === correct03) {
+    correctOnHover(element);
+  } else {
+    incorrectOnHover(element);
+  }
+}
 
 /* 獲得したスタンプの表示に関する処理 */
 function showFeedback(isCorrect) {
