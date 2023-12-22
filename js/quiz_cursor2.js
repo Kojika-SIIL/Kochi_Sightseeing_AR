@@ -77,7 +77,6 @@ function changeColorOnHover(element) {
     originalColor  = element.getAttribute('material').color;
     if (cursorEnabled) {
       element.setAttribute('material', 'color: #f0e68c');
-      tapButton(element);
     }
   });
 
@@ -86,28 +85,32 @@ function changeColorOnHover(element) {
       element.setAttribute('material', 'color: ' + originalColor);
     }
   });
+
+  // ボタンをタップしたときの処理を一度だけバインド
+  element.addEventListener('click', function () {
+    if (cursorEnabled) {
+      tapButton(element);
+    }
+  });
 }
 
 /*----- ボタンをタップしたときの処理 -----*/
 function tapButton(element) {
   var button = document.getElementById('chooseAnswerButton');
+  // 背景色を薄くする処理
+  button.style.backgroundColor = 'rgba(135, 250, 0, 1)';
+  setTimeout(function() {
+    // 一定時間後に背景色を元に戻す処理
+    button.style.backgroundColor = 'rgba(0, 0, 255, 1)';
+  }, 300); // 300ミリ秒後に元に戻す（必要に応じて調整）
 
-  button.addEventListener('click', function() {
-    // 背景色を薄くする処理
-    button.style.backgroundColor = 'rgba(135, 250, 0, 1)';
-    setTimeout(function() {
-      // 一定時間後に背景色を元に戻す処理
-      button.style.backgroundColor = 'rgba(0, 0, 255, 1)';
-    }, 300); // 300ミリ秒後に元に戻す（必要に応じて調整）
+  if (element === correct01 || element === correct02 || element === correct03) {
+    correctOnHover(element);
+  } else {
+    incorrectOnHover(element);
+  }
 
-    if (element === correct01 || element === correct02 || element === correct03) {
-      correctOnHover(element);
-    } else {
-      incorrectOnHover(element);
-    }
-
-    element.removeEventListener('click', tapButton);
-  });
+  element.removeEventListener('click', tapButton);
 }
       
 /*----- 正解・不正解の処理 -----*/
