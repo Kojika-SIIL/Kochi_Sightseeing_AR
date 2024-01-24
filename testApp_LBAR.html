@@ -56,6 +56,7 @@
         box-sizing: border-box;
       }
       /* 距離の表示 */
+      /*
       #distance {
         position: fixed;
         z-index: 10000;
@@ -77,6 +78,20 @@
       #distValue {
         font-size: 36px;
         font-weight: bold;
+      }
+      */
+
+      #distance {
+        position: fixed;
+        z-index: 10000;
+        background-color: rgba(0,0,0,.8);
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        top: 10px;
+        left: 5%;
+        width: 90%;
+        display: block;
       }
 
       /* メッセージの表示 */
@@ -155,9 +170,12 @@
 
   <body style="margin: 0; overflow: hidden;">
     <!-- 距離の表示 -->
+    <!--
     <div id="distance">
       <div>あと<br><span id="distValue">00</span>m</div>
     </div>
+    -->
+    <div id="distance">Loading...</div>
 
     <!-- メッセージ表示 -->
     <div id="message">
@@ -228,12 +246,15 @@
         const audio = new Audio('./assets/helicopter.mp3');
         audio.loop = true;
 
+        /*
         function roundToInteger(value) {
           return Math.round(value);
         }
+        */
          
         el.addEventListener('gps-entity-place-update-position', (event) => {
-          document.getElementById('distValue').textContent = roundToInteger(event.detail.distance);
+          // document.getElementById('distValue').textContent = roundToInteger(event.detail.distance);
+          distanceMsg.textContent = `あと${event.detail.distance}m`;
           if (event.detail.distance <= 20) {
             // 20m以下で明るくする
             directionLight.setAttribute('intensity', 1);
