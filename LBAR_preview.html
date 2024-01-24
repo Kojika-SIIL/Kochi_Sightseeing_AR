@@ -7,7 +7,7 @@
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src='https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar-threex-location-only.js'></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <!--script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script-->
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <style>
@@ -18,6 +18,7 @@
         box-sizing: border-box;
       }
       /* 距離の表示 */
+      /*
       #distance {
         position: fixed;
         z-index: 10000;
@@ -39,6 +40,20 @@
       #distValue {
         font-size: 36px;
         font-weight: bold;
+      }
+      */
+
+      #distance {
+        position: fixed;
+        z-index: 10000;
+        background-color: rgba(0,0,0,.8);
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        top: 10px;
+        left: 5%;
+        width: 90%;
+        display: block;
       }
 
       /* メッセージの表示 */
@@ -117,9 +132,12 @@
 
   <body style="margin: 0; overflow: hidden;">
     <!-- 距離の表示 -->
+    <!--
     <div id="distance">
       <div>あと<br><span id="distValue">00</span> m</div>
     </div>
+    -->
+    <div id="distance"></div>
 
     <!-- メッセージ表示 -->
     <div id="message"></div>
@@ -142,6 +160,7 @@
         obj-model="obj: #obj; mtl: #mtl"
         scale="0.001 0.001 0.001"
         rotation="0 0 0"
+        look-at="[gps-camera]"
       ></a-entity>
 
       <!-- 前浜4号掩体 -->
@@ -186,7 +205,7 @@
     <script>
       var el = document.querySelector('[gps-entity-place]');
       var distanceMsg = document.getElementById('distance');
-      var distanceValue = document.getElementById('distValue');
+      // var distanceValue = document.getElementById('distValue');
       var message = document.getElementById('message');
       var directionLight = document.getElementById('directionLight');
       var ambientLight = document.getElementById('ambientLight');
@@ -197,7 +216,8 @@
       var entaigo = document.querySelector('#entaigo');
 
       el.addEventListener('gps-entity-place-update-position', (event) => {
-        distanceValue.textContent = Math.round(event.detail.distance);
+        // distanceValue.textContent = Math.round(event.detail.distance);
+        distanceMsg.textContent = `あと${event.detail.distance}m`;
         if (event.detail.distance <= 20) {
           // 20m以下のとき
           directionLight.setAttribute('intensity', 1);
@@ -253,7 +273,7 @@
       /*----- メッセージの表示に関する処理 -----*/
       function showMessage(element) {
         if (element == entaigo) {
-          message.textContent = 'AR戦闘機 (掩体壕)';
+          message.textContent = 'AR戦闘機';
         }
         message.style.display = 'block';
       }
